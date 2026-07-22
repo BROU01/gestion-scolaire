@@ -1,0 +1,29 @@
+# --- Outils / agents / compétences (non liés au projet) ---
+.agents/
+.claude/
+Skills/
+skills-lock.json
+
+# --- Fichiers de travail / prompts / extraits ---
+prompt_extracted/
+prompt.zip
+extracted.txt
+extracted_text.txt
+test.txt
+nul
+
+# Fichiers de spécification (prompts de génération)
+# Pattern large pour gérer les normalisations Unicode (NFC/NFD) des accents
+PROMPT FINAL*.pdf
+PROMPT FINAL*.docx
+
+# --- OS / éditeurs ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# --- Dépendances / builds ---
+node_modules/
+*.log
