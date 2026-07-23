@@ -195,7 +195,7 @@ var APP = {
    ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
   var raw = localStorage.getItem('ecole_session');
-  if (!raw) { window.location.href = 'login.html'; return; }
+  if (!raw) { window.location.href = '../public/login.html'; return; }
   APP.session = JSON.parse(raw);
   APP.role = APP.session.role;
 
