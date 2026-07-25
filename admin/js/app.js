@@ -3,6 +3,28 @@
    JavaScript Principal — app.js
    ============================================ */
 
+/* --- i18n Helper (safe wrapper autour de __()) --- */
+function __t(key, fallback) {
+  if (typeof __ !== 'undefined') {
+    var t = __(key);
+    if (t !== key) return t;
+  }
+  return fallback || key;
+}
+
+/* Intercept switchLang pour re-rendre la vue admin courante */
+(function() {
+  if (typeof switchLang !== 'undefined') {
+    var _origSwitchLang = switchLang;
+    window.switchLang = function(lang) {
+      _origSwitchLang(lang);
+      if (typeof navigateTo !== 'undefined' && window.APP && window.APP.view) {
+        setTimeout(function() { navigateTo(window.APP.view); }, 50);
+      }
+    };
+  }
+})();
+
 /* --- Heroicons SVG Helpers --- */
 var ICONS = {
   home: '<svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v4.875h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>',
@@ -244,17 +266,18 @@ function buildSidebar() {
   document.getElementById('userName').textContent = APP.session.name;
   document.getElementById('userAvatar').textContent = APP.session.name.charAt(0).toUpperCase();
   var roleLabels = { admin: 'Administrateur', teacher: 'Enseignant', student: 'Étudiant', parent: 'Parent' };
-  document.getElementById('userRole').textContent = roleLabels[role] || role;
-  document.getElementById('sidebarRoleBadge').textContent = roleLabels[role] || role;
+  document.getElementById('userRole').textContent = __t('role.' + role, roleLabels[role] || role);
+  document.getElementById('sidebarRoleBadge').textContent = __t('role.' + role, roleLabels[role] || role);
 
   var sections = getMenuSections(role);
   var html = '';
   sections.forEach(function(s) {
-    html += '<div class="nav-section-title">' + s.title + '</div>';
+    html += '<div class="nav-section-title">' + __t(s.titleKey, s.title) + '</div>';
     s.items.forEach(function(item) {
       html += '<div class="nav-item" data-view="' + item.view + '">'
+        + __t('label.' + item.view, item.label)
         + '<span class="nav-icon">' + item.icon + '</span>'
-        + '<span class="nav-label">' + item.label + '</span>'
+        + '<span class="nav-label">' + __t('label.' + item.view, item.label) + '</span>'
         + '</div>';
     });
   });
@@ -271,10 +294,10 @@ function buildSidebar() {
 function getMenuSections(role) {
   var i = ICONS;
   if (role === 'admin') return [
-    { title: 'Principal', items: [
+    { title: 'Principal', titleKey: 'menu.principal', items: [
       { view: 'dashboard', icon: i.home, label: 'Tableau de bord' }
     ]},
-    { title: 'Administration', items: [
+    { title: 'Administration', titleKey: 'menu.administration', items: [
       { view: 'years', icon: i.calendar, label: 'Années académiques' },
       { view: 'filieres', icon: i.academicCap, label: 'Filières' },
       { view: 'specialites', icon: i.beaker, label: 'Spécialités' },
@@ -283,18 +306,18 @@ function getMenuSections(role) {
       { view: 'teachers', icon: i.users, label: 'Enseignants' },
       { view: 'subjects', icon: i.bookOpen, label: 'Matières' }
     ]},
-    { title: 'Discipline & Assiduité', items: [
+    { title: 'Discipline & Assiduité', titleKey: 'menu.discipline', items: [
       { view: 'absences', icon: i.clock, label: 'Absences & Retards' },
       { view: 'punishments', icon: i.shieldExclamation, label: 'Punitions' }
     ]},
-    { title: 'Activités', items: [
+    { title: 'Activités', titleKey: 'menu.activites', items: [
       { view: 'activities', icon: i.musicalNote, label: 'Activités' },
       { view: 'calendar-view', icon: i.calendar, label: 'Calendrier' }
     ]},
-    { title: 'Ressources', items: [
+    { title: 'Ressources', titleKey: 'menu.ressources', items: [
       { view: 'scholarships', icon: i.globeAlt, label: 'Bourses d\'études' }
     ]},
-    { title: 'Site Public', items: [
+    { title: 'Site Public', titleKey: 'menu.site', items: [
       { view: 'theme', icon: i.paintbrush, label: 'Personnalisation' },
       { view: 'candidates', icon: i.clipboard, label: 'Candidatures' },
       { view: 'appointments', icon: i.calendarDays, label: 'Rendez-vous' },
@@ -303,31 +326,31 @@ function getMenuSections(role) {
   ];
 
   if (role === 'teacher') return [
-    { title: 'Principal', items: [
+    { title: 'Principal', titleKey: 'menu.principal', items: [
       { view: 'dashboard', icon: i.home, label: 'Tableau de bord' }
     ]},
-    { title: 'Enseignement', items: [
+    { title: 'Enseignement', titleKey: 'menu.enseignement', items: [
       { view: 'my-classes', icon: i.buildingLibrary, label: 'Mes classes' },
       { view: 'my-students', icon: i.userGroup, label: 'Mes étudiants' },
       { view: 'my-subjects', icon: i.bookOpen, label: 'Mes matières' },
       { view: 'grades', icon: i.chartBar, label: 'Notes' },
       { view: 'bonus-malus', icon: i.sparkles, label: 'Bonus / Malus' }
     ]},
-    { title: 'Assiduité', items: [
+    { title: 'Assiduité', titleKey: 'menu.assiduite', items: [
       { view: 'teacher-absences', icon: i.clock, label: 'Mes absences' },
       { view: 'teacher-punish', icon: i.shieldExclamation, label: 'Punitions données' }
     ]},
-    { title: 'Ressources', items: [
+    { title: 'Ressources', titleKey: 'menu.ressources', items: [
       { view: 'calendar-view', icon: i.calendar, label: 'Calendrier' },
       { view: 'activities', icon: i.musicalNote, label: 'Activités' }
     ]}
   ];
 
   if (role === 'student') return [
-    { title: 'Principal', items: [
+    { title: 'Principal', titleKey: 'menu.principal', items: [
       { view: 'dashboard', icon: i.home, label: 'Tableau de bord' }
     ]},
-    { title: 'Mon espace', items: [
+    { title: 'Mon espace', titleKey: 'menu.monespace', items: [
       { view: 'my-profile', icon: i.user, label: 'Mon profil' },
       { view: 'my-filiere', icon: i.academicCap, label: 'Ma filière' },
       { view: 'my-class-student', icon: i.buildingLibrary, label: 'Ma classe' },
@@ -335,27 +358,27 @@ function getMenuSections(role) {
       { view: 'my-grades', icon: i.chartBar, label: 'Mes notes' },
       { view: 'my-exams', icon: i.academicCap, label: 'Mes examens' }
     ]},
-    { title: 'Discipline', items: [
+    { title: 'Discipline', titleKey: 'menu.discipline', items: [
       { view: 'my-record', icon: i.shieldCheck, label: 'Mon casier' },
       { view: 'my-attendance', icon: i.clock, label: 'Mes absences' }
     ]},
-    { title: 'Vie scolaire', items: [
+    { title: 'Vie scolaire', titleKey: 'menu.viescolaire', items: [
       { view: 'calendar-view', icon: i.calendar, label: 'Calendrier' },
       { view: 'activities', icon: i.musicalNote, label: 'Activités' }
     ]}
   ];
 
   if (role === 'parent') return [
-    { title: 'Principal', items: [
+    { title: 'Principal', titleKey: 'menu.principal', items: [
       { view: 'dashboard', icon: i.home, label: 'Tableau de bord' }
     ]},
-    { title: 'Mon enfant', items: [
+    { title: 'Mon enfant', titleKey: 'menu.mesenfants', items: [
       { view: 'child-profile', icon: i.user, label: 'Profil' },
       { view: 'child-grades', icon: i.chartBar, label: 'Notes' },
       { view: 'child-attendance', icon: i.clock, label: 'Absences & Retards' },
       { view: 'child-record', icon: i.shieldCheck, label: 'Comportement' }
     ]},
-    { title: 'Ressources', items: [
+    { title: 'Ressources', titleKey: 'menu.ressources', items: [
       { view: 'calendar-view', icon: i.calendar, label: 'Calendrier' },
       { view: 'scholarships', icon: i.globeAlt, label: 'Bourses d\'études' }
     ]}
@@ -367,30 +390,25 @@ function getMenuSections(role) {
 /* ============================================
    ROUTING
    ============================================ */
-var TITLES = {
-  'dashboard': 'Tableau de bord',
-  'years': 'Années académiques', 'filieres': 'Filières', 'specialites': 'Spécialités',
-  'classes': 'Classes', 'students': 'Étudiants', 'teachers': 'Enseignants', 'subjects': 'Matières',
-  'absences': 'Absences & Retards', 'punishments': 'Punitions',
-  'my-classes': 'Mes classes', 'my-students': 'Mes étudiants', 'my-subjects': 'Mes matières',
-  'grades': 'Gestion des notes', 'bonus-malus': 'Bonus / Malus',
-  'teacher-absences': 'Mes absences', 'teacher-punish': 'Punitions données',
-  'my-profile': 'Mon profil', 'my-filiere': 'Ma filière',
-  'my-class-student': 'Ma classe', 'my-subjects-student': 'Mes matières',
-  'my-grades': 'Mes notes', 'my-record': 'Mon casier', 'my-attendance': 'Mes absences',
-  'child-profile': 'Profil de mon enfant', 'child-grades': 'Notes de mon enfant',
-  'child-attendance': 'Absences & Retards', 'child-record': 'Comportement',
-  'activities': 'Activités', 'calendar-view': 'Calendrier académique',
-  'my-exams': 'Mes examens', 'site-editor': 'Personnalisation du site',
-  'scholarships': 'Bourses d\'études internationales'
-};
+/* Objet TITLES pour la rétrocompatibilité + traduction dynamique */
+var TITLES = {};
+['dashboard','years','filieres','specialites','classes','students','teachers','subjects',
+ 'absences','punishments','my-classes','my-students','my-subjects','grades','bonus-malus',
+ 'teacher-absences','teacher-punish','my-profile','my-filiere','my-class-student',
+ 'my-subjects-student','my-grades','my-record','my-attendance',
+ 'child-profile','child-grades','child-attendance','child-record',
+ 'activities','calendar-view','my-exams','site-editor','scholarships'
+].forEach(function(k) {
+  TITLES[k] = __t('label.' + k, k);
+});
 
 function navigateTo(view) {
   APP.view = view;
   document.querySelectorAll('.nav-item').forEach(function(el) {
     el.classList.toggle('active', el.dataset.view === view);
   });
-  document.getElementById('pageTitle').textContent = TITLES[view] || view;
+  /* Use __t for dynamic translation on each navigate */
+  document.getElementById('pageTitle').textContent = __t('label.' + view, TITLES[view] || view);
   document.getElementById('headerActions').innerHTML = '';
   renderView(view);
 }
@@ -485,23 +503,23 @@ function renderAdminDash(c) {
 
   c.innerHTML = ''
     + '<div class="stats-grid">'
-    + statCard(ICONS.userGroup, 'Étudiants', d.students.length, 'success')
-    + statCard(ICONS.users, 'Enseignants', d.teachers.length, 'info')
-    + statCard(ICONS.buildingLibrary, 'Classes', d.classes.length, 'primary')
+    + statCard(ICONS.userGroup, __t('label.students','Étudiants'), d.students.length, 'success')
+    + statCard(ICONS.users, __t('label.teachers','Enseignants'), d.teachers.length, 'info')
+    + statCard(ICONS.buildingLibrary, __t('label.classes','Classes'), d.classes.length, 'primary')
     + statCard(ICONS.chartBar, 'Moyenne générale', avg + '/20', 'warning')
     + '</div>'
     + '<div class="stats-grid">'
     + statCard(ICONS.clock, 'Retards', totalRetards, 'warning')
     + statCard(ICONS.noSymbol, 'Absences', totalAbs, 'danger')
-    + statCard(ICONS.shieldExclamation, 'Punitions', d.punitions.length, 'danger')
+    + statCard(ICONS.shieldExclamation, __t('label.punishments','Punitions'), d.punitions.length, 'danger')
     + statCard(ICONS.musicalNote, 'Activités', d.activities.length, 'info')
     + '</div>'
     + '<div class="grid-2col">'
-    + '<div class="card"><div class="card-header"><h3>Dernières notes</h3></div><div class="card-body">' + recentGradesTable() + '</div></div>'
-    + '<div class="card"><div class="card-header"><h3>Année en cours</h3></div><div class="card-body">' + currentYearInfo() + '</div></div>'
+    + '<div class="card"><div class="card-header"><h3>' + __t('label.recentGrades','Dernières notes') + '</h3></div><div class="card-body">' + recentGradesTable() + '</div></div>'
+    + '<div class="card"><div class="card-header"><h3>' + __t('label.currentYear','Année en cours') + '</h3></div><div class="card-body">' + currentYearInfo() + '</div></div>'
     + '</div>'
     + '<!-- Flags Section -->'
-    + '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.globeAlt + ' Bourses internationales — 25+ pays</h3></div><div class="card-body">'
+    + '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.globeAlt + ' ' + __t('label.international','Bourses internationales — 25+ pays') + '</h3></div><div class="card-body">'
     + '<div class="admin-flags-row">'
     + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Chine">🇨🇳<span>Chine</span></a>'
     + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Japon">🇯🇵<span>Japon</span></a>'
@@ -538,13 +556,13 @@ function renderTeacherDash(c) {
 
   c.innerHTML = ''
     + '<div class="stats-grid">'
-    + statCard(ICONS.bookOpen, 'Matières', mySubs.length, 'primary')
-    + statCard(ICONS.userGroup, 'Étudiants', myStuds.length, 'success')
-    + statCard(ICONS.buildingLibrary, 'Classes', myClassIds.length, 'info')
-    + statCard(ICONS.shieldExclamation, 'Punitions données', myPunish.length, 'danger')
+    + statCard(ICONS.bookOpen, __t('label.my-subjects','Matières'), mySubs.length, 'primary')
+    + statCard(ICONS.userGroup, __t('label.my-students','Étudiants'), myStuds.length, 'success')
+    + statCard(ICONS.buildingLibrary, __t('label.my-classes','Classes'), myClassIds.length, 'info')
+    + statCard(ICONS.shieldExclamation, __t('label.teacher-punish','Punitions données'), myPunish.length, 'danger')
     + '</div>'
     + '<div class="card">'
-    + '<div class="card-header"><h3>Actions rapides</h3></div>'
+    + '<div class="card-header"><h3>' + __t('crud.quickActions','Actions rapides') + '</h3></div>'
     + '<div class="card-body"><div class="quick-actions">'
     + quickAction(ICONS.chartBar, 'Saisir les notes', 'grades')
     + quickAction(ICONS.userGroup, 'Mes étudiants', 'my-students')
@@ -620,8 +638,7 @@ function quickAction(icon, label, view) {
 }
 
 function recentGradesTable() {
-  var g = MOCK.grades.slice(-5).reverse();
-  if (!g.length) return '<p class="text-muted">Aucune note.</p>';
+  var g = MOCK.grades.slice(-5).reverse();    if (!g.length) return '<p class="text-muted">' + __t('crud.noData','Aucune note.') + '</p>';
   var h = '<table class="table"><thead><tr><th>Étudiant</th><th>Matière</th><th>Note</th></tr></thead><tbody>';
   g.forEach(function(r) {
     var st = findById(MOCK.students, r.studentId);
@@ -633,16 +650,15 @@ function recentGradesTable() {
 
 function currentYearInfo() {
   var y = MOCK.academicYears.find(function(y){return y.active;});
-  if (!y) return '<p class="text-muted">Aucune année active.</p>';
+  if (!y) return '<p class="text-muted">' + __t('crud.noActiveYear','Aucune année active.') + '</p>';
   return '<div class="text-center p-lg">'
     + '<div class="year-label">' + y.label + '</div>'
-    + '<p class="text-muted">Année académique en cours</p>'
-    + '<span class="badge badge-success mt-1">Active</span></div>';
+    + '<p class="text-muted">' + __t('crud.activeYear','Année académique en cours') + '</p>'
+    + '<span class="badge badge-success mt-1">' + __t('crud.active','Active') + '</span></div>';
 }
 
 function studentRecentGrades(sid) {
-  var g = MOCK.grades.filter(function(r){return r.studentId===sid;}).slice(-5).reverse();
-  if (!g.length) return '<p class="text-muted">Aucune note.</p>';
+  var g = MOCK.grades.filter(function(r){return r.studentId===sid;}).slice(-5).reverse();    if (!g.length) return '<p class="text-muted">' + __t('crud.noData','Aucune note.') + '</p>';
   var h = '';
   g.forEach(function(r) {
     var sub = findById(MOCK.subjects, r.subjectId);
@@ -659,10 +675,10 @@ function renderCrud(c, dataKey, label, cols, formFields) {
   var searchId = 'search-' + dataKey;
 
   document.getElementById('headerActions').innerHTML =
-    '<button class="btn btn-primary" onclick="openAddModal(\'' + dataKey + '\',\'' + label + '\')">' + ICONS.plus + ' Ajouter</button>';
+    '<button class="btn btn-primary" onclick="openAddModal(\'' + dataKey + '\',\'' + label + '\')">' + ICONS.plus + ' ' + __t('crud.add','Ajouter') + '</button>';
 
   var html = '<div class="toolbar"><div class="search-box"><span class="search-icon">' + ICONS.magnifyingGlass + '</span>'
-    + '<input type="text" id="' + searchId + '" placeholder="Rechercher..." oninput="filterCrud(\'' + dataKey + '\',\'' + label + '\')"></div></div>'
+    + '<input type="text" id="' + searchId + '" placeholder="' + __t('crud.search','Rechercher...') + '" oninput="filterCrud(\'' + dataKey + '\',\'' + label + '\')"></div></div>'
     + '<div class="card"><div class="table-container"><table class="table"><thead><tr>';
   cols.forEach(function(col) { html += '<th>' + col.label + '</th>'; });
   html += '<th>Actions</th></tr></thead><tbody id="tbody-' + dataKey + '">';
@@ -672,7 +688,7 @@ function renderCrud(c, dataKey, label, cols, formFields) {
 }
 
 function crudRows(data, dataKey, label, cols) {
-  if (!data.length) return '<tr><td colspan="' + (cols.length + 1) + '" class="text-center text-muted empty-pad">Aucun enregistrement</td></tr>';
+  if (!data.length) return '<tr><td colspan="' + (cols.length + 1) + '" class="text-center text-muted empty-pad">' + __t('crud.noData','Aucun enregistrement') + '</td></tr>';
   var h = '';
   data.forEach(function(item) {
     h += '<tr>';
@@ -1507,7 +1523,7 @@ function renderParentGrades(c) {
     });
     h += '</tbody></table></div></div>';
   });
-  c.innerHTML = h || '<div class="empty-state"><div class="empty-icon">' + ICONS.chartBar + '</div><h3>Aucune note</h3></div>';
+  c.innerHTML = h || '<div class="empty-state"><div class="empty-icon">' + ICONS.chartBar + '</div><h3>' + __t('crud.noData','Aucune note') + '</h3></div>';
 }
 
 function renderParentAttendance(c) {
@@ -2498,7 +2514,7 @@ function deleteCalendarEventLocal(id) {
    ============================================ */function renderActivities(c) {
   /* Admin CRUD buttons */
   if (APP.role === 'admin') {
-    document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openAddModal(\'activities\',\'Activité\')">' + ICONS.plus + ' Ajouter</button>';
+    document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openAddModal(\'activities\',\'Activité\')">' + ICONS.plus + ' ' + __t('crud.add','Ajouter') + '</button>';
   }
 
   var h = '<div class="tabs">'
@@ -2549,7 +2565,7 @@ function filterActivities(type, btn) {
    SCHOLARSHIPS
    ============================================ */function renderScholarships(c) {
   if (APP.role === 'admin') {
-    document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openAddModal(\'scholarships\',\'Bourse\')">' + ICONS.plus + ' Ajouter</button>';
+    document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openAddModal(\'scholarships\',\'Bourse\')">' + ICONS.plus + ' ' + __t('crud.add','Ajouter') + '</button>';
   }
 
   var h = '<div class="toolbar"><div class="search-box"><span class="search-icon">' + ICONS.magnifyingGlass + '</span>'
