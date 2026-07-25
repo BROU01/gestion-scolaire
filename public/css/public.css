@@ -57,7 +57,8 @@ h1,h2,h3,h4,h5,h6 { line-height:1.2; letter-spacing:-0.02em; }
 .hi-xl { width:32px; height:32px; }
 
 /* ============================================
-   NAVBAR — Néobrutaliste
+   NAVBAR — Glass Universel (fonctionne sur tous les fonds)
+   Fond toujours foncé, texte toujours blanc
    ============================================ */
 .pub-nav {
   position: absolute;
@@ -66,77 +67,79 @@ h1,h2,h3,h4,h5,h6 { line-height:1.2; letter-spacing:-0.02em; }
   right: 0;
   z-index: 100;
   height: var(--pub-nav-h);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
   display: flex;
   align-items: center;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  transition: background .2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background .25s ease, border-color .25s ease;
 }
 
 .pub-nav.scrolled {
   position: fixed;
-  background: rgba(0, 0, 0, 0.85);
-  border-bottom: 2px solid #000000;
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.pub-nav.hero-mode .pub-logo,
-.pub-nav.hero-mode .pub-nav-links a {
-  color: rgba(255,255,255,0.95);
+/* --- Toujours texte blanc --- */
+.pub-nav .pub-logo,
+.pub-nav .pub-nav-links a {
+  color: rgba(255, 255, 255, 0.88);
+  transition: all .15s ease;
 }
 
-.pub-nav.hero-mode .pub-nav-links a:hover,
-.pub-nav.hero-mode .pub-nav-links a.active {
-  background: rgba(255,255,255,0.1);
+.pub-nav .pub-nav-links a:hover,
+.pub-nav .pub-nav-links a.active {
   color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.4);
 }
 
-.pub-nav.hero-mode .pub-btn-secondary {
-  color: rgba(255,255,255,0.85);
-  border-color: rgba(255,255,255,0.25);
+.pub-nav .pub-nav-links a.active {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.pub-nav.hero-mode .pub-btn-secondary:hover {
-  border-color: rgba(255,255,255,0.6);
-  color: #ffffff;
-}
-
-.pub-nav.hero-mode .pub-hamburger {
-  color: rgba(255,255,255,0.85);
-}
-
-.pub-nav.hero-mode .pub-hamburger:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-.pub-nav.scrolled.hero-mode .pub-logo,
-.pub-nav.scrolled.hero-mode .pub-nav-links a {
+/* Menu mobile ouvert : texte foncé sur fond blanc */
+.pub-nav-links.open a {
   color: var(--pub-text);
 }
 
-.pub-nav.scrolled.hero-mode .pub-nav-links a:hover,
-.pub-nav.scrolled.hero-mode .pub-nav-links a.active {
+.pub-nav-links.open a:hover,
+.pub-nav-links.open a.active {
   color: var(--pub-text);
   background: var(--pub-primary-light);
+  border-bottom-color: transparent;
 }
 
-.pub-nav.scrolled.hero-mode .pub-btn-secondary {
-  color: var(--pub-text-secondary);
-  border: 2px solid #000000;
+/* --- Boutons navbar --- */
+.pub-nav .pub-btn-secondary {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
 }
 
-.pub-nav.scrolled.hero-mode .pub-btn-secondary:hover {
-  border-color: var(--pub-primary);
-  color: var(--pub-primary);
+.pub-nav .pub-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
 }
 
-.pub-nav.scrolled.hero-mode .pub-hamburger {
-  color: var(--pub-text);
+.pub-nav .pub-btn-primary {
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
 }
 
-.pub-nav.scrolled.hero-mode .pub-hamburger:hover {
-  background: var(--pub-primary-light);
+.pub-nav .pub-hamburger {
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pub-nav .pub-hamburger:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .pub-nav-inner {
@@ -677,8 +680,104 @@ h1,h2,h3,h4,h5,h6 { line-height:1.2; letter-spacing:-0.02em; }
 }
 
 /* ============================================
-   BOURSES — Tags
+   BOURSES — Drapeaux & Tags améliorés
    ============================================ */
+
+/* Amélioration de l'affichage des drapeaux */
+.pub-card-icon.pub-flag {
+  font-size: 2rem;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border: 2px solid #000;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0 #000;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.pub-card:hover .pub-card-icon.pub-flag {
+  transform: scale(1.08);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.pub-flag-large {
+  font-size: 3rem;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  background: #FFF;
+  box-shadow: 3px 3px 0 #000;
+}
+
+/* Bandeau drapeaux en haut du filtre */
+.pub-flags-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #FFF;
+  border: 2px solid #000;
+  box-shadow: var(--pub-shadow-card);
+}
+
+.pub-flag-chip {
+  width: 36px;
+  height: 36px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  background: #FFF;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  padding: 0;
+  position: relative;
+}
+
+.pub-flag-chip:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 #000;
+  z-index: 2;
+}
+
+.pub-flag-chip.active {
+  box-shadow: 3px 3px 0 #000;
+  background: var(--pub-primary-light);
+  transform: translate(-1px, -1px);
+}
+
+.pub-flag-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pub-flag-chip:hover .pub-flag-tooltip {
+  display: block;
+}
+
+/* ============================================
+   BOURSES — Tags
+   ============================================
 .pub-scholarship-tags {
   display: flex;
   flex-wrap: wrap;
@@ -697,6 +796,8 @@ h1,h2,h3,h4,h5,h6 { line-height:1.2; letter-spacing:-0.02em; }
 
 .pub-tag.teal { background:var(--pub-primary-light); color:var(--pub-primary-dark); }
 .pub-tag.blue { background:#DBEAFE; color:#1D4ED8; }
+.pub-tag.green { background:#D1FAE5; color:#065F46; }
+.pub-tag.amber { background:#FEF3C7; color:#92400E; }
 
 /* ============================================
    SEARCH & FILTER
@@ -1343,6 +1444,69 @@ h1,h2,h3,h4,h5,h6 { line-height:1.2; letter-spacing:-0.02em; }
 .pub-calendar-type.cultural { background:var(--pub-primary-light); color:var(--pub-primary-dark); }
 .pub-calendar-type.sport { background:#D1FAE5; color:#065F46; }
 .pub-calendar-type.holiday { background:#FEF3C7; color:#92400E; }
+
+/* ============================================
+   INTERNATIONAL FLAGS SHOWCASE
+   ============================================ */
+.pub-flags-section {
+  padding: 48px 24px;
+  text-align: center;
+  background: #F8FAF8;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+}
+
+.pub-flags-section-inner {
+  max-width: var(--pub-max-w);
+  margin: 0 auto;
+}
+
+.pub-flags-section h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--pub-text);
+}
+
+.pub-flags-section p {
+  font-size: 0.875rem;
+  color: var(--pub-text-secondary);
+  margin-bottom: 24px;
+}
+
+.pub-flags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pub-flag-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  background: #FFF;
+  border: 2px solid #000;
+  font-size: 1.75rem;
+  transition: all 0.12s ease;
+  min-width: 64px;
+}
+
+.pub-flag-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.pub-flag-item span {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--pub-text-secondary);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
 
 /* ============================================
    SUCCESS STATE

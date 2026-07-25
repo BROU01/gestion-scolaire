@@ -3,17 +3,44 @@
    Navigation mobile, filtres, formulaire
    ============================================ */
 
-/* --- Mobile Nav Toggle --- */
+/* ============================================
+   FT3 — Navigation & Scroll
+   ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('mainNav');
   var hamburger = document.querySelector('.pub-hamburger');
   var navLinks = document.querySelector('.pub-nav-links');
+
+  /* --- Scroll : navbar fixed au scroll --- */
+  if (nav) {
+    var hero = document.querySelector('.pub-hero');
+    var heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+
+    function onScroll() {
+      if (window.scrollY > heroHeight - 80) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    window.addEventListener('resize', function() {
+      heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+      onScroll();
+    });
+  }
+
+  /* --- Mobile Nav Toggle --- */
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', function() {
       navLinks.classList.toggle('open');
       var isOpen = navLinks.classList.contains('open');
       hamburger.setAttribute('aria-expanded', isOpen);
     });
-    /* Fermer au clic sur un lien */
+
     var links = navLinks.querySelectorAll('a');
     for (var i = 0; i < links.length; i++) {
       links[i].addEventListener('click', function() {

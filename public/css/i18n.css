@@ -1,0 +1,42 @@
+/* ============================================
+   FT3 — Language Switcher Styles
+   ============================================ */
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  transition: all .12s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lang-btn:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+  transform: translate(-1px, -1px);
+}
+
+.lang-btn .lang-globe {
+  width: 14px;
+  height: 14px;
+}
+
+/* In mobile menu */
+.pub-nav-links.open .lang-btn {
+  background: var(--pub-primary-light);
+  color: var(--pub-primary-dark);
+  border-color: #000;
+}
+
+.pub-nav-links.open .lang-btn:hover {
+  background: var(--pub-primary);
+  color: #fff;
+}

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inscription — Gestion Scolaire</title>
   <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/i18n.css">
   <script src="js/theme.js"></script>
 </head>
 <body>
@@ -33,7 +34,10 @@
           <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
           Espace Privé
         </a>
-      </div>
+      <button class="lang-btn" onclick="switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')" aria-label="Switch language">
+        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+        <span data-i18n-toggle>English</span>
+      </button>
       <button class="pub-hamburger" aria-label="Menu" aria-expanded="false">
         <svg class="hi hi-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
@@ -42,8 +46,8 @@
 
   <!-- PAGE HEADER -->
   <section class="pub-page-header">
-    <h1>Inscrivez votre <span>enfant</span></h1>
-    <p>Formulaire en 4 étapes. Informations personnelles, parcours académique, vœux d'orientation et prise de rendez-vous.</p>
+    <h1 data-i18n="register.title">Inscrivez votre <span>enfant</span></h1>
+    <p data-i18n="register.desc">Formulaire en 4 étapes. Informations personnelles, parcours académique, vœux d'orientation et prise de rendez-vous.</p>
   </section>
 
   <!-- FORMULAIRE -->
@@ -54,16 +58,16 @@
         <!-- Step indicators -->
         <div class="pub-form-steps">
           <div class="pub-form-step active" data-step="1">
-            <span>1. Informations</span>
+            <span data-i18n="register.step1">1. Informations</span>
           </div>
           <div class="pub-form-step" data-step="2">
-            <span>2. Parcours</span>
+            <span data-i18n="register.step2">2. Parcours</span>
           </div>
           <div class="pub-form-step" data-step="3">
-            <span>3. Vœux</span>
+            <span data-i18n="register.step3">3. Vœux</span>
           </div>
           <div class="pub-form-step" data-step="4">
-            <span>4. Rendez-vous</span>
+            <span data-i18n="register.step4">4. Rendez-vous</span>
           </div>
         </div>
 
@@ -278,6 +282,36 @@
     <div class="pub-footer-bottom">© 2025 Gestion Scolaire. Tous droits réservés.</div>
   </footer>
 
+  <!-- ====== FLAGS SHOWCASE ====== -->
+  <section class="pub-flags-section">
+    <div class="pub-flags-section-inner">
+      <h3 data-i18n="hero.scholarships.title">Étudiez à l'étranger</h3>
+      <p data-i18n="hero.scholarships.desc">Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
+      <div class="pub-flags-row">
+        <a href="bourses.html" class="pub-flag-item">🇨🇳<span>Chine</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇯🇵<span>Japon</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇰🇷<span>Corée</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇪<span>Allemagne</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇪<span>Suède</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇳🇴<span>Norvège</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇷<span>Turquie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇦<span>Arabie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇷<span>Brésil</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇲🇽<span>Mexique</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇭<span>Thaïlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇫🇮<span>Finlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇷🇺<span>Russie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇰<span>Danemark</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇼<span>Taïwan</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇺🇾<span>Uruguay</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇪🇪<span>Estonie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇳<span>Brunei</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇶🇦<span>Qatar</span></a>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/i18n.js"></script>
   <script src="js/public.js"></script>
   <script>
   /* ============================================
@@ -370,7 +404,7 @@
       var minDate = new Date(now);
       minDate.setDate(minDate.getDate() + 7);
 
-      var todayStr = APP_UTILS ? APP_UTILS.today() : new Date().toISOString().split('T')[0];
+      var todayStr = (typeof APP_UTILS !== 'undefined' && APP_UTILS.today) ? APP_UTILS.today() : new Date().toISOString().split('T')[0];
 
       // Jours du mois précédent
       for (var i = startOffset - 1; i >= 0; i--) {

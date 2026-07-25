@@ -11,8 +11,14 @@
        Palette : Blanc, Vert #16A34A, Noir
        ============================================ */
 
+    /* --- Heroicons sizing (car public.css n'est pas inclus) --- */
+    .heroicon { width:20px; height:20px; flex-shrink:0; stroke:currentColor; stroke-width:1.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    .heroicon-sm { width:16px; height:16px; }
+    .heroicon-lg { width:24px; height:24px; }
+    .heroicon-xl { width:32px; height:32px; }
+
     .login-page {
-      background: url('images/login page background.png') no-repeat center center fixed;
+      background: url('images/login-page-background.webp') no-repeat center center fixed;
       background-size: cover;
       position: relative;
       min-height: 100vh;
@@ -166,6 +172,49 @@
     }
 
     /* --- Bouton néo-brutaliste --- */
+    .lang-login-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: all .12s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .lang-login-btn:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.5);
+      color: #fff;
+    }
+
+    .login-flags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .login-flag-link {
+      font-size: 1.25rem;
+      text-decoration: none;
+      transition: transform .12s ease;
+      opacity: 0.6;
+    }
+    .login-flag-link:hover {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+
     .btn-glass {
       display: inline-flex;
       align-items: center;
@@ -242,16 +291,22 @@
     }
   </style>
 </head>
-<body>  <div class="login-page">
+<body>
 
     <!-- Canvas Matrix Effect -->
     <canvas id="matrixCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
 
     <!-- Conteneur Glassmorphism -->
     <div class="login-container">
+      <!-- Langue Toggle -->
+      <div style="text-align:right;margin-bottom:8px;">
+        <button class="lang-login-btn" onclick="if(typeof switchLang !== 'undefined') switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')">
+          🌐 <span data-i18n-toggle>English</span>
+        </button>
+      </div>
       <div class="login-logo">
         <div class="logo-icon">
-          <svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="heroicon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
           </svg>
         </div>
@@ -275,7 +330,7 @@
           <label for="loginEmail">Adresse e-mail</label>
           <input type="email" id="loginEmail" class="form-control" placeholder="exemple@ecole.fr" required>
           <div class="form-error" id="emailError">
-            <svg class="heroicon heroicon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            <svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
             Veuillez entrer une adresse e-mail valide.
           </div>
         </div>
@@ -286,13 +341,13 @@
             <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
           </div>
           <div class="form-error" id="passwordError">
-            <svg class="heroicon heroicon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            <svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
             Le mot de passe doit contenir au moins 6 caractères.
           </div>
         </div>
 
         <button type="submit" class="btn-glass" id="loginBtn">
-          <svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          <svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
           Se connecter
         </button>
 
@@ -300,8 +355,21 @@
           Identifiants de test : sélectionnez un rôle et les champs se remplissent automatiquement.
         </p>
 
+        <!-- Flags showcase -->
+        <div class="login-flags-row">
+          <a href="bourses.html" class="login-flag-link" title="Bourses internationales">🌍</a>
+          <a href="bourses.html" class="login-flag-link" title="Chine">🇨🇳</a>
+          <a href="bourses.html" class="login-flag-link" title="Japon">🇯🇵</a>
+          <a href="bourses.html" class="login-flag-link" title="Corée">🇰🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Allemagne">🇩🇪</a>
+          <a href="bourses.html" class="login-flag-link" title="Suède">🇸🇪</a>
+          <a href="bourses.html" class="login-flag-link" title="Brésil">🇧🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Turquie">🇹🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Qatar">🇶🇦</a>
+        </div>
+
         <div class="secure-badge">
-          <svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+          <svg class="heroicon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
           Connexion sécurisée • Chiffrement de bout en bout
         </div>
       </form>
@@ -310,6 +378,7 @@
 
   <div class="toast-container" id="toastContainer"></div>
 
+  <script src="js/i18n.js"></script>
   <script>
     /* ============================================
        Matrix Rain Effect (plus subtil)
@@ -458,7 +527,7 @@
         }
 
         loginBtn.disabled = true;
-        loginBtn.innerHTML = '<svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Connexion...';
+        loginBtn.innerHTML = '<svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Connexion...';
 
         setTimeout(function() {
           var session = {
@@ -482,9 +551,9 @@
       toast.className = 'toast toast-' + (type || 'info');
 
       var icons = {
-        success: '<svg class="heroicon heroicon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>',
-        error: '<svg class="heroicon heroicon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/></svg>',
-        info: '<svg class="heroicon heroicon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>'
+        success: '<svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>',
+        error: '<svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/></svg>',
+        info: '<svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>'
       };
 
       toast.innerHTML = '<span class="toast-icon">' + (icons[type] || icons.info) + '</span>'

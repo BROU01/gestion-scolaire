@@ -297,7 +297,8 @@ function getMenuSections(role) {
     { title: 'Site Public', items: [
       { view: 'theme', icon: i.paintbrush, label: 'Personnalisation' },
       { view: 'candidates', icon: i.clipboard, label: 'Candidatures' },
-      { view: 'appointments', icon: i.calendarDays, label: 'Rendez-vous' }
+      { view: 'appointments', icon: i.calendarDays, label: 'Rendez-vous' },
+      { view: 'site-editor', icon: i.paintbrush, label: 'Éditeur site' }
     ]}
   ];
 
@@ -331,7 +332,8 @@ function getMenuSections(role) {
       { view: 'my-filiere', icon: i.academicCap, label: 'Ma filière' },
       { view: 'my-class-student', icon: i.buildingLibrary, label: 'Ma classe' },
       { view: 'my-subjects-student', icon: i.bookOpen, label: 'Mes matières' },
-      { view: 'my-grades', icon: i.chartBar, label: 'Mes notes' }
+      { view: 'my-grades', icon: i.chartBar, label: 'Mes notes' },
+      { view: 'my-exams', icon: i.academicCap, label: 'Mes examens' }
     ]},
     { title: 'Discipline', items: [
       { view: 'my-record', icon: i.shieldCheck, label: 'Mon casier' },
@@ -379,6 +381,7 @@ var TITLES = {
   'child-profile': 'Profil de mon enfant', 'child-grades': 'Notes de mon enfant',
   'child-attendance': 'Absences & Retards', 'child-record': 'Comportement',
   'activities': 'Activités', 'calendar-view': 'Calendrier académique',
+  'my-exams': 'Mes examens', 'site-editor': 'Personnalisation du site',
   'scholarships': 'Bourses d\'études internationales'
 };
 
@@ -430,6 +433,8 @@ function renderView(view) {
     /* Shared */
     case 'activities': renderActivities(b); break;
     case 'calendar-view': renderCalendar(b); break;
+    case 'my-exams': renderMyExams(b); break;
+    case 'site-editor': renderSiteEditor(b); break;
     case 'scholarships': renderScholarships(b); break;
     case 'theme': if (APP.role !== 'admin') { showToast('Accès réservé à l\'administration.', 'error'); renderDashboard(b); break; } renderThemeSettings(b); break;
     case 'candidates': if (APP.role !== 'admin') { showToast('Accès réservé à l\'administration.', 'error'); renderDashboard(b); break; } renderCandidates(b); break;
@@ -494,7 +499,34 @@ function renderAdminDash(c) {
     + '<div class="grid-2col">'
     + '<div class="card"><div class="card-header"><h3>Dernières notes</h3></div><div class="card-body">' + recentGradesTable() + '</div></div>'
     + '<div class="card"><div class="card-header"><h3>Année en cours</h3></div><div class="card-body">' + currentYearInfo() + '</div></div>'
-    + '</div>';
+    + '</div>'
+    + '<!-- Flags Section -->'
+    + '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.globeAlt + ' Bourses internationales — 25+ pays</h3></div><div class="card-body">'
+    + '<div class="admin-flags-row">'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Chine">🇨🇳<span>Chine</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Japon">🇯🇵<span>Japon</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Corée">🇰🇷<span>Corée</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Luxembourg">🇱🇺<span>Luxembourg</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Suède">🇸🇪<span>Suède</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Norvège">🇳🇴<span>Norvège</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Allemagne">🇩🇪<span>Allemagne</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Turquie">🇹🇷<span>Turquie</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Arabie Saoudite">🇸🇦<span>Arabie</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Qatar">🇶🇦<span>Qatar</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Brésil">🇧🇷<span>Brésil</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Mexique">🇲🇽<span>Mexique</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Russie">🇷🇺<span>Russie</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Finlande">🇫🇮<span>Finlande</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Danemark">🇩🇰<span>Danemark</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Thaïlande">🇹🇭<span>Thaïlande</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Taïwan">🇹🇼<span>Taïwan</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Écosse">🏴󠁧󠁢󠁳󠁣󠁴󠁿<span>Écosse</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Estonie">🇪🇪<span>Estonie</span></a>'
+    + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Brunei">🇧🇳<span>Brunei</span></a>'
+    + '</div>'
+    + '<div style="margin-top:12px;font-size:0.75rem;color:var(--text-muted);text-align:center;">'
+    + ICONS.globeAlt + ' Cliquez sur un drapeau pour voir les détails de la bourse'
+    + '</div></div></div>';
 }
 
 function renderTeacherDash(c) {
@@ -1532,10 +1564,93 @@ function renderParentRecord(c) {
 }
 
 /* ============================================
-   CALENDAR
+   STUDENT EXAM VIEW
+   ============================================ */
+function renderMyExams(c) {
+  loadCalendarEvents();
+  var exams = [];
+  for (var i = 0; i < CALENDAR_EVENTS.length; i++) {
+    if (CALENDAR_EVENTS[i].type === 'academic') {
+      exams.push(CALENDAR_EVENTS[i]);
+    }
+  }
+
+  var now = new Date();
+  var upcoming = [];
+  var past = [];
+  for (var j = 0; j < exams.length; j++) {
+    if (new Date(exams[j].date) >= now) {
+      upcoming.push(exams[j]);
+    } else {
+      past.push(exams[j]);
+    }
+  }
+  upcoming.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  past.sort(function(a,b){return new Date(b.date)-new Date(a.date);});
+
+  var h = '<div class="stats-grid" style="margin-bottom:24px;">'
+    + statCard(ICONS.calendar, 'Examens à venir', upcoming.length, 'info')
+    + statCard(ICONS.chartBar, 'Examens passés', past.length, 'neutral')
+    + '</div>';
+
+  h += '<div class="card"><div class="card-header"><h3>' + ICONS.calendar + ' Examens à venir</h3></div><div class="card-body">';
+  if (upcoming.length === 0) {
+    h += '<div class="empty-state"><p>Aucun examen prévu.</p></div>';
+  } else {
+    h += '<div class="table-container"><table class="table"><thead><tr><th>Date</th><th>Événement</th><th>Période</th></tr></thead><tbody>';
+    for (var u = 0; u < upcoming.length; u++) {
+      h += '<tr><td><span class="badge badge-info">' + upcoming[u].date + '</span></td>'
+        + '<td>' + upcoming[u].title + '</td>'
+        + '<td>' + (upcoming[u].endDate && upcoming[u].endDate !== upcoming[u].date ? upcoming[u].date + ' → ' + upcoming[u].endDate : upcoming[u].date) + '</td></tr>';
+    }
+    h += '</tbody></table></div>';
+  }
+  h += '</div></div>';
+
+  h += '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.chartBar + ' Examens passés</h3></div><div class="card-body">';
+  if (past.length === 0) {
+    h += '<div class="empty-state"><p>Aucun examen passé.</p></div>';
+  } else {
+    h += '<div class="table-container"><table class="table"><thead><tr><th>Date</th><th>Événement</th><th>Période</th></tr></thead><tbody>';
+    for (var p = 0; p < past.length; p++) {
+      h += '<tr><td><span class="badge badge-neutral">' + past[p].date + '</span></td>'
+        + '<td>' + past[p].title + '</td>'
+        + '<td>' + (past[p].endDate && past[p].endDate !== past[p].date ? past[p].date + ' → ' + past[p].endDate : past[p].date) + '</td></tr>';
+    }
+    h += '</tbody></table></div>';
+  }
+  h += '</div></div>';
+
+  c.innerHTML = h;
+}
+
+/* ============================================
+   CALENDAR — Connecté à l'API
    ============================================ */
 /* Calendrier state */
 var calYear, calMonth;
+var CALENDAR_EVENTS = [];
+
+/* Charger les événements depuis l'API (ou fallback MOCK) */
+function loadCalendarEvents(year, month) {
+  var url = '/api/calendar';
+  if (year !== undefined && month !== undefined) {
+    url += '?year=' + year + '&month=' + (month + 1);
+  }
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, false); /* synchrone pour simplifier le rendu */
+  try {
+    xhr.send();
+    if (xhr.status === 200) {
+      CALENDAR_EVENTS = JSON.parse(xhr.responseText);
+    } else {
+      CALENDAR_EVENTS = MOCK.calendar || [];
+    }
+  } catch(e) {
+    /* Serveur indisponible : utiliser les données mockées */
+    CALENDAR_EVENTS = MOCK.calendar || [];
+  }
+}
 
 function renderCalendar(c, yearOffset, monthOffset) {
   if (!window._calInit) {
@@ -1555,11 +1670,34 @@ function renderCalendar(c, yearOffset, monthOffset) {
   var daysInMonth = new Date(year, month + 1, 0).getDate();
   var monthNames = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
   var dayNames = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  var isAdmin = APP.role === 'admin';
 
-  var eventsThisMonth = MOCK.calendar.filter(function(ev) {
+  /* Charger les événements du mois */
+  loadCalendarEvents(year, month);
+
+  var eventsThisMonth = CALENDAR_EVENTS.filter(function(ev) {
     var d = new Date(ev.date);
     return d.getMonth() === month && d.getFullYear() === year;
   });
+
+  /* Filtres par type */
+  var calFilter = window._calFilter || 'all';
+  var filteredEvents = eventsThisMonth;
+  if (calFilter !== 'all') {
+    filteredEvents = [];
+    for (var fe = 0; fe < eventsThisMonth.length; fe++) {
+      if (eventsThisMonth[fe].type === calFilter) {
+        filteredEvents.push(eventsThisMonth[fe]);
+      }
+    }
+  }
+
+  /* Bouton Ajouter pour admin */
+  if (isAdmin) {
+    document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openCalendarEventModal()">' + ICONS.plus + ' Ajouter un événement</button>';
+  }
+
+  var calId = 'calGrid_' + Math.random().toString(36).substr(2, 5);
 
   var h = '<div class="card"><div class="card-header">' +
     '<div class="calendar-nav">' +
@@ -1581,36 +1719,778 @@ function renderCalendar(c, yearOffset, monthOffset) {
   for (var d = 1; d <= daysInMonth; d++) {
     var isToday = d === today && month === now.getMonth() && year === now.getFullYear();
     h += '<div class="calendar-cell' + (isToday ? ' today' : '') + '"><div class="calendar-day">' + d + '</div>';
-    eventsThisMonth.forEach(function(ev) {
+    for (var ei = 0; ei < filteredEvents.length; ei++) {
+      var ev = filteredEvents[ei];
       var evDay = new Date(ev.date).getDate();
       if (evDay === d) {
-        var typeCls = ev.type === 'academic' ? 'academic' : ev.type === 'cultural' ? 'cultural' : 'sport';
-        h += '<div class="calendar-event ' + typeCls + '">' + ev.title + '</div>';
+        var typeCls = ev.type === 'academic' ? 'academic' : ev.type === 'cultural' ? 'cultural' : ev.type === 'sport' ? 'sport' : 'holiday';
+        var adminActions = isAdmin
+          ? '<div class="cal-event-actions">'
+            + '<button class="cal-event-edit" onclick="event.stopPropagation();openCalendarEventModal(\'' + ev.id + '\')" title="Modifier">' + ICONS.pencil + '</button>'
+            + '<button class="cal-event-delete" onclick="event.stopPropagation();confirmDeleteCalendar(\'' + ev.id + '\',\'' + ev.title.replace(/'/g, "\\'") + '\')" title="Supprimer">' + ICONS.trash + '</button>'
+            + '</div>'
+          : '';
+        h += '<div class="calendar-event ' + typeCls + '">'
+          + '<div class="cal-event-title">' + ev.title + '</div>'
+          + adminActions
+          + '</div>';
       }
-    });
+    }
     h += '</div>';
   }
 
   h += '</div></div></div>';
 
-  /* Légende */
-  h += '<div class="card mt-3"><div class="card-body d-flex gap-3 flex-wrap align-center">'
-    + '<span class="badge badge-info">Académique</span>'
-    + '<span class="badge badge-primary">Culturel</span>'
-    + '<span class="badge badge-success">Sportif</span>'
-    + '<span class="badge badge-neutral">Vacances</span>'
-    + '</div></div>';
+  /* Filtres */
+  var filterTabs = ['all','academic','cultural','sport','holiday'];
+  var filterLabels = { all:'Tous', academic:'Académique', cultural:'Culturel', sport:'Sportif', holiday:'Vacances' };
+  h += '<div class="card mt-3"><div class="card-body">'
+    + '<div class="cal-filter-tabs">';
+  for (var ft = 0; ft < filterTabs.length; ft++) {
+    var fk = filterTabs[ft];
+    var activeCls = calFilter === fk ? ' cal-filter-active' : '';
+    h += '<button class="cal-filter-tab' + activeCls + '" onclick="window._calFilter=\'' + fk + '\';renderCalendar(document.getElementById(\'contentBody\'))">' + filterLabels[fk] + '</button>';
+  }
+  h += '</div></div></div>';
 
   /* Prochains événements */
-  h += '<div class="card mt-3"><div class="card-header"><h3>Prochains événements</h3></div><div class="card-body">';
-  MOCK.calendar.sort(function(a,b){return new Date(a.date)-new Date(b.date);}).forEach(function(ev) {
-    h += '<div class="list-item">'
-      + '<span class="list-item-date">' + ev.date + '</span>'
-      + '<span>' + ev.title + '</span></div>';
-  });
+  h += '<div class="card mt-3"><div class="card-header"><h3>Prochains événements</h3></div><div class="card-body" id="' + calId + '">';
+  if (CALENDAR_EVENTS.length === 0) {
+    h += '<div class="empty-state"><div class="empty-icon">' + ICONS.calendarDays + '</div><p>Aucun événement à venir.</p></div>';
+  } else {
+    CALENDAR_EVENTS.sort(function(a,b){return new Date(a.date)-new Date(b.date);}).forEach(function(ev) {
+      var typeLabel = ev.type === 'academic' ? 'Acad.' : ev.type === 'cultural' ? 'Cult.' : ev.type === 'sport' ? 'Sport' : 'Vac.';
+      h += '<div class="list-item">'
+        + '<span class="list-item-date">' + ev.date + '</span>'
+        + '<span class="list-item-title">' + ev.title + '</span>'
+        + '<span class="badge badge-info" style="margin-left:auto;font-size:0.65rem;">' + typeLabel + '</span>'
+        + '</div>';
+    });
+  }
   h += '</div></div>';
 
   c.innerHTML = h;
+}
+
+/* --- Modal Événement Calendrier --- */
+function openCalendarEventModal(id) {
+  var isEdit = !!id;
+  var ev = null;
+  if (isEdit) {
+    for (var i = 0; i < CALENDAR_EVENTS.length; i++) {
+      if (CALENDAR_EVENTS[i].id === id) {
+        ev = CALENDAR_EVENTS[i];
+        break;
+      }
+    }
+  }
+
+  var todayStr = new Date().toISOString().split('T')[0];
+
+  var h = '<form onsubmit="return false;">'
+    + '<div class="form-group"><label for="cal-title">Titre *</label>'
+    + '<input type="text" id="cal-title" class="form-control" value="' + (ev ? ev.title.replace(/"/g, '&quot;') : '') + '" placeholder="Ex: DS Groupe 1" required></div>'
+    + '<div class="form-group"><label for="cal-date">Date *</label>'
+    + '<input type="date" id="cal-date" class="form-control" value="' + (ev ? ev.date : todayStr) + '" required></div>'
+    + '<div class="form-group"><label for="cal-endDate">Date de fin</label>'
+    + '<input type="date" id="cal-endDate" class="form-control" value="' + (ev && ev.endDate ? ev.endDate : '') + '"></div>'
+    + '<div class="form-group"><label for="cal-type">Type *</label>'
+    + '<select id="cal-type" class="form-control" required>'
+    + '<option value="academic"' + (ev && ev.type === 'academic' ? ' selected' : '') + '>Académique</option>'
+    + '<option value="cultural"' + (ev && ev.type === 'cultural' ? ' selected' : '') + '>Culturel</option>'
+    + '<option value="sport"' + (ev && ev.type === 'sport' ? ' selected' : '') + '>Sportif</option>'
+    + '<option value="holiday"' + (ev && ev.type === 'holiday' ? ' selected' : '') + '>Vacances</option>'
+    + '</select></div>'
+    + '<div class="form-group"><label for="cal-desc">Description</label>'
+    + '<textarea id="cal-desc" class="form-control" rows="3" placeholder="Description optionnelle...">' + (ev && ev.description ? ev.description.replace(/"/g, '&quot;') : '') + '</textarea></div>'
+    + '</form>';
+
+  APP.editingEntity = isEdit ? id : null;
+
+  var modalBody = h;
+  var modalTitle = isEdit ? 'Modifier un événement' : 'Ajouter un événement';
+  var footer = '<button class="btn btn-outline" onclick="closeModal()">Annuler</button>'
+    + '<button class="btn btn-primary" onclick="saveCalendarEvent()">' + ICONS.check + ' Enregistrer</button>';
+
+  document.getElementById('modalContent').innerHTML = ''
+    + '<div class="modal-header"><h2>' + modalTitle + '</h2><button class="modal-close" onclick="closeModal()">' + ICONS.xMark + '</button></div>'
+    + '<div class="modal-body">' + modalBody + '</div>'
+    + '<div class="modal-footer">' + footer + '</div>';
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function saveCalendarEvent() {
+  var title = document.getElementById('cal-title').value.trim();
+  var date = document.getElementById('cal-date').value;
+  var endDate = document.getElementById('cal-endDate').value || date;
+  var type = document.getElementById('cal-type').value;
+  var description = document.getElementById('cal-desc').value.trim();
+
+  if (!title || !date || !type) {
+    showToast('Veuillez remplir tous les champs obligatoires.', 'error');
+    return;
+  }
+
+  var isEdit = APP.editingEntity !== null;
+  var url = isEdit ? '/api/calendar/' + APP.editingEntity : '/api/calendar';
+  var method = isEdit ? 'PUT' : 'POST';
+  var body = JSON.stringify({ title: title, date: date, endDate: endDate, type: type, description: description });
+
+  var session = JSON.parse(localStorage.getItem('ecole_session') || '{}');
+  var token = session.token;
+
+  /* Si token mocké ou API indisponible, enregistrer localement */
+  if (!token || token.indexOf('mock-') === 0) {
+    saveCalendarEventLocal(isEdit, title, date, endDate, type, description);
+    return;
+  }
+
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, url, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      closeModal();
+      showToast(isEdit ? 'Événement modifié avec succès.' : 'Événement ajouté avec succès.', 'success');
+      window._calInit = false;
+      renderView('calendar-view');
+    } else if (xhr.status === 401) {
+      /* Token invalide : fallback local */
+      saveCalendarEventLocal(isEdit, title, date, endDate, type, description);
+    } else {
+      try {
+        var err = JSON.parse(xhr.responseText);
+        showToast(err.error || 'Erreur lors de l\'enregistrement.', 'error');
+      } catch(e) {
+        showToast('Erreur lors de l\'enregistrement.', 'error');
+      }
+    }
+  };
+  xhr.onerror = function() {
+    /* Serveur indisponible : fallback local */
+    saveCalendarEventLocal(isEdit, title, date, endDate, type, description);
+  };
+  xhr.send(body);
+}
+
+/* Sauvegarde locale (fallback quand le serveur API est indisponible) */
+function saveCalendarEventLocal(isEdit, title, date, endDate, type, description) {
+  if (isEdit) {
+    for (var i = 0; i < CALENDAR_EVENTS.length; i++) {
+      if (CALENDAR_EVENTS[i].id === APP.editingEntity) {
+        CALENDAR_EVENTS[i].title = title;
+        CALENDAR_EVENTS[i].date = date;
+        CALENDAR_EVENTS[i].endDate = endDate;
+        CALENDAR_EVENTS[i].type = type;
+        CALENDAR_EVENTS[i].description = description;
+        break;
+      }
+    }
+    /* Also update MOCK.calendar */
+    for (var j = 0; j < MOCK.calendar.length; j++) {
+      if (MOCK.calendar[j].id === APP.editingEntity) {
+        MOCK.calendar[j].title = title;
+        MOCK.calendar[j].date = date;
+        MOCK.calendar[j].endDate = endDate;
+        MOCK.calendar[j].type = type;
+        break;
+      }
+    }
+  } else {
+    var newId = Date.now();
+    var ev = { id: newId, title: title, date: date, endDate: endDate, type: type, description: description };
+    CALENDAR_EVENTS.push(ev);
+    MOCK.calendar.push(ev);
+  }
+  closeModal();
+  showToast((isEdit ? 'Événement modifié' : 'Événement ajouté') + ' (mode local).', 'success');
+  window._calInit = false;
+  renderView('calendar-view');
+}
+
+/* --- Confirmation de suppression --- */
+function confirmDeleteCalendar(id, title) {
+  document.getElementById('confirmContent').innerHTML = ''
+    + '<div class="confirm-icon">' + ICONS.exclamationTriangle + '</div>'
+    + '<div class="confirm-text"><h3>Supprimer cet événement ?</h3>'
+    + '<p>\'' + title + '\' sera définitivement supprimé.</p></div>'
+    + '<div class="modal-footer confirm-footer">'
+    + '<button class="btn btn-outline" onclick="closeConfirm()">Annuler</button>'
+    + '<button class="btn btn-danger" onclick="deleteCalendarEvent(\'' + id + '\')">' + ICONS.trash + ' Supprimer</button>'
+    + '</div>';
+  document.getElementById('confirmOverlay').classList.add('active');
+}
+
+function deleteCalendarEvent(id) {
+  var session = JSON.parse(localStorage.getItem('ecole_session') || '{}');
+  var token = session.token;
+
+  /* Si token mocké ou API indisponible, supprimer localement */
+  if (!token || token.indexOf('mock-') === 0) {
+    deleteCalendarEventLocal(id);
+    return;
+  }
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('DELETE', '/api/calendar/' + id, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      closeConfirm();
+      showToast('Événement supprimé.', 'success');
+      window._calInit = false;
+      renderView('calendar-view');
+    } else if (xhr.status === 401) {
+      deleteCalendarEventLocal(id);
+    } else {
+      try {
+        var err = JSON.parse(xhr.responseText);
+        showToast(err.error || 'Erreur lors de la suppression.', 'error');
+      } catch(e) {
+        showToast('Erreur lors de la suppression.', 'error');
+      }
+    }
+  };
+  xhr.onerror = function() {
+    deleteCalendarEventLocal(id);
+  };
+  xhr.send();
+}
+
+/* Suppression locale (fallback) */
+/* ============================================
+   SITE EDITOR
+   ============================================ */
+var _siteEditingPage = null;
+
+function renderSiteEditor(c) {
+  if (typeof SITE_load === 'undefined') {
+    c.innerHTML = '<div class="empty-state"><div class="empty-icon">' + ICONS.exclamationTriangle + '</div><h3>Module éditeur non chargé</h3><p>Le fichier site-editor.js est manquant.</p></div>';
+    return;
+  }
+  var data = SITE_load();
+  document.getElementById('headerActions').innerHTML = ''
+    + '<button class="btn btn-primary" onclick="openSitePageModal()">' + ICONS.plus + ' Nouvelle page</button>'
+    + '<button class="btn btn-success" onclick="openSiteLogoModal()">' + ICONS.paintbrush + ' Logo</button>'
+    + '<button class="btn btn-outline" onclick="openSiteNavModal()">' + ICONS.cog + ' Navigation</button>';
+
+  var pagesHtml = '';
+  for (var i = 0; i < data.pages.length; i++) {
+    var p = data.pages[i];
+    pagesHtml += '<div class="nav-item-sm" onclick="editSitePage(\'' + p.id + '\')">'
+      + '<span>' + p.title + '</span>'
+      + '<span class="badge ' + (p.published ? 'badge-success' : 'badge-neutral') + '" style="font-size:0.6rem;">' + (p.published ? 'Publié' : 'Brouillon') + '</span>'
+      + '</div>';
+  }
+
+  var previewHtml = '<div class="empty-state"><div class="empty-icon">' + ICONS.calendarDays + '</div><h3>Sélectionnez une page</h3><p>Choisissez une page dans la liste pour l\'éditer.</p></div>';
+
+  c.innerHTML = '<div class="site-editor-layout">'
+    + '<div class="site-editor-sidebar"><h4>' + ICONS.calendar + ' Pages du site</h4>'
+    + pagesHtml
+    + '<div style="margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid #000;">'
+    + '<h4>Images</h4>'
+    + '<button class="btn btn-ghost btn-sm w-full" onclick="openSiteImageModal()" style="font-size:0.75rem;">' + ICONS.plus + ' Ajouter une image</button>'
+    + '</div></div>'
+    + '<div class="site-editor-main" id="siteEditorMain">' + previewHtml + '</div></div>';
+}
+
+function editSitePage(pageId) {
+  _siteEditingPage = pageId;
+  var data = SITE_load();
+  var page = null;
+  for (var i = 0; i < data.pages.length; i++) {
+    if (data.pages[i].id === pageId) { page = data.pages[i]; break; }
+  }
+  if (!page) return;
+
+  var main = document.getElementById('siteEditorMain');
+  if (!main) return;
+
+  /* Highlight active page */
+  var allNav = main.parentNode.querySelectorAll('.nav-item-sm');
+  for (var n = 0; n < allNav.length; n++) { allNav[n].classList.remove('active'); }
+  var activeEl = main.parentNode.querySelector('[onclick*="' + pageId + '"]');
+  if (activeEl) activeEl.classList.add('active');
+
+  var sectionsHtml = '';
+  for (var s = 0; s < page.sections.length; s++) {
+    var sec = page.sections[s];
+    var typeLabel = sec.type.charAt(0).toUpperCase() + sec.type.slice(1);
+    var previewText = sec.content.title || sec.content.body || '';
+    sectionsHtml += '<div class="section-card">'
+      + '<span class="section-type">' + typeLabel + '</span>'
+      + '<span class="section-preview">' + previewText.substring(0, 60) + '</span>'
+      + '<div class="section-actions">'
+      + '<button onclick="openSiteSectionModal(\'' + pageId + '\',\'' + sec.id + '\')" title="Modifier">' + ICONS.pencil + '</button>'
+      + '<button onclick="confirmDeleteSection(\'' + pageId + '\',\'' + sec.id + '\')" title="Supprimer">' + ICONS.trash + '</button>'
+      + '</div></div>';
+  }
+
+  var typeOptions = ['hero','text','features','cta','image'];
+  var typeSelectHtml = '<select id="newSectionType" class="form-control" style="width:auto;display:inline-block;">';
+  for (var t = 0; t < typeOptions.length; t++) {
+    typeSelectHtml += '<option value="' + typeOptions[t] + '">' + typeOptions[t].charAt(0).toUpperCase() + typeOptions[t].slice(1) + '</option>';
+  }
+  typeSelectHtml += '</select>';
+
+  main.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-4);">'
+    + '<h3 style="font-size:1.125rem;font-weight:700;">' + page.title + '</h3>'
+    + '<div class="d-flex gap-1">'
+    + '<button class="btn btn-sm btn-outline" onclick="openSitePageModal(\'' + pageId + '\')">' + ICONS.pencil + ' Modifier</button>'
+    + '<button class="btn btn-sm btn-danger" onclick="confirmDeleteSitePage(\'' + pageId + '\')">' + ICONS.trash + ' Supprimer</button>'
+    + '<button class="btn btn-sm btn-primary" onclick="previewSitePage(\'' + pageId + '\')">' + ICONS.eye + ' Aperçu</button>'
+    + '</div></div>'
+    + '<div style="margin-bottom:var(--space-4);display:flex;gap:var(--space-2);align-items:center;flex-wrap:wrap;">'
+    + '<span style="font-weight:600;font-size:0.875rem;">Ajouter une section :</span>'
+    + typeSelectHtml
+    + '<button class="btn btn-sm btn-primary" onclick="addSiteSection(\'' + pageId + '\')">' + ICONS.plus + ' Ajouter</button>'
+    + '</div>'
+    + '<div>' + sectionsHtml + '</div>'
+    + (sectionsHtml === '' ? '<div class="empty-state"><p>Cette page est vide. Ajoutez des sections ci-dessus.</p></div>' : '');
+}
+
+function addSiteSection(pageId) {
+  var type = document.getElementById('newSectionType').value;
+  var defaults = {
+    hero: { title: 'Nouvelle section', subtitle: 'Sous-titre', bgColor: '#16A34A', btnText: 'En savoir plus', btnLink: '#' },
+    text: { body: '<p>Contenu texte ici...</p>' },
+    features: { title: 'Nos fonctionnalités', items: [{ icon: '✓', text: 'Fonctionnalité 1' }, { icon: '✓', text: 'Fonctionnalité 2' }] },
+    cta: { title: 'Appel à l\'action', btnText: 'Contactez-nous', btnLink: '#' },
+    image: { src: '', alt: 'Image' }
+  };
+  SITE_addSection(pageId, type, defaults[type] || {});
+  showToast('Section ajoutée.', 'success');
+  editSitePage(pageId);
+}
+
+function openSiteSectionModal(pageId, sectionId) {
+  var data = SITE_load();
+  var section = null;
+  for (var i = 0; i < data.pages.length; i++) {
+    if (data.pages[i].id === pageId) {
+      for (var j = 0; j < data.pages[i].sections.length; j++) {
+        if (data.pages[i].sections[j].id === sectionId) {
+          section = data.pages[i].sections[j];
+          break;
+        }
+      }
+      break;
+    }
+  }
+  if (!section) return;
+
+  var c = section.content;
+  var fields = [];
+
+  if (section.type === 'hero') {
+    fields = [
+      { name: 'title', label: 'Titre', type: 'text', value: c.title || '' },
+      { name: 'subtitle', label: 'Sous-titre', type: 'text', value: c.subtitle || '' },
+      { name: 'btnText', label: 'Texte du bouton', type: 'text', value: c.btnText || '' },
+      { name: 'btnLink', label: 'Lien du bouton', type: 'text', value: c.btnLink || '' },
+      { name: 'bgColor', label: 'Couleur de fond', type: 'color', value: c.bgColor || '#16A34A' }
+    ];
+  } else if (section.type === 'text') {
+    fields = [
+      { name: 'body', label: 'Contenu (HTML)', type: 'textarea', value: c.body || '' }
+    ];
+  } else if (section.type === 'features') {
+    var itemsStr = '';
+    if (c.items) {
+      for (var it = 0; it < c.items.length; it++) {
+        itemsStr += (it > 0 ? '\n' : '') + (c.items[it].icon || '') + '|' + (c.items[it].text || '');
+      }
+    }
+    fields = [
+      { name: 'title', label: 'Titre', type: 'text', value: c.title || '' },
+      { name: 'items_raw', label: 'Éléments (icône|texte par ligne)', type: 'textarea', value: itemsStr }
+    ];
+  } else if (section.type === 'cta') {
+    fields = [
+      { name: 'title', label: 'Titre', type: 'text', value: c.title || '' },
+      { name: 'btnText', label: 'Texte du bouton', type: 'text', value: c.btnText || '' },
+      { name: 'btnLink', label: 'Lien du bouton', type: 'text', value: c.btnLink || '' }
+    ];
+  } else if (section.type === 'image') {
+    var imgOptions = '<option value="">— Sélectionner —</option>';
+    for (var im = 0; im < data.images.length; im++) {
+      var selected = data.images[im].dataUrl === c.src ? ' selected' : '';
+      imgOptions += '<option value="' + im + '"' + selected + '>' + data.images[im].name + '</option>';
+    }
+    fields = [
+      { name: 'src', label: 'Image', type: 'select', options: imgOptions, value: '' },
+      { name: 'alt', label: 'Texte alternatif', type: 'text', value: c.alt || '' }
+    ];
+  }
+
+  var formHtml = '<form onsubmit="return false;">';
+  for (var f = 0; f < fields.length; f++) {
+    var field = fields[f];
+    formHtml += '<div class="form-group"><label for="sec-' + field.name + '">' + field.label + '</label>';
+    if (field.type === 'textarea') {
+      formHtml += '<textarea id="sec-' + field.name + '" class="form-control" rows="4">' + (field.value || '').replace(/"/g, '&quot;') + '</textarea>';
+    } else if (field.type === 'color') {
+      formHtml += '<input type="color" id="sec-' + field.name + '" class="form-control" style="height:40px;padding:4px;" value="' + field.value + '">';
+    } else if (field.type === 'select') {
+      formHtml += '<select id="sec-' + field.name + '" class="form-control">' + field.options + '</select>';
+    } else {
+      formHtml += '<input type="text" id="sec-' + field.name + '" class="form-control" value="' + (field.value || '').replace(/"/g, '&quot;') + '">';
+    }
+    formHtml += '</div>';
+  }
+  formHtml += '</form>';
+
+  APP._editSectionContext = { pageId: pageId, sectionId: sectionId, type: section.type };
+
+  document.getElementById('modalContent').innerHTML = ''
+    + '<div class="modal-header"><h2>Section ' + section.type + '</h2><button class="modal-close" onclick="closeModal()">' + ICONS.xMark + '</button></div>'
+    + '<div class="modal-body">' + formHtml + '</div>'
+    + '<div class="modal-footer">'
+    + '<button class="btn btn-outline" onclick="closeModal()">Annuler</button>'
+    + '<button class="btn btn-primary" onclick="saveSiteSection()">' + ICONS.check + ' Enregistrer</button>'
+    + '</div>';
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function saveSiteSection() {
+  var ctx = APP._editSectionContext;
+  if (!ctx) return;
+
+  var content = {};
+  if (ctx.type === 'hero') {
+    content.title = document.getElementById('sec-title').value.trim();
+    content.subtitle = document.getElementById('sec-subtitle').value.trim();
+    content.btnText = document.getElementById('sec-btnText').value.trim();
+    content.btnLink = document.getElementById('sec-btnLink').value.trim();
+    content.bgColor = document.getElementById('sec-bgColor').value;
+  } else if (ctx.type === 'text') {
+    content.body = document.getElementById('sec-body').value;
+  } else if (ctx.type === 'features') {
+    content.title = document.getElementById('sec-title').value.trim();
+    var raw = document.getElementById('sec-items_raw').value;
+    var lines = raw.split('\n');
+    content.items = [];
+    for (var i = 0; i < lines.length; i++) {
+      var parts = lines[i].split('|');
+      content.items.push({ icon: parts[0] || '✓', text: parts[1] || parts[0] || '' });
+    }
+  } else if (ctx.type === 'cta') {
+    content.title = document.getElementById('sec-title').value.trim();
+    content.btnText = document.getElementById('sec-btnText').value.trim();
+    content.btnLink = document.getElementById('sec-btnLink').value.trim();
+  } else if (ctx.type === 'image') {
+    var data = SITE_load();
+    var idx = parseInt(document.getElementById('sec-src').value);
+    content.src = (!isNaN(idx) && data.images[idx]) ? data.images[idx].dataUrl : '';
+    content.alt = document.getElementById('sec-alt').value.trim();
+  }
+
+  SITE_updateSection(ctx.pageId, ctx.sectionId, content);
+  closeModal();
+  showToast('Section mise à jour.', 'success');
+  editSitePage(ctx.pageId);
+}
+
+function confirmDeleteSection(pageId, sectionId) {
+  document.getElementById('confirmContent').innerHTML = ''
+    + '<div class="confirm-icon">' + ICONS.exclamationTriangle + '</div>'
+    + '<div class="confirm-text"><h3>Supprimer cette section ?</h3><p>Cette action est irréversible.</p></div>'
+    + '<div class="modal-footer confirm-footer">'
+    + '<button class="btn btn-outline" onclick="closeConfirm()">Annuler</button>'
+    + '<button class="btn btn-danger" onclick="doDeleteSection(\'' + pageId + '\',\'' + sectionId + '\')">' + ICONS.trash + ' Supprimer</button>'
+    + '</div>';
+  document.getElementById('confirmOverlay').classList.add('active');
+}
+
+function doDeleteSection(pageId, sectionId) {
+  SITE_deleteSection(pageId, sectionId);
+  closeConfirm();
+  showToast('Section supprimée.', 'success');
+  editSitePage(pageId);
+}
+
+function openSitePageModal(editId) {
+  var data = SITE_load();
+  var isEdit = !!editId;
+  var page = null;
+  if (isEdit) {
+    for (var i = 0; i < data.pages.length; i++) {
+      if (data.pages[i].id === editId) { page = data.pages[i]; break; }
+    }
+  }
+
+  var formHtml = '<form onsubmit="return false;">'
+    + '<div class="form-group"><label for="page-title">Titre de la page *</label>'
+    + '<input type="text" id="page-title" class="form-control" value="' + (page ? page.title.replace(/"/g, '&quot;') : '') + '" placeholder="Ex: À propos"></div>'
+    + '<div class="form-group"><label for="page-slug">Slug (URL)</label>'
+    + '<input type="text" id="page-slug" class="form-control" value="' + (page ? page.slug : '') + '" placeholder="Ex: a-propos"></div>'
+    + '<div class="form-group"><label><input type="checkbox" id="page-published"' + (page && page.published ? ' checked' : '') + '> Page publiée</label></div>'
+    + '</form>';
+
+  APP._editPageId = editId || null;
+
+  document.getElementById('modalContent').innerHTML = ''
+    + '<div class="modal-header"><h2>' + (isEdit ? 'Modifier la page' : 'Nouvelle page') + '</h2><button class="modal-close" onclick="closeModal()">' + ICONS.xMark + '</button></div>'
+    + '<div class="modal-body">' + formHtml + '</div>'
+    + '<div class="modal-footer">'
+    + '<button class="btn btn-outline" onclick="closeModal()">Annuler</button>'
+    + '<button class="btn btn-primary" onclick="saveSitePage()">' + ICONS.check + ' Enregistrer</button>'
+    + '</div>';
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function saveSitePage() {
+  var title = document.getElementById('page-title').value.trim();
+  if (!title) { showToast('Le titre est requis.', 'error'); return; }
+  var slug = document.getElementById('page-slug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  var published = document.getElementById('page-published').checked;
+
+  if (APP._editPageId) {
+    SITE_updatePage(APP._editPageId, { title: title, slug: slug, published: published });
+    showToast('Page modifiée.', 'success');
+  } else {
+    SITE_addPage(title, slug);
+    SITE_updatePage(SITE_load().pages[SITE_load().pages.length - 1].id, { published: published });
+    showToast('Page créée.', 'success');
+  }
+  closeModal();
+  renderSiteEditor(document.getElementById('contentBody'));
+}
+
+function confirmDeleteSitePage(pageId) {
+  document.getElementById('confirmContent').innerHTML = ''
+    + '<div class="confirm-icon">' + ICONS.exclamationTriangle + '</div>'
+    + '<div class="confirm-text"><h3>Supprimer cette page ?</h3><p>Toutes ses sections seront perdues.</p></div>'
+    + '<div class="modal-footer confirm-footer">'
+    + '<button class="btn btn-outline" onclick="closeConfirm()">Annuler</button>'
+    + '<button class="btn btn-danger" onclick="doDeleteSitePage(\'' + pageId + '\')">' + ICONS.trash + ' Supprimer</button>'
+    + '</div>';
+  document.getElementById('confirmOverlay').classList.add('active');
+}
+
+function doDeleteSitePage(pageId) {
+  SITE_deletePage(pageId);
+  closeConfirm();
+  showToast('Page supprimée.', 'success');
+  _siteEditingPage = null;
+  renderSiteEditor(document.getElementById('contentBody'));
+}
+
+function openSiteLogoModal() {
+  var data = SITE_load();
+  var formHtml = '<form onsubmit="return false;">'
+    + '<div class="form-group"><label for="logo-text">Texte du logo</label>'
+    + '<input type="text" id="logo-text" class="form-control" value="' + (data.logo.text || 'FT3').replace(/"/g, '&quot;') + '"></div>'
+    + '<div class="form-group"><label for="logo-icon">Icône (emoji)</label>'
+    + '<input type="text" id="logo-icon" class="form-control" value="' + (data.logo.icon || '🎓') + '" maxlength="4"></div>'
+    + '<div class="form-group"><label>Logo image (optionnel, remplace texte)</label>'
+    + '<input type="file" id="logo-image-input" accept="image/*" class="form-control" style="padding:8px;">'
+    + (data.logoImage ? '<div style="margin-top:8px;"><img src="' + data.logoImage + '" style="max-height:60px;border:1px solid #000;"></div><div><button class="btn btn-ghost btn-sm" id="btnDeleteLogoImage">Supprimer l\'image</button></div>' : '')
+    + '</div>'
+    + '</form>';
+
+  document.getElementById('modalContent').innerHTML = ''
+    + '<div class="modal-header"><h2>Logo du site</h2><button class="modal-close" onclick="closeModal()">' + ICONS.xMark + '</button></div>'
+    + '<div class="modal-body">' + formHtml + '</div>'
+    + '<div class="modal-footer">'
+    + '<button class="btn btn-outline" onclick="closeModal()">Annuler</button>'
+    + '<button class="btn btn-primary" onclick="saveSiteLogo()">' + ICONS.check + ' Enregistrer</button>'
+    + '</div>';
+  document.getElementById('modalOverlay').classList.add('active');
+
+  /* Handle image upload */
+  var fileInput = document.getElementById('logo-image-input');
+  if (fileInput) {
+    fileInput.addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        SITE_setLogoImage(ev.target.result);
+        showToast('Logo mis à jour.', 'success');
+        closeModal();
+        renderSiteEditor(document.getElementById('contentBody'));
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+}
+
+function saveSiteLogo() {
+  var text = document.getElementById('logo-text').value.trim() || 'FT3';
+  var icon = document.getElementById('logo-icon').value.trim() || '🎓';
+  SITE_setLogo({ text: text, icon: icon });
+  closeModal();
+  showToast('Logo enregistré.', 'success');
+  renderSiteEditor(document.getElementById('contentBody'));
+}
+
+function openSiteNavModal() {
+  var data = SITE_load();
+  var itemsHtml = '';
+  for (var i = 0; i < data.nav.length; i++) {
+    itemsHtml += '<div class="form-group">'
+      + '<div style="display:flex;gap:8px;align-items:center;">'
+      + '<input type="text" class="form-control" id="nav-label-' + i + '" value="' + data.nav[i].label.replace(/"/g, '&quot;') + '" placeholder="Label" style="flex:1;">'
+      + '<input type="text" class="form-control" id="nav-href-' + i + '" value="' + data.nav[i].href.replace(/"/g, '&quot;') + '" placeholder="Lien" style="flex:1;">'
+      + '<button class="btn btn-ghost btn-sm" onclick="removeNavItem(' + i + ');closeModal();openSiteNavModal()" style="color:var(--danger);">' + ICONS.trash + '</button>'
+      + '</div></div>';
+  }
+
+  var formHtml = '<form onsubmit="return false;">'
+    + itemsHtml
+    + '<button type="button" class="btn btn-ghost btn-sm" onclick="addNavItem();closeModal();openSiteNavModal()">' + ICONS.plus + ' Ajouter un lien</button>'
+    + '</form>';
+
+  document.getElementById('modalContent').innerHTML = ''
+    + '<div class="modal-header"><h2>Navigation du site</h2><button class="modal-close" onclick="closeModal()">' + ICONS.xMark + '</button></div>'
+    + '<div class="modal-body">' + formHtml + '</div>'
+    + '<div class="modal-footer">'
+    + '<button class="btn btn-outline" onclick="closeModal()">Annuler</button>'
+    + '<button class="btn btn-primary" onclick="saveSiteNav()">' + ICONS.check + ' Enregistrer</button>'
+    + '</div>';
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function saveSiteNav() {
+  var data = SITE_load();
+  var newNav = [];
+  for (var i = 0; i < data.nav.length; i++) {
+    var label = document.getElementById('nav-label-' + i);
+    var href = document.getElementById('nav-href-' + i);
+    if (label && href) {
+      newNav.push({ label: label.value.trim() || 'Lien', href: href.value.trim() || '#' });
+    }
+  }
+  data.nav = newNav;
+  SITE_save(data);
+  closeModal();
+  showToast('Navigation enregistrée.', 'success');
+  renderSiteEditor(document.getElementById('contentBody'));
+}
+
+function addNavItem() {
+  var data = SITE_load();
+  data.nav.push({ label: 'Nouveau lien', href: '#' });
+  SITE_save(data);
+}
+
+function removeNavItem(idx) {
+  var data = SITE_load();
+  var newNav = [];
+  for (var i = 0; i < data.nav.length; i++) {
+    if (i !== idx) newNav.push(data.nav[i]);
+  }
+  data.nav = newNav;
+  SITE_save(data);
+}
+
+function openSiteImageModal() {
+  var data = SITE_load();
+  var existingHtml = '';
+  if (data.images.length > 0) {
+    existingHtml = '<h4 style="margin-bottom:var(--space-3);font-size:0.875rem;">Images existantes</h4><div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-4);">';
+    for (var i = 0; i < data.images.length; i++) {
+      existingHtml += '<div style="border:1px solid #000;padding:4px;text-align:center;width:100px;">'
+        + '<img src="' + data.images[i].dataUrl + '" style="width:80px;height:60px;object-fit:cover;">'
+        + '<div style="font-size:0.65rem;overflow:hidden;text-overflow:ellipsis;">' + data.images[i].name + '</div>'
+        + '<button class="btn btn-ghost btn-sm" data-action="del-img" data-id="' + data.images[i].id + '" style="font-size:0.6rem;color:var(--danger);">' + ICONS.trash + '</button>'
+        + '</div>';
+    }
+    existingHtml += '</div>';
+  }
+
+  var formHtml = '<form onsubmit="return false;">'
+    + existingHtml
+    + '<div class="form-group"><label for="img-name">Nom de l\'image</label>'
+    + '<input type="text" id="img-name" class="form-control" placeholder="Ex: photo-campus"></div>'
+    + '<div class="form-group"><label>Fichier image</label>'
+    + '<input type="file" id="img-file-input" accept="image/*" class="form-control" style="padding:8px;"></div>'
+    + '</form>';
+
+  document.getElementById('modalContent').innerHTML = ''
+    + '<div class="modal-header"><h2>Gestion des images</h2><button class="modal-close" onclick="closeModal()">' + ICONS.xMark + '</button></div>'
+    + '<div class="modal-body">' + formHtml + '</div>'
+    + '<div class="modal-footer">'
+    + '<button class="btn btn-outline" onclick="closeModal()">Fermer</button>'
+    + '<button class="btn btn-primary" onclick="uploadSiteImage()">' + ICONS.plus + ' Ajouter</button>'
+    + '</div>';
+  document.getElementById('modalOverlay').classList.add('active');
+
+  /* Delegation pour les boutons data-action dans la modale */
+  setTimeout(function(){
+    var delBtns = document.querySelectorAll('[data-action=del-img]');
+    for (var di = 0; di < delBtns.length; di++) {
+      delBtns[di].onclick = function() {
+        var id = this.getAttribute('data-id');
+        if (id) {
+          SITE_deleteImage(id);
+          closeModal();
+          setTimeout(function(){ openSiteImageModal(); }, 100);
+          showToast('Image supprimée.', 'info');
+        }
+      };
+    }
+  }, 50);
+}
+
+function uploadSiteImage() {
+  var fileInput = document.getElementById('img-file-input');
+  var nameInput = document.getElementById('img-name');
+  if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+    showToast('Sélectionnez un fichier image.', 'error');
+    return;
+  }
+  var name = nameInput.value.trim() || fileInput.files[0].name;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    SITE_addImage(name, ev.target.result);
+    showToast('Image ajoutée.', 'success');
+    closeModal();
+    renderSiteEditor(document.getElementById('contentBody'));
+  };
+  reader.readAsDataURL(fileInput.files[0]);
+}
+
+function previewSitePage(pageId) {
+  var html = SITE_previewHTML(pageId);
+  var main = document.getElementById('siteEditorMain');
+  if (!main) return;
+
+  main.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-3);">'
+    + '<h3 style="font-size:1rem;font-weight:700;">Aperçu</h3>'
+    + '<button class="btn btn-sm btn-outline" onclick="editSitePage(\'' + pageId + '\')">' + ICONS.pencil + ' Retour à l\'édition</button>'
+    + '</div>'
+    + '<div class="site-preview-frame">' + html + '</div>';
+}
+
+function deleteCalendarEventLocal(id) {
+  var newArr = [];
+  for (var i = 0; i < CALENDAR_EVENTS.length; i++) {
+    if (CALENDAR_EVENTS[i].id !== id) {
+      newArr.push(CALENDAR_EVENTS[i]);
+    }
+  }
+  CALENDAR_EVENTS = newArr;
+
+  /* Also update MOCK.calendar */
+  var newMock = [];
+  for (var j = 0; j < MOCK.calendar.length; j++) {
+    if (MOCK.calendar[j].id !== id) {
+      newMock.push(MOCK.calendar[j]);
+    }
+  }
+  MOCK.calendar = newMock;
+
+  closeConfirm();
+  showToast('Événement supprimé (mode local).', 'success');
+  window._calInit = false;
+  renderView('calendar-view');
 }
 
 /* ============================================
