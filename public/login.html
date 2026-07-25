@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion — Gestion Scolaire</title>
+  <!-- Les styles sont entièrement définis ci-dessous - pas besoin des CSS racine -->
+  <style>
+    /* ============================================
+       LOGIN PUBLIC — Néo-Brutaliste + Glassmorphism
+       Palette : Blanc, Vert #16A34A, Noir
+       ============================================ */
+
+    /* --- Heroicons sizing (car public.css n'est pas inclus) --- */
+    .heroicon { width:20px; height:20px; flex-shrink:0; stroke:currentColor; stroke-width:1.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    .heroicon-sm { width:16px; height:16px; }
+    .heroicon-lg { width:24px; height:24px; }
+    .heroicon-xl { width:32px; height:32px; }
+
+    .login-page {
+      background: url('images/login-page-background.webp') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Overlay sombre pour lisibilité */
+    .login-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* --- Canvas Matrix --- */
+    #matrixCanvas {
+      display: none;
+    }
+
+    /* --- Conteneur Glassmorphism Néo-Brutaliste --- */
+    .login-container {
+      background: rgba(12, 20, 14, 0.35);
+      backdrop-filter: blur(28px) saturate(1.2);
+      -webkit-backdrop-filter: blur(28px) saturate(1.2);
+      border: 2px solid #000000;
+      width: 100%;
+      max-width: 420px;
+      padding: 44px 36px 36px;
+      position: relative;
+      z-index: 10;
+      animation: scaleIn 0.4s ease-out both;
+      box-shadow: 5px 5px 0 #000000;
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* --- Logo & Branding --- */
+    .login-logo {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .login-logo .logo-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(22, 163, 74, 0.2);
+      border: 2px solid #000000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .login-logo .logo-icon .heroicon {
+      width: 30px;
+      height: 30px;
+      color: #4ade80;
+    }
+
+    .login-logo h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+    }
+
+    .login-logo p {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.875rem;
+      margin-top: 6px;
+    }
+
+    /* --- Formulaires --- */
+    .form-group {
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #000000;
+      font-size: 0.9375rem;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .form-control:focus {
+      border-color: #16A34A;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 3px 3px 0 #000000;
+    }
+
+    .form-control.error {
+      border-color: #DC2626;
+      box-shadow: 3px 3px 0 rgba(220, 38, 38, 0.3);
+    }
+
+    .form-control option {
+      background: #1a2a1a;
+      color: #ffffff;
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 18px;
+      padding-right: 44px;
+    }
+
+    .form-error {
+      color: #DC2626;
+      font-size: 0.75rem;
+      margin-top: 6px;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-error.visible {
+      display: flex;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    /* --- Bouton néo-brutaliste --- */
+    .lang-login-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: all .12s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .lang-login-btn:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.5);
+      color: #fff;
+    }
+
+    .login-flags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .login-flag-link {
+      font-size: 1.25rem;
+      text-decoration: none;
+      transition: transform .12s ease;
+      opacity: 0.6;
+    }
+    .login-flag-link:hover {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+
+    .btn-glass {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 24px;
+      border: 2px solid #000000;
+      font-size: 0.9375rem;
+      font-weight: 800;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      background: #16A34A;
+      box-shadow: 4px 4px 0 #000000;
+    }
+
+    .btn-glass:hover {
+      background: #15803D;
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #000000;
+    }
+
+    .btn-glass:active {
+      transform: translate(1px, 1px);
+      box-shadow: none;
+    }
+
+    .btn-glass:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .login-hint {
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.3);
+      line-height: 1.6;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .secure-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.6875rem;
+      color: rgba(255, 255, 255, 0.25);
+      margin-top: 24px;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .secure-badge .heroicon {
+      width: 12px;
+      height: 12px;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        margin: 16px;
+        padding: 32px 24px 28px;
+      }
+      .login-logo .logo-icon { width: 52px; height: 52px; }
+      .login-logo h1 { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Canvas Matrix Effect -->
+    <canvas id="matrixCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+    <!-- Conteneur Glassmorphism -->
+    <div class="login-container">
+      <!-- Langue Toggle -->
+      <div style="text-align:right;margin-bottom:8px;">
+        <button class="lang-login-btn" onclick="if(typeof switchLang !== 'undefined') switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')">
+          🌐 <span data-i18n-toggle>English</span>
+        </button>
+      </div>
+      <div class="login-logo">
+        <div class="logo-icon">
+          <svg class="heroicon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+          </svg>
+        </div>
+        <h1>Gestion Scolaire</h1>
+        <p>Connectez-vous à votre espace sécurisé</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginRole">Rôle</label>
+          <select id="loginRole" class="form-control" required>
+            <option value="">— Sélectionnez votre rôle —</option>
+            <option value="admin">Administrateur</option>
+            <option value="teacher">Enseignant</option>
+            <option value="student">Étudiant</option>
+            <option value="parent">Parent</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="loginEmail">Adresse e-mail</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="exemple@ecole.fr" required>
+          <div class="form-error" id="emailError">
+            <svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            Veuillez entrer une adresse e-mail valide.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Mot de passe</label>
+          <div style="position:relative;">
+            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+          </div>
+          <div class="form-error" id="passwordError">
+            <svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            Le mot de passe doit contenir au moins 6 caractères.
+          </div>
+        </div>
+
+        <button type="submit" class="btn-glass" id="loginBtn">
+          <svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          Se connecter
+        </button>
+
+        <p class="login-hint">
+          Identifiants de test : sélectionnez un rôle et les champs se remplissent automatiquement.
+        </p>
+
+        <!-- Flags showcase -->
+        <div class="login-flags-row">
+          <a href="bourses.html" class="login-flag-link" title="Bourses internationales">🌍</a>
+          <a href="bourses.html" class="login-flag-link" title="Chine">🇨🇳</a>
+          <a href="bourses.html" class="login-flag-link" title="Japon">🇯🇵</a>
+          <a href="bourses.html" class="login-flag-link" title="Corée">🇰🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Allemagne">🇩🇪</a>
+          <a href="bourses.html" class="login-flag-link" title="Suède">🇸🇪</a>
+          <a href="bourses.html" class="login-flag-link" title="Brésil">🇧🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Turquie">🇹🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Qatar">🇶🇦</a>
+        </div>
+
+        <div class="secure-badge">
+          <svg class="heroicon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+          Connexion sécurisée • Chiffrement de bout en bout
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/i18n.js"></script>
+  <script>
+    /* ============================================
+       Matrix Rain Effect (plus subtil)
+       ============================================ */
+    (function initMatrix() {
+      var canvas = document.getElementById('matrixCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        ctx.fillStyle = '#0a1a0a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*(){}[]|/<>~^';
+      var fontSize = 14;
+      var columns = Math.floor(canvas.width / fontSize);
+      var drops = [];
+      for (var i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100;
+      }
+
+      function draw() {
+        ctx.fillStyle = 'rgba(10, 15, 10, 0.03)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.font = fontSize + 'px monospace';
+
+        for (var i = 0; i < drops.length; i++) {
+          var text = chars.charAt(Math.floor(Math.random() * chars.length));
+          var x = i * fontSize;
+          var y = drops[i] * fontSize;
+
+          var brightness = Math.random();
+          if (brightness > 0.97) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+          } else if (brightness > 0.85) {
+            ctx.fillStyle = 'rgba(74, 222, 128, 0.5)';
+          } else {
+            ctx.fillStyle = 'rgba(74, 222, 128, 0.15)';
+          }
+
+          ctx.fillText(text, x, y);
+
+          if (y > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      setInterval(draw, 50);
+    })();
+
+    /* ============================================
+       Login Logic
+       ============================================ */
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('loginForm');
+      var roleSelect = document.getElementById('loginRole');
+      var emailInput = document.getElementById('loginEmail');
+      var passwordInput = document.getElementById('loginPassword');
+      var emailError = document.getElementById('emailError');
+      var passwordError = document.getElementById('passwordError');
+      var loginBtn = document.getElementById('loginBtn');
+
+      /* Identifiants de test par rôle */
+      var accounts = {
+        admin:   { name: 'Admin Système',  email: 'admin@ecole.fr',    password: 'admin123' },
+        teacher: { name: 'Prof. Dupont',   email: 'dupont@ecole.fr',   password: 'prof123' },
+        student: { name: 'Jean Martin',    email: 'martin@ecole.fr',   password: 'etudiant123' },
+        parent:  { name: 'Mme Martin',     email: 'parent@ecole.fr',   password: 'parent123' }
+      };
+
+      /* Animation des labels flottants */
+      document.querySelectorAll('.form-control').forEach(function(input) {
+        input.addEventListener('focus', function() {
+          this.closest('.form-group').querySelector('label').style.color = 'rgba(74, 222, 128, 0.9)';
+        });
+        input.addEventListener('blur', function() {
+          this.closest('.form-group').querySelector('label').style.color = '';
+        });
+      });
+
+      /* Auto-remplissage */
+      roleSelect.addEventListener('change', function() {
+        var role = this.value;
+        if (role && accounts[role]) {
+          emailInput.value = accounts[role].email;
+          passwordInput.value = accounts[role].password;
+          emailInput.style.transition = 'all 0.3s ease';
+          passwordInput.style.transition = 'all 0.3s ease';
+        } else {
+          emailInput.value = '';
+          passwordInput.value = '';
+        }
+      });
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var role = roleSelect.value;
+        var email = emailInput.value.trim();
+        var password = passwordInput.value;
+
+        emailError.classList.remove('visible');
+        passwordError.classList.remove('visible');
+        emailInput.classList.remove('error');
+        passwordInput.classList.remove('error');
+
+        var valid = true;
+
+        if (!role) {
+          showToast('Veuillez sélectionner un rôle.', 'error');
+          roleSelect.focus();
+          return;
+        }
+
+        if (!email || !email.includes('@') || email.length < 6) {
+          emailError.classList.add('visible');
+          emailInput.classList.add('error');
+          valid = false;
+        }
+
+        if (!password || password.length < 6) {
+          passwordError.classList.add('visible');
+          passwordInput.classList.add('error');
+          valid = false;
+        }
+
+        if (!valid) return;
+
+        /* Vérifier les identifiants */
+        var account = accounts[role];
+        if (email !== account.email || password !== account.password) {
+          showToast('Identifiants incorrects. Utilisez les identifiants de test.', 'error');
+          return;
+        }
+
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '<svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Connexion...';
+
+        setTimeout(function() {
+          var session = {
+            role: role,
+            name: account.name,
+            email: email
+          };
+          localStorage.setItem('ecole_session', JSON.stringify(session));
+          showToast('Connexion réussie ! Bienvenue ' + account.name, 'success');
+          setTimeout(function() {
+            window.location.href = '../admin/index.html';
+          }, 600);
+        }, 1200);
+      });
+    });
+
+    /* --- Toast --- */
+    function showToast(message, type) {
+      var container = document.getElementById('toastContainer');
+      var toast = document.createElement('div');
+      toast.className = 'toast toast-' + (type || 'info');
+
+      var icons = {
+        success: '<svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>',
+        error: '<svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/></svg>',
+        info: '<svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>'
+      };
+
+      toast.innerHTML = '<span class="toast-icon">' + (icons[type] || icons.info) + '</span>'
+        + '<span class="toast-message">' + message + '</span>';
+
+      container.appendChild(toast);
+
+      setTimeout(function() {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(function() { toast.remove(); }, 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

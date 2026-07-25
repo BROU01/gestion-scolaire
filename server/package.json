@@ -1,0 +1,26 @@
+{
+  "name": "gestion-scolaire-api",
+  "version": "1.0.0",
+  "description": "API REST pour Gestion Scolaire",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed": "node seed.js",
+    "health": "node -e \"const h=new(require('http').IncomingMessage);require('http').get('http://localhost:3001/api/health',r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>console.log(d))}).on('error',()=>console.log('Server not running'))\"",
+    "backup": "node -e \"require('fs').copyFileSync('gestion_scolaire.db','backup_'+new Date().toISOString().slice(0,10)+'.db');console.log('Backup done')\""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.0",
+    "express-rate-limit": "^8.6.0",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^10.0.0"
+  }
+}

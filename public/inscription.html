@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription — Gestion Scolaire</title>
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/i18n.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="pub-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
+    <div class="pub-nav-inner">
+      <a href="index.html" class="pub-logo">
+        <div class="pub-logo-icon">
+          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+        </div>
+        <span data-pub="schoolName">Gestion Scolaire</span>
+      </a>
+      <ul class="pub-nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="vie-academique.html">Vie Académique</a></li>
+        <li><a href="activites.html">Activités</a></li>
+        <li><a href="bourses.html">Bourses</a></li>
+      </ul>
+      <div class="pub-nav-actions">
+        <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
+          S'inscrire
+        </a>
+        <a href="login.html" class="pub-btn pub-btn-secondary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          Espace Privé
+        </a>
+      <button class="lang-btn" onclick="switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')" aria-label="Switch language">
+        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+        <span data-i18n-toggle>English</span>
+      </button>
+      <button class="pub-hamburger" aria-label="Menu" aria-expanded="false">
+        <svg class="hi hi-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="pub-page-header">
+    <h1 data-i18n="register.title">Inscrivez votre <span>enfant</span></h1>
+    <p data-i18n="register.desc">Formulaire en 4 étapes. Informations personnelles, parcours académique, vœux d'orientation et prise de rendez-vous.</p>
+  </section>
+
+  <!-- FORMULAIRE -->
+  <section class="pub-section" style="padding-top:0;">
+    <div class="pub-section-inner">
+      <div class="pub-form-container" id="inscriptionForm">
+
+        <!-- Step indicators -->
+        <div class="pub-form-steps">
+          <div class="pub-form-step active" data-step="1">
+            <span data-i18n="register.step1">1. Informations</span>
+          </div>
+          <div class="pub-form-step" data-step="2">
+            <span data-i18n="register.step2">2. Parcours</span>
+          </div>
+          <div class="pub-form-step" data-step="3">
+            <span data-i18n="register.step3">3. Vœux</span>
+          </div>
+          <div class="pub-form-step" data-step="4">
+            <span data-i18n="register.step4">4. Rendez-vous</span>
+          </div>
+        </div>
+
+        <div class="pub-form-body" id="formBody">
+          <!-- Step 1: Infos personnelles -->
+          <div class="form-step-content" id="step1" data-step="1">
+            <div class="pub-form-row">
+              <div class="pub-form-group">
+                <label for="f-nom">Nom <span class="required">*</span></label>
+                <input type="text" id="f-nom" class="pub-form-input" placeholder="Ex: Dupont" required aria-required="true">
+                <div class="pub-form-error" id="err-nom">Le nom est requis (min. 2 caractères).</div>
+              </div>
+              <div class="pub-form-group">
+                <label for="f-prenom">Prénom <span class="required">*</span></label>
+                <input type="text" id="f-prenom" class="pub-form-input" placeholder="Ex: Jean" required aria-required="true">
+                <div class="pub-form-error" id="err-prenom">Le prénom est requis (min. 2 caractères).</div>
+              </div>
+            </div>
+            <div class="pub-form-row">
+              <div class="pub-form-group">
+                <label for="f-age">Âge <span class="required">*</span></label>
+                <input type="number" id="f-age" class="pub-form-input" min="14" max="25" placeholder="Ex: 18" required aria-required="true">
+                <div class="pub-form-error" id="err-age">L'âge doit être entre 14 et 25 ans.</div>
+              </div>
+              <div class="pub-form-group">
+                <label for="f-phone">Téléphone <span class="required">*</span></label>
+                <input type="tel" id="f-phone" class="pub-form-input" placeholder="06 12 34 56 78" required aria-required="true">
+                <div class="pub-form-error" id="err-phone">Numéro de téléphone invalide.</div>
+              </div>
+            </div>
+            <div class="pub-form-group">
+              <label for="f-email">Email du parent/tuteur <span class="required">*</span></label>
+              <input type="email" id="f-email" class="pub-form-input" placeholder="parent@email.fr" required aria-required="true">
+              <div class="pub-form-error" id="err-email">Adresse email invalide.</div>
+            </div>
+          </div>
+
+          <!-- Step 2: Parcours académique -->
+          <div class="form-step-content" id="step2" data-step="2" style="display:none;">
+            <div class="pub-form-group">
+              <label for="f-diplome">Dernier diplôme obtenu <span class="required">*</span></label>
+              <select id="f-diplome" class="pub-form-input" required aria-required="true">
+                <option value="">— Sélectionnez —</option>
+                <option value="brevet">Brevet des collèges</option>
+                <option value="bac_general">Baccalauréat Général</option>
+                <option value="bac_pro">Baccalauréat Professionnel</option>
+                <option value="bac_tech">Baccalauréat Technologique</option>
+                <option value="licence">Licence (L3)</option>
+                <option value="master">Master (M1/M2)</option>
+                <option value="autre">Autre</option>
+              </select>
+              <div class="pub-form-error" id="err-diplome">Veuillez sélectionner un diplôme.</div>
+            </div>
+            <div class="pub-form-group">
+              <label for="f-etablissement">Établissement d'origine</label>
+              <input type="text" id="f-etablissement" class="pub-form-input" placeholder="Nom de l'établissement précédent">
+            </div>
+            <div class="pub-form-group">
+              <label for="f-moyenne">Dernière moyenne générale</label>
+              <input type="text" id="f-moyenne" class="pub-form-input" placeholder="Ex: 14.5/20" maxlength="10">
+            </div>
+          </div>
+
+          <!-- Step 3: Vœux d'orientation -->
+          <div class="form-step-content" id="step3" data-step="3" style="display:none;">
+            <div class="pub-form-group">
+              <label for="f-filiere">Filière souhaitée <span class="required">*</span></label>
+              <select id="f-filiere" class="pub-form-input" required aria-required="true">
+                <option value="">— Sélectionnez une filière —</option>
+                <option value="info">Informatique</option>
+                <option value="gestion">Gestion</option>
+                <option value="commerce">Commerce International</option>
+              </select>
+              <div class="pub-form-error" id="err-filiere">Veuillez choisir une filière.</div>
+            </div>
+            <div class="pub-form-group">
+              <label for="f-specialite">Spécialité souhaitée <span class="required">*</span></label>
+              <select id="f-specialite" class="pub-form-input" required aria-required="true" disabled>
+                <option value="">— Choisissez d'abord une filière —</option>
+              </select>
+              <div class="pub-form-error" id="err-specialite">Veuillez choisir une spécialité.</div>
+            </div>
+            <div class="pub-form-group">
+              <label for="f-motivation">Lettre de motivation</label>
+              <textarea id="f-motivation" class="pub-form-input" rows="4" placeholder="Décrivez votre projet académique et professionnel…"></textarea>
+            </div>
+          </div>
+
+          <!-- Step 4: Prise de RDV — Calendrier Visuel Interactif -->
+          <div class="form-step-content" id="step4" data-step="4" style="display:none;">
+            <div class="pub-rdv-layout">
+              <!-- Colonne Gauche : Calendrier Visuel -->
+              <div class="pub-rdv-calendar-col">
+                <label class="pub-form-label">Choisissez une date <span class="required">*</span></label>
+                <div class="pub-calendar-widget" id="calendarWidget">
+                  <div class="pub-cal-widget-header">
+                    <button type="button" class="pub-cal-nav-btn" id="calPrev" aria-label="Mois précédent">
+                      <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                    <span class="pub-cal-month-year" id="calMonthYear">Janvier 2026</span>
+                    <button type="button" class="pub-cal-nav-btn" id="calNext" aria-label="Mois suivant">
+                      <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                  </div>
+                  <div class="pub-cal-weekdays">
+                    <span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span class="pub-cal-weekend-label">Sam</span><span class="pub-cal-weekend-label">Dim</span>
+                  </div>
+                  <div class="pub-cal-days" id="calDays"></div>
+                </div>
+                <div class="pub-form-error" id="err-rdv-date">Veuillez choisir une date valide (min. 7 jours à l'avance, hors week-end).</div>
+                <p class="pub-cal-hint" id="calHint">
+                  <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
+                  Les rendez-vous sont disponibles du lundi au vendredi, minimum 7 jours à l'avance.
+                </p>
+              </div>
+
+              <!-- Colonne Droite : Créneaux & Notes -->
+              <div class="pub-rdv-slots-col">
+                <div class="pub-form-group">
+                  <label>Créneau horaire <span class="required">*</span></label>
+                  <div class="pub-timeslots" id="timeslots">
+                    <div class="pub-timeslots-empty" id="slotsEmpty">
+                      <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+                      <span>Sélectionnez une date pour voir les créneaux disponibles</span>
+                    </div>
+                  </div>
+                  <div class="pub-form-error" id="err-rdv-time">Veuillez choisir un créneau horaire.</div>
+                </div>
+                <div class="pub-form-group">
+                  <label for="f-notes">Notes supplémentaires</label>
+                  <textarea id="f-notes" class="pub-form-input" rows="3" placeholder="Informations complémentaires pour le rendez-vous…"></textarea>
+                </div>
+                <!-- Résumé de la sélection -->
+                <div class="pub-rdv-summary" id="rdvSummary" style="display:none;">
+                  <div class="pub-rdv-summary-icon">
+                    <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"/></svg>
+                  </div>
+                  <div class="pub-rdv-summary-text">
+                    <span id="rdvSummaryDate">—</span>
+                    <span id="rdvSummaryTime">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success state -->
+        <div class="pub-form-body" id="formSuccess" style="display:none;">
+          <div class="pub-success-state">
+            <div class="pub-success-icon">
+              <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+            </div>
+            <h3>Inscription enregistrée !</h3>
+            <p>Votre demande a bien été prise en compte. Vous recevrez un email de confirmation avec les détails de votre rendez-vous d'entretien.</p>
+            <a href="index.html" class="pub-btn pub-btn-primary pub-btn-lg" style="margin-top:24px;">Retour à l'accueil</a>
+          </div>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="pub-form-actions" id="formActions">
+          <button type="button" class="pub-btn pub-btn-secondary" id="prevBtn" style="display:none;">
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 19.5 7.5-7.5-7.5-7.5"/></svg>
+            Précédent
+          </button>
+          <button type="button" class="pub-btn pub-btn-primary" id="nextBtn">
+            Suivant
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pub-footer">
+    <div class="pub-footer-inner">
+      <div class="pub-footer-brand">
+        <div class="pub-logo" style="margin-bottom:4px;">
+          <div class="pub-logo-icon">
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+          </div>
+          <span data-pub="schoolName">Gestion Scolaire</span>
+        </div>
+        <p>Établissement d'enseignement supérieur dédié à l'excellence académique.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="vie-academique.html">Vie Académique</a></li>
+          <li><a href="activites.html">Activités</a></li>
+          <li><a href="bourses.html">Bourses</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Espaces</h4>
+        <ul>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="login.html">Espace Privé</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@ecole.fr">contact@ecole.fr</a></li>
+          <li><a href="tel:+33123456789">01 23 45 67 89</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pub-footer-bottom">© 2025 Gestion Scolaire. Tous droits réservés.</div>
+  </footer>
+
+  <!-- ====== FLAGS SHOWCASE ====== -->
+  <section class="pub-flags-section">
+    <div class="pub-flags-section-inner">
+      <h3 data-i18n="hero.scholarships.title">Étudiez à l'étranger</h3>
+      <p data-i18n="hero.scholarships.desc">Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
+      <div class="pub-flags-row">
+        <a href="bourses.html" class="pub-flag-item">🇨🇳<span>Chine</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇯🇵<span>Japon</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇰🇷<span>Corée</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇪<span>Allemagne</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇪<span>Suède</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇳🇴<span>Norvège</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇷<span>Turquie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇦<span>Arabie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇷<span>Brésil</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇲🇽<span>Mexique</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇭<span>Thaïlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇫🇮<span>Finlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇷🇺<span>Russie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇰<span>Danemark</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇼<span>Taïwan</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇺🇾<span>Uruguay</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇪🇪<span>Estonie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇳<span>Brunei</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇶🇦<span>Qatar</span></a>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/public.js"></script>
+  <script>
+  /* ============================================
+     INSCRIPTION MULTI-ÉTAPES
+     ============================================ */
+  (function() {
+    var currentStep = 1;
+    var totalSteps = 4;
+    var form = document.getElementById('inscriptionForm');
+    var formBody = document.getElementById('formBody');
+    var formActions = document.getElementById('formActions');
+    var formSuccess = document.getElementById('formSuccess');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var steps = document.querySelectorAll('.pub-form-step');
+    var selectedTime = null;
+    var selectedDate = null;
+    var selectedDateStr = '';
+
+    /* --- Calendrier Visuel Interactif --- */
+    var calCurrentDate = new Date();
+    calCurrentDate.setDate(1); // premier jour du mois
+    var calSelectedDate = null;
+
+    var MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    var DAYS_SHORT = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+
+    /* --- Récupérer les créneaux déjà réservés --- */
+    function getBookedSlots(dateStr) {
+      var booked = [];
+      if (typeof STORE_CANDIDATES !== 'undefined') {
+        var list = STORE_CANDIDATES.getAll();
+        for (var i = 0; i < list.length; i++) {
+          if (list[i].rdvDate === dateStr && list[i].rdvTime) {
+            booked.push(list[i].rdvTime);
+          }
+        }
+      }
+      return booked;
+    }
+
+    /* --- Obtenir les créneaux configurables --- */
+    function getAvailableSlots() {
+      if (typeof STORE_CANDIDATES !== 'undefined') {
+        var slots = STORE_CANDIDATES.getSlots();
+        if (slots && slots.length > 0) return slots;
+      }
+      return ['09:00','09:30','10:00','10:30','11:00','14:00','14:30','15:00','15:30','16:00'];
+    }
+
+    /* --- Formater la date en français --- */
+    function formatDateFR(dateStr) {
+      if (!dateStr) return '—';
+      var parts = dateStr.split('-');
+      if (parts.length !== 3) return dateStr;
+      return parts[2] + ' ' + MONTHS[parseInt(parts[1])-1] + ' ' + parts[0];
+    }
+
+    /* --- Vérifier si une date est valide pour RDV --- */
+    function isValidRdvDate(dateStr) {
+      var d = new Date(dateStr + 'T12:00:00');
+      var now = new Date();
+      now.setHours(0,0,0,0);
+      var minDate = new Date(now);
+      minDate.setDate(minDate.getDate() + 7);
+      var day = d.getDay();
+      // Doit être un jour de semaine (1-5) et au moins 7 jours dans le futur
+      return d >= minDate && day >= 1 && day <= 5;
+    }
+
+    /* --- Construire le calendrier visuel --- */
+    function renderCalendar() {
+      var year = calCurrentDate.getFullYear();
+      var month = calCurrentDate.getMonth();
+      var monthYearEl = document.getElementById('calMonthYear');
+      monthYearEl.textContent = MONTHS[month] + ' ' + year;
+
+      var firstDay = new Date(year, month, 1).getDay(); // 0=Dim
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var daysInPrevMonth = new Date(year, month, 0).getDate();
+
+      // Ajustement : Lundi = 0
+      var startOffset = firstDay === 0 ? 6 : firstDay - 1;
+
+      var container = document.getElementById('calDays');
+      container.innerHTML = '';
+
+      var now = new Date();
+      now.setHours(0,0,0,0);
+      var minDate = new Date(now);
+      minDate.setDate(minDate.getDate() + 7);
+
+      var todayStr = (typeof APP_UTILS !== 'undefined' && APP_UTILS.today) ? APP_UTILS.today() : new Date().toISOString().split('T')[0];
+
+      // Jours du mois précédent
+      for (var i = startOffset - 1; i >= 0; i--) {
+        var dayEl = document.createElement('button');
+        dayEl.type = 'button';
+        dayEl.className = 'pub-cal-day pub-cal-day-other';
+        dayEl.textContent = daysInPrevMonth - i;
+        dayEl.disabled = true;
+        container.appendChild(dayEl);
+      }
+
+      // Jours du mois courant
+      for (var d = 1; d <= daysInMonth; d++) {
+        var dateObj = new Date(year, month, d);
+        var dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+        var dayOfWeek = dateObj.getDay(); // 0=Dim
+        var isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+        var isBeforeMin = dateObj < minDate;
+        var isDisabled = isWeekend || isBeforeMin;
+        var isToday = dateStr === todayStr;
+        var isSelected = calSelectedDate && dateStr === calSelectedDate;
+
+        var dayEl = document.createElement('button');
+        dayEl.type = 'button';
+        dayEl.className = 'pub-cal-day';
+        if (isWeekend) dayEl.className += ' pub-cal-day-weekend';
+        if (isToday) dayEl.className += ' pub-cal-day-today';
+        if (isSelected) dayEl.className += ' pub-cal-day-selected';
+        dayEl.textContent = d;
+        dayEl.dataset.date = dateStr;
+
+        if (isDisabled) {
+          dayEl.disabled = true;
+        } else {
+          dayEl.addEventListener('click', function() {
+            calendarSelectDate(this.dataset.date);
+          });
+        }
+        container.appendChild(dayEl);
+      }
+
+      // Jours du mois suivant pour remplir la grille
+      var totalCells = startOffset + daysInMonth;
+      var remaining = 7 - (totalCells % 7);
+      if (remaining < 7) {
+        for (var r = 1; r <= remaining; r++) {
+          var dayEl = document.createElement('button');
+          dayEl.type = 'button';
+          dayEl.className = 'pub-cal-day pub-cal-day-other';
+          dayEl.textContent = r;
+          dayEl.disabled = true;
+          container.appendChild(dayEl);
+        }
+      }
+    }
+
+    /* --- Sélection d'une date dans le calendrier --- */
+    function calendarSelectDate(dateStr) {
+      calSelectedDate = dateStr;
+      selectedDateStr = dateStr;
+      selectedDate = new Date(dateStr + 'T12:00:00');
+      renderCalendar();
+      renderSlotsForDate(dateStr);
+      updateRdvSummary();
+      clearFieldError('err-rdv-date');
+    }
+
+    /* --- Afficher les créneaux pour une date donnée --- */
+    function renderSlotsForDate(dateStr) {
+      var container = document.getElementById('timeslots');
+      var emptyEl = document.getElementById('slotsEmpty');
+      var slots = getAvailableSlots();
+      var booked = getBookedSlots(dateStr);
+
+      container.innerHTML = '';
+
+      for (var i = 0; i < slots.length; i++) {
+        var time = slots[i];
+        var isBooked = booked.indexOf(time) !== -1;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pub-timeslot';
+        if (isBooked) btn.className += ' disabled';
+        btn.dataset.time = time;
+        btn.textContent = time;
+        if (isBooked) {
+          btn.title = 'Créneau déjà réservé';
+          btn.disabled = true;
+        } else {
+          btn.addEventListener('click', function() {
+            var all = container.querySelectorAll('.pub-timeslot:not(.disabled)');
+            for (var j = 0; j < all.length; j++) all[j].classList.remove('active');
+            this.classList.add('active');
+            selectedTime = this.dataset.time;
+            updateRdvSummary();
+            clearFieldError('err-rdv-time');
+          });
+        }
+        container.appendChild(btn);
+      }
+    }
+
+    /* --- Mettre à jour le résumé RDV --- */
+    function updateRdvSummary() {
+      var summary = document.getElementById('rdvSummary');
+      var dateEl = document.getElementById('rdvSummaryDate');
+      var timeEl = document.getElementById('rdvSummaryTime');
+
+      if (selectedDateStr || selectedTime) {
+        summary.style.display = 'flex';
+        if (selectedDateStr) {
+          dateEl.textContent = formatDateFR(selectedDateStr);
+        } else {
+          dateEl.textContent = '—';
+        }
+        if (selectedTime) {
+          timeEl.textContent = 'à ' + selectedTime;
+        } else {
+          timeEl.textContent = '';
+        }
+      } else {
+        summary.style.display = 'none';
+      }
+    }
+
+    /* --- Navigation du calendrier --- */
+    document.getElementById('calPrev').addEventListener('click', function() {
+      calCurrentDate.setMonth(calCurrentDate.getMonth() - 1);
+      renderCalendar();
+    });
+
+    document.getElementById('calNext').addEventListener('click', function() {
+      calCurrentDate.setMonth(calCurrentDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    /* --- Specialités par filière --- */
+    var specialitesMap = {
+      info: [
+        { value: 'dev-web', label: 'Développement Web' },
+        { value: 'reseaux', label: 'Réseaux & Systèmes' }
+      ],
+      gestion: [
+        { value: 'finance', label: 'Finance' },
+        { value: 'compta', label: 'Comptabilité' }
+      ],
+      commerce: [
+        { value: 'marketing', label: 'Marketing Digital' },
+        { value: 'commerce-intl', label: 'Commerce International' }
+      ]
+    };
+
+    /* --- Dynamic specialités --- */
+    document.getElementById('f-filiere').addEventListener('change', function() {
+      var sel = document.getElementById('f-specialite');
+      sel.innerHTML = '<option value="">— Sélectionnez —</option>';
+      var specs = specialitesMap[this.value];
+      if (specs) {
+        sel.disabled = false;
+        for (var i = 0; i < specs.length; i++) {
+          var opt = document.createElement('option');
+          opt.value = specs[i].value;
+          opt.textContent = specs[i].label;
+          sel.appendChild(opt);
+        }
+      } else {
+        sel.disabled = true;
+        sel.innerHTML = '<option value="">— Choisissez d\'abord une filière —</option>';
+      }
+    });
+
+    /* --- Validation par étape --- */
+    function validateStep(step) {
+      var valid = true;
+      if (step === 1) {
+        valid = validateField('f-nom', 'err-nom', function(v){ return v.length >= 2; }) && valid;
+        valid = validateField('f-prenom', 'err-prenom', function(v){ return v.length >= 2; }) && valid;
+        valid = validateField('f-age', 'err-age', function(v){ return v !== '' && parseInt(v) >= 14 && parseInt(v) <= 25; }) && valid;
+        valid = validateField('f-phone', 'err-phone', function(v){ return v.replace(/\s/g,'').length >= 10; }) && valid;
+        valid = validateField('f-email', 'err-email', function(v){ return v.indexOf('@') > 2 && v.length > 5; }) && valid;
+      } else if (step === 2) {
+        valid = validateField('f-diplome', 'err-diplome', function(v){ return v !== ''; }) && valid;
+      } else if (step === 3) {
+        valid = validateField('f-filiere', 'err-filiere', function(v){ return v !== ''; }) && valid;
+        valid = validateField('f-specialite', 'err-specialite', function(v){ return v !== ''; }) && valid;
+      } else if (step === 4) {
+        if (!selectedDateStr || !isValidRdvDate(selectedDateStr)) {
+          document.getElementById('err-rdv-date').classList.add('visible');
+          valid = false;
+        }
+        if (!selectedTime) {
+          document.getElementById('err-rdv-time').classList.add('visible');
+          valid = false;
+        }
+      }
+      return valid;
+    }
+
+    function validateField(inputId, errorId, testFn) {
+      var input = document.getElementById(inputId);
+      var error = document.getElementById(errorId);
+      var val = input.value.trim();
+      if (!testFn(val)) {
+        input.classList.add('is-invalid');
+        error.classList.add('visible');
+        return false;
+      }
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+      error.classList.remove('visible');
+      return true;
+    }
+
+    function clearFieldError(errorId) {
+      var el = document.getElementById(errorId);
+      if (el) el.classList.remove('visible');
+    }
+
+    /* Clear errors on input */
+    var inputs = document.querySelectorAll('.pub-form-input');
+    for (var k = 0; k < inputs.length; k++) {
+      inputs[k].addEventListener('input', function() {
+        this.classList.remove('is-invalid');
+        var id = this.id.replace('f-', 'err-');
+        var err = document.getElementById(id);
+        if (err) err.classList.remove('visible');
+      });
+    }
+
+    /* --- Navigation avec animation --- */
+    function goToStep(step) {
+      if (step === 4) {
+        renderCalendar();
+      }
+      /* Hide all steps */
+      var allSteps = document.querySelectorAll('.form-step-content');
+      for (var i = 0; i < allSteps.length; i++) {
+        allSteps[i].classList.remove('step-enter');
+        allSteps[i].style.display = 'none';
+      }
+      /* Show target step with animation */
+      var target = document.getElementById('step' + step);
+      if (target) {
+        target.style.display = '';
+        // Force reflow pour l'animation
+        void target.offsetWidth;
+        target.classList.add('step-enter');
+      }
+      /* Update step indicators */
+      for (var j = 0; j < steps.length; j++) {
+        var s = parseInt(steps[j].dataset.step);
+        steps[j].classList.remove('active', 'done');
+        if (s === step) steps[j].classList.add('active');
+        else if (s < step) steps[j].classList.add('done');
+      }
+      /* Show/hide nav buttons */
+      prevBtn.style.display = step === 1 ? 'none' : '';
+      if (step === totalSteps) {
+        nextBtn.innerHTML = 'Soumettre <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>';
+      } else {
+        nextBtn.innerHTML = 'Suivant <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>';
+      }
+      currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (currentStep > 1) goToStep(currentStep - 1);
+    });
+
+    nextBtn.addEventListener('click', function() {
+      if (currentStep < totalSteps) {
+        if (validateStep(currentStep)) goToStep(currentStep + 1);
+      } else {
+        /* Submit */
+        if (validateStep(currentStep)) {
+          /* Collect form data */
+          var data = {
+            nom: document.getElementById('f-nom').value.trim(),
+            prenom: document.getElementById('f-prenom').value.trim(),
+            age: document.getElementById('f-age').value,
+            phone: document.getElementById('f-phone').value.trim(),
+            email: document.getElementById('f-email').value.trim(),
+            diplome: document.getElementById('f-diplome').value,
+            etablissement: document.getElementById('f-etablissement').value.trim(),
+            moyenne: document.getElementById('f-moyenne').value.trim(),
+            filiere: document.getElementById('f-filiere').value,
+            specialite: document.getElementById('f-specialite').value,
+            motivation: document.getElementById('f-motivation').value.trim(),
+            rdvDate: selectedDateStr,
+            rdvTime: selectedTime,
+            notes: document.getElementById('f-notes').value.trim()
+          };
+          /* Save via STORE_CANDIDATES (compatible avec Panel Admin) */
+          if (typeof STORE_CANDIDATES !== 'undefined' && STORE_CANDIDATES.addCandidate) {
+            STORE_CANDIDATES.addCandidate(data);
+          } else {
+            /* Fallback direct localStorage */
+            var existing = [];
+            try { existing = JSON.parse(localStorage.getItem('pub_candidates') || '[]'); } catch(e){}
+            existing.push({
+              id: Date.now(),
+              nom: data.nom,
+              prenom: data.prenom,
+              age: data.age,
+              phone: data.phone,
+              email: data.email,
+              diplome: data.diplome,
+              etablissement: data.etablissement,
+              moyenne: data.moyenne,
+              filiere: data.filiere,
+              specialite: data.specialite,
+              motivation: data.motivation,
+              rdvDate: data.rdvDate,
+              rdvTime: data.rdvTime,
+              notes: data.notes,
+              status: 'pending',
+              date: new Date().toISOString().split('T')[0],
+              createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('pub_candidates', JSON.stringify(existing));
+          }
+          /* Show success */
+          formBody.style.display = 'none';
+          formActions.style.display = 'none';
+          formSuccess.style.display = '';
+          pubToast('Inscription envoyée avec succès !', 'success');
+        }
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bourses d'études — Gestion Scolaire</title>
+  <link rel="stylesheet" href="css/public.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="pub-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
+    <div class="pub-nav-inner">
+      <a href="index.html" class="pub-logo">
+        <div class="pub-logo-icon">
+          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+        </div>
+        <span data-pub="schoolName">Gestion Scolaire</span>
+      </a>
+      <ul class="pub-nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="vie-academique.html">Vie Académique</a></li>
+        <li><a href="activites.html">Activités</a></li>
+        <li><a href="bourses.html" class="active">Bourses</a></li>
+      </ul>
+      <div class="pub-nav-actions">
+        <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
+          S'inscrire
+        </a>
+        <a href="login.html" class="pub-btn pub-btn-secondary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          Espace Privé
+        </a>
+      </div>
+      <button class="pub-hamburger" aria-label="Menu" aria-expanded="false">
+        <svg class="hi hi-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="pub-hero">
+    <div class="pub-hero-bg">
+      <picture>
+        <source srcset="images/etudiez-a-l-etranger.webp" type="image/webp">
+        <img src="images/Etudiez a  l etranger.jpg" alt="Bourses" width="1920" height="600" loading="lazy" />
+      </picture>
+    </div>
+    <div class="pub-hero-overlay"></div>
+    <div class="pub-hero-inner">
+      <h1>Étudiez à <span>l'étranger</span></h1>
+      <p>Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
+    </div>
+  </section>
+
+  <!-- FILTRES & RECHERCHE -->
+  <section class="pub-section" style="padding-top:32px;">
+    <div class="pub-section-inner">
+      <div class="pub-filter-bar" id="scholarshipFilterBar">
+        <div class="pub-search">
+          <span class="pub-search-icon">
+            <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+          </span>
+          <input type="text" id="scholarshipSearch" placeholder="Rechercher un pays, une bourse…" aria-label="Rechercher une bourse">
+        </div>
+        <div class="pub-filter-chips">
+          <button class="pub-chip active" data-filter="all">Tous</button>
+          <button class="pub-chip" data-filter="asie">Asie</button>
+          <button class="pub-chip" data-filter="europe">Europe</button>
+          <button class="pub-chip" data-filter="moyen-orient">Moyen-Orient</button>
+          <button class="pub-chip" data-filter="amerique">Amérique</button>
+        </div>
+      </div>
+
+      <!-- BANDEAU DRAPEAUX -- Filtre rapide par pays -->
+      <div class="pub-flags-bar" id="flagsFilterBar">
+        <button class="pub-flag-chip active" data-flag="all" onclick="filterByFlag('all')" title="Tous les pays">🌍<span class="pub-flag-tooltip">Tous</span></button>
+        <button class="pub-flag-chip" data-flag="chine" onclick="filterByFlag('chine')">🇨🇳<span class="pub-flag-tooltip">Chine</span></button>
+        <button class="pub-flag-chip" data-flag="japon" onclick="filterByFlag('japon')">🇯🇵<span class="pub-flag-tooltip">Japon</span></button>
+        <button class="pub-flag-chip" data-flag="coree" onclick="filterByFlag('coree')">🇰🇷<span class="pub-flag-tooltip">Corée du Sud</span></button>
+        <button class="pub-flag-chip" data-flag="luxembourg" onclick="filterByFlag('luxembourg')">🇱🇺<span class="pub-flag-tooltip">Luxembourg</span></button>
+        <button class="pub-flag-chip" data-flag="suede" onclick="filterByFlag('suede')">🇸🇪<span class="pub-flag-tooltip">Suède</span></button>
+        <button class="pub-flag-chip" data-flag="norvege" onclick="filterByFlag('norvege')">🇳🇴<span class="pub-flag-tooltip">Norvège</span></button>
+        <button class="pub-flag-chip" data-flag="turquie" onclick="filterByFlag('turquie')">🇹🇷<span class="pub-flag-tooltip">Turquie</span></button>
+        <button class="pub-flag-chip" data-flag="allemagne" onclick="filterByFlag('allemagne')">🇩🇪<span class="pub-flag-tooltip">Allemagne</span></button>
+        <button class="pub-flag-chip" data-flag="arabie" onclick="filterByFlag('arabie')">🇸🇦<span class="pub-flag-tooltip">Arabie Saoudite</span></button>
+        <button class="pub-flag-chip" data-flag="qatar" onclick="filterByFlag('qatar')">🇶🇦<span class="pub-flag-tooltip">Qatar</span></button>
+        <button class="pub-flag-chip" data-flag="russie" onclick="filterByFlag('russie')">🇷🇺<span class="pub-flag-tooltip">Russie</span></button>
+        <button class="pub-flag-chip" data-flag="mexique" onclick="filterByFlag('mexique')">🇲🇽<span class="pub-flag-tooltip">Mexique</span></button>
+        <button class="pub-flag-chip" data-flag="bresil" onclick="filterByFlag('bresil')">🇧🇷<span class="pub-flag-tooltip">Brésil</span></button>
+        <button class="pub-flag-chip" data-flag="thailande" onclick="filterByFlag('thailande')">🇹🇭<span class="pub-flag-tooltip">Thaïlande</span></button>
+        <button class="pub-flag-chip" data-flag="ecosse" onclick="filterByFlag('ecosse')">🏴󠁧󠁢󠁳󠁣󠁴󠁿<span class="pub-flag-tooltip">Écosse</span></button>
+        <button class="pub-flag-chip" data-flag="finlande" onclick="filterByFlag('finlande')">🇫🇮<span class="pub-flag-tooltip">Finlande</span></button>
+        <button class="pub-flag-chip" data-flag="grece" onclick="filterByFlag('grece')">🇬🇷<span class="pub-flag-tooltip">Grèce</span></button>
+        <button class="pub-flag-chip" data-flag="danemark" onclick="filterByFlag('danemark')">🇩🇰<span class="pub-flag-tooltip">Danemark</span></button>
+        <button class="pub-flag-chip" data-flag="taiwan" onclick="filterByFlag('taiwan')">🇹🇼<span class="pub-flag-tooltip">Taïwan</span></button>
+        <button class="pub-flag-chip" data-flag="estonie" onclick="filterByFlag('estonie')">🇪🇪<span class="pub-flag-tooltip">Estonie</span></button>
+        <button class="pub-flag-chip" data-flag="lettonie" onclick="filterByFlag('lettonie')">🇱🇻<span class="pub-flag-tooltip">Lettonie</span></button>
+        <button class="pub-flag-chip" data-flag="moldavie" onclick="filterByFlag('moldavie')">🇲🇩<span class="pub-flag-tooltip">Moldavie</span></button>
+        <button class="pub-flag-chip" data-flag="bielorussie" onclick="filterByFlag('bielorussie')">🇧🇾<span class="pub-flag-tooltip">Biélorussie</span></button>
+        <button class="pub-flag-chip" data-flag="brunei" onclick="filterByFlag('brunei')">🇧🇳<span class="pub-flag-tooltip">Brunei</span></button>
+        <button class="pub-flag-chip" data-flag="uruguay" onclick="filterByFlag('uruguay')">🇺🇾<span class="pub-flag-tooltip">Uruguay</span></button>
+      </div>
+
+      <div class="pub-card-grid" id="scholarshipGrid">
+
+        <!-- Chine -->
+        <div class="pub-card" data-type="asie" data-country="chine">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag teal">🇨🇳</div>
+            <div>
+              <div class="pub-card-meta">Asie</div>
+              <div class="pub-card-title">Chine — Bourse CSC</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Bourse du Gouvernement Chinois (CSC). Frais de scolarité complets + allocation mensuelle d'environ 800 USD.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Avril chaque année
+            </div>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+              Bachelor ou Masters, &lt;35 ans
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag teal">Frais complets</span>
+              <span class="pub-tag">Allocation</span>
+            </div>
+            <a href="https://www.csc.edu.cn" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Japon -->
+        <div class="pub-card" data-type="asie" data-country="japon">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag teal">🇯🇵</div>
+            <div>
+              <div class="pub-card-meta">Asie</div>
+              <div class="pub-card-title">Japon — MEXT Scholarship</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Bourse du Ministère japonais de l'Éducation. Allocation de 117 000 à 145 000 JPY/mois + frais de scolarité.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Avril–Mai
+            </div>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+              18–30 ans, bon dossier académique
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag teal">Frais complets</span>
+              <span class="pub-tag">Allocation élevée</span>
+            </div>
+            <a href="https://www.studyinjapan.go.jp" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Corée du Sud -->
+        <div class="pub-card" data-type="asie" data-country="coree">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag teal">🇰🇷</div>
+            <div>
+              <div class="pub-card-meta">Asie</div>
+              <div class="pub-card-title">Corée du Sud — KGSP</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Korean Government Scholarship Program. Frais de scolarité + 900 000 KRW/mois pour Bachelor ou Masters.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Février–Mars
+            </div>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+              GPA &gt; 80%
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag teal">Frais complets</span>
+              <span class="pub-tag">Logement</span>
+            </div>
+            <a href="https://www.studyinkorea.go.kr" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Luxembourg -->
+        <div class="pub-card" data-type="europe" data-country="luxembourg">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇱🇺</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Luxembourg — Bourse OFPIL</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Pour étudiants étrangers en Master. Allocation de 1 954 EUR/mois — coût de vie abordable et cadre sûr.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Décembre
+            </div>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+              Master, &lt;28 ans
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">1 954 EUR/mois</span>
+              <span class="pub-tag">Pays sûr</span>
+            </div>
+            <a href="https://wwwfruni.lu" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Suède -->
+        <div class="pub-card" data-type="europe" data-country="suede">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇸🇪</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Suède — SISS</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Swedish Institute Scholarships. Frais de vie + scolarité + voyage pour les pays éligibles avec 3000h d'expérience.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Février
+            </div>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+              Pays éligibles, expérience pro requise
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Frais complets</span>
+              <span class="pub-tag">Voyage inclus</span>
+            </div>
+            <a href="https://si.se/en/apply/scholarships/" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Norvège -->
+        <div class="pub-card" data-type="europe" data-country="norvege">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇳🇴</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Norvège — Quota Scheme</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Pour étudiants des pays en développement. Master ou PhD, allocation de vie ~NOK 12 000/mois.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Décembre
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Allocation vie</span>
+              <span class="pub-tag">Scolarité gratuite</span>
+            </div>
+            <a href="https://www.studyinnorway.no" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Turquie -->
+        <div class="pub-card" data-type="europe" data-country="turquie">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇹🇷</div>
+            <div>
+              <div class="pub-card-meta">Europe / Asie</div>
+              <div class="pub-card-title">Turquie — Türkiye Burslari</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Frais complets + allocation + logement. 18–35 ans, tous niveaux. Programme très complet avec cours de langue.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Février
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Frais complets</span>
+              <span class="pub-tag">Logement inclus</span>
+            </div>
+            <a href="https://www.turkiyeburslari.gov.tr" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Allemagne -->
+        <div class="pub-card" data-type="europe" data-country="allemagne">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇩🇪</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Allemagne — DAAD</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Tous niveaux, tout domaine. Allocation mensuelle + frais de scolarité. Réseau DAAD mondial reconnu.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Octobre
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Allocation</span>
+              <span class="pub-tag">Tous domaines</span>
+            </div>
+            <a href="https://www.daad.de" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Russie -->
+        <div class="pub-card" data-type="europe" data-country="russie">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇷🇺</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Russie — Bourse Gouvernementale</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Bourse du Gouvernement Russe. Frais de scolarité + allocation mensuelle (~25 000 RUB/mois). Bachelor ou Masters.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mars
+            </div>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+              &lt;35 ans
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Allocation</span>
+              <span class="pub-tag">Gouvernemental</span>
+            </div>
+            <a href="https://rfauaa.org" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Danemark -->
+        <div class="pub-card" data-type="europe" data-country="danemark">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇩🇰</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Danemark — Danish Scholarships</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Bourses pour Masters et PhD. Frais de scolarité réduits + allocation mensuelle. Système éducatif de premier plan.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Janvier–Mars
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Allocation</span>
+              <span class="pub-tag">Éducation premium</span>
+            </div>
+            <a href="https://studyindenmark.dk" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Grèce -->
+        <div class="pub-card" data-type="europe" data-country="grece">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇬🇷</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Grèce — IKY Scholarships</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Greek State Scholarships (IKY). Allocation mensuelle + frais pour Masters ou PhD. Patrimoine culturel unique.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mai
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Allocation</span>
+              <span class="pub-tag">Masters/PhD</span>
+            </div>
+            <a href="https://www.iky.gr" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Arabie Saoudite -->
+        <div class="pub-card" data-type="moyen-orient" data-country="arabie">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag amber">🇸🇦</div>
+            <div>
+              <div class="pub-card-meta">Moyen-Orient</div>
+              <div class="pub-card-title">Arabie Saoudite — KAUST</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>King Abdullah University. Masters ou PhD en STEM. Frais complets + allocation mensuelle généreuse.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Janvier
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag">STEM</span>
+              <span class="pub-tag teal">Frais complets</span>
+            </div>
+            <a href="https://www.kaust.edu.sa" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Qatar -->
+        <div class="pub-card" data-type="moyen-orient" data-country="qatar">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag amber">🇶🇦</div>
+            <div>
+              <div class="pub-card-meta">Moyen-Orient</div>
+              <div class="pub-card-title">Qatar — Qatar University</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Frais de scolarité + allocation + logement. GPA &gt; 2.5. Environnement sûr et moderne.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mars–Octobre
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag">Logement</span>
+              <span class="pub-tag teal">Allocation</span>
+            </div>
+            <a href="https://www.qu.edu.qa" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Taïwan -->
+        <div class="pub-card" data-type="asie" data-country="taiwan">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag teal">🇹🇼</div>
+            <div>
+              <div class="pub-card-meta">Asie</div>
+              <div class="pub-card-title">Taïwan — MOFA Scholarship</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Bourse du Ministère des Affaires Étrangères. NTD 40 000/mois + frais pour Bachelor, Masters ou PhD.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mars
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag teal">Allocation</span>
+              <span class="pub-tag">Tous niveaux</span>
+            </div>
+            <a href="https://www.taiwanexperience.org.tw" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mexique -->
+        <div class="pub-card" data-type="amerique" data-country="mexique">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag green">🇲🇽</div>
+            <div>
+              <div class="pub-card-meta">Amérique</div>
+              <div class="pub-card-title">Mexique — AMEXCID</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters ou PhD. Allocation de vie + frais de scolarité. Programme gouvernemental officiel.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Août
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag">Masters/PhD</span>
+              <span class="pub-tag teal">Allocation</span>
+            </div>
+            <a href="https://www.gob.mx/amexcid" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Uruguay -->
+        <div class="pub-card" data-type="amerique" data-country="uruguay">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag green">🇺🇾</div>
+            <div>
+              <div class="pub-card-meta">Amérique</div>
+              <div class="pub-card-title">Uruguay — ANII Scholarships</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters ou PhD. Allocation mensuelle via l'Agence Nationale de Recherche et Innovation (ANII).</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mai
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag teal">Allocation</span>
+              <span class="pub-tag">Masters/PhD</span>
+            </div>
+            <a href="https://www.anii.uy" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Brésil -->
+        <div class="pub-card" data-type="amerique" data-country="bresil">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag green">🇧🇷</div>
+            <div>
+              <div class="pub-card-meta">Amérique</div>
+              <div class="pub-card-title">Brésil — CAPES/CSF</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters ou PhD en STEM. Allocation mensuelle + frais via le programme CAPES du gouvernement brésilien.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Octobre
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag">STEM</span>
+              <span class="pub-tag teal">Gouvernemental</span>
+            </div>
+            <a href="https://www.capes.gov.br" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Thaïlande -->
+        <div class="pub-card" data-type="asie" data-country="thailande">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag teal">🇹🇭</div>
+            <div>
+              <div class="pub-card-meta">Asie</div>
+              <div class="pub-card-title">Thaïlande — Royal Thai Gov.</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters ou PhD en STEM. Frais complets + allocation. Coût de vie très abordable et cadre accueillant.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mars
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag teal">Frais complets</span>
+              <span class="pub-tag">Coût faible</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estonie -->
+        <div class="pub-card" data-type="europe" data-country="estonie">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇪🇪</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Estonie — Gov. Scholarships</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters ou PhD. Frais de vie + scolarité. Pays numériquement avancé avec un système éducatif moderne.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mars
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Frais + vie</span>
+              <span class="pub-tag">Numérique</span>
+            </div>
+            <a href="https://studyinestonia.ee" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Lettonie -->
+        <div class="pub-card" data-type="europe" data-country="lettonie">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇱🇻</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Lettonie — State Scholarships</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters ou PhD. 500-700 EUR/mois. Échange académique et culturel au cœur des pays baltes.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Avril
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">500-700 EUR</span>
+              <span class="pub-tag">Échange</span>
+            </div>
+            <a href="https://www.viaa.gov.lv" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Moldavie -->
+        <div class="pub-card" data-type="europe" data-country="moldavie">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇲🇩</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Moldavie — Gov. Scholarship</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Bourse du Gouvernement de Moldavie. Allocation mensuelle pour Bachelor ou Masters. Cadre d'étude accueillant.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Juillet
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Allocation</span>
+              <span class="pub-tag">Bachelor/Master</span>
+            </div>
+            <a href="https://www.mecc.gov.md" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Biélorussie -->
+        <div class="pub-card" data-type="europe" data-country="bielorussie">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇧🇾</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Biélorussie — Gov. Scholarship</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Bourse du Gouvernement de Biélorussie. Frais de scolarité + allocation. Bachelor ou Masters.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Juillet
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Frais + allocation</span>
+              <span class="pub-tag">Gouvernemental</span>
+            </div>
+            <a href="http://www.education.gov.by" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Brunei -->
+        <div class="pub-card" data-type="asie" data-country="brunei">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag teal">🇧🇳</div>
+            <div>
+              <div class="pub-card-meta">Asie</div>
+              <div class="pub-card-title">Brunei — Gov. Scholarship</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Moins de 28 ans, Bachelor ou Masters. Frais complets + BND 600/mois. Pays riche et sûr.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Février
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag teal">Frais complets</span>
+              <span class="pub-tag">BND 600/mois</span>
+            </div>
+            <a href="https://www.moe.gov.bn" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Écosse -->
+        <div class="pub-card" data-type="europe" data-country="ecosse">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Écosse — Saltire Scholarships</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters en Écosse. Bourse de £8 000 pour les étudiants des pays éligibles. Universités de renommée mondiale.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Mai
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">£8 000</span>
+              <span class="pub-tag">Masters</span>
+            </div>
+            <a href="https://www.studyscotland.ac.uk" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Finlande -->
+        <div class="pub-card" data-type="europe" data-country="finlande">
+          <div class="pub-card-top">
+            <div class="pub-card-icon pub-flag blue">🇫🇮</div>
+            <div>
+              <div class="pub-card-meta">Europe</div>
+              <div class="pub-card-title">Finlande — Finland Scholarship</div>
+            </div>
+          </div>
+          <div class="pub-card-body">
+            <p>Masters pour non-UE. Frais de scolarité réduits + allocation. Système éducatif de classe mondiale.</p>
+            <div class="pub-card-detail">
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+              Deadline : Janvier
+            </div>
+          </div>
+          <div class="pub-card-footer">
+            <div class="pub-scholarship-tags">
+              <span class="pub-tag blue">Allocation</span>
+              <span class="pub-tag">Éducation premium</span>
+            </div>
+            <a href="https://www.studyinfinland.fi" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">
+              Site officiel
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NOTE -->
+      <div style="margin-top:32px;padding:20px 24px;background:var(--pub-surface);border:1px solid var(--pub-border);border-radius:var(--pub-radius-md);display:flex;gap:12px;align-items:flex-start;">
+        <svg class="hi" style="color:var(--pub-accent);flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
+        <div>
+          <strong style="font-size:0.9375rem;">Conseil pour les parents</strong>
+          <p style="font-size:0.875rem;color:var(--pub-text-secondary);margin-top:4px;">Les pays mentionnés ci-dessus offrent des conditions d'études abordables et un environnement sûr. La Chine, la Corée, la Thaïlande et la Turquie sont particulièrement intéressantes pour leur coût de vie faible et la qualité de leurs programmes. L'Europe (Luxembourg, Suède, Finlande, Danemark) offre un cadre de vie exceptionnel avec des systèmes de santé et d'éducation performants.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pub-section" style="padding-bottom:0;">
+    <div class="pub-cta">
+      <h2>Besoin d'accompagnement ?</h2>
+      <p>Notre équipe vous guide dans vos démarches de candidature pour les bourses internationales.</p>
+      <a href="mailto:contact@ecole.fr" class="pub-btn pub-btn-primary pub-btn-lg">
+        <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+        Nous contacter
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pub-footer">
+    <div class="pub-footer-inner">
+      <div class="pub-footer-brand">
+        <div class="pub-logo" style="margin-bottom:4px;">
+          <div class="pub-logo-icon">
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+          </div>
+          <span data-pub="schoolName">Gestion Scolaire</span>
+        </div>
+        <p>Établissement d'enseignement supérieur dédié à l'excellence académique.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="vie-academique.html">Vie Académique</a></li>
+          <li><a href="activites.html">Activités</a></li>
+          <li><a href="bourses.html">Bourses</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Espaces</h4>
+        <ul>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="login.html">Espace Privé</a></li>
+          <li><a href="login.html">Portail Parents</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@ecole.fr">contact@ecole.fr</a></li>
+          <li><a href="tel:+33123456789">01 23 45 67 89</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pub-footer-bottom">© 2025 Gestion Scolaire. Tous droits réservés.</div>
+  </footer>
+
+  <script src="js/public.js"></script>
+  <script>
+  /* Filtre par drapeau */
+  function filterByFlag(country) {
+    /* Désactive les chips région */
+    var regionChips = document.querySelectorAll('.pub-chip');
+    regionChips.forEach(function(c) { c.classList.remove('active'); });
+    var allRegion = document.querySelector('.pub-chip[data-filter="all"]');
+    if (allRegion) allRegion.classList.add('active');
+
+    /* Active le chip drapeau cliqué */
+    var flagChips = document.querySelectorAll('.pub-flag-chip');
+    flagChips.forEach(function(c) { c.classList.remove('active'); });
+    var active = document.querySelector('.pub-flag-chip[data-flag="' + country + '"]');
+    if (active) active.classList.add('active');
+
+    /* Applique le filtre */
+    var cards = document.querySelectorAll('#scholarshipGrid .pub-card');
+    cards.forEach(function(card) {
+      if (country === 'all' || card.dataset.country === country) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      /* Filtres bourses par région */
+      initFilterChips('#scholarshipFilterBar', '#scholarshipGrid .pub-card');
+      /* Recherche bourses */
+      initSearch('#scholarshipSearch', '#scholarshipGrid .pub-card', ['.pub-card-title', '.pub-card-meta', '.pub-card-body p']);
+
+      /* --- Chargement dynamique depuis l'API avec drapeaux --- */
+      var grid = document.getElementById('scholarshipGrid');
+      if (!grid) return;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/api/scholarships', true);
+      xhr.onload = function() {
+        if (xhr.status !== 200) return; /* Fallback hardcodé conservé */
+        try {
+          var data = JSON.parse(xhr.responseText);
+          if (!data || !data.length) return;
+
+          var regions = {
+            'Chine':'asie','Japon':'asie','Corée du Sud':'asie','Thaïlande':'asie',
+            'Luxembourg':'europe','Suède':'europe','Norvège':'europe','Turquie':'europe',
+            'Allemagne':'europe','Écosse':'europe','Finlande':'europe',
+            'Arabie Saoudite':'moyen-orient','Qatar':'moyen-orient',
+            'Mexique':'amerique','Brésil':'amerique'
+          };
+          var regionColors = {'asie':'teal','europe':'blue','moyen-orient':'amber','amerique':'green'};
+
+          var html = '';
+          for (var i = 0; i < data.length; i++) {
+            var s = data[i];
+            var region = regions[s.country] || 'europe';
+            var color = regionColors[region] || 'blue';
+            var flagHtml = s.flag || '';
+            var urlHtml = s.url
+              ? '<a href="' + s.url + '" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">Site officiel<svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg></a>'
+              : '';
+            html += '<div class="pub-card" data-type="' + region + '">'
+              + '<div class="pub-card-top">'
+              + '<div class="pub-card-icon ' + color + '" style="font-size:1.8rem;background:var(--pub-bg);position:relative;">'
+              + flagHtml
+              + '</div>'
+              + '<div><div class="pub-card-meta">' + region.charAt(0).toUpperCase() + region.slice(1) + '</div>'
+              + '<div class="pub-card-title">' + s.country + ' — ' + s.name + '</div></div></div>'
+              + '<div class="pub-card-body"><p>' + (s.eligibility || '') + '</p>'
+              + '<div class="pub-card-detail"><svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>Deadline : ' + (s.deadline || '—') + '</div>'
+              + '<div class="pub-card-detail"><svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>' + (s.amount || '') + '</div>'
+              + '</div><div class="pub-card-footer"><div class="pub-scholarship-tags"><span class="pub-tag ' + color + '">' + (s.process || '') + '</span></div>' + urlHtml + '</div></div>';
+          }
+          if (html) {
+            grid.innerHTML = html;
+            initFilterChips('#scholarshipFilterBar', '#scholarshipGrid .pub-card');
+            initSearch('#scholarshipSearch', '#scholarshipGrid .pub-card', ['.pub-card-title', '.pub-card-meta', '.pub-card-body p']);
+          }
+        } catch(e) { /* Fallback hardcodé */ }
+      };
+      xhr.send();
+    });
+  </script>
+</body>
+</html>

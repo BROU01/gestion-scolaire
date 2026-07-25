@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vie Académique — Gestion Scolaire</title>
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/i18n.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="pub-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
+    <div class="pub-nav-inner">
+      <a href="index.html" class="pub-logo">
+        <div class="pub-logo-icon">
+          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+        </div>
+        <span data-pub="schoolName">Gestion Scolaire</span>
+      </a>
+      <ul class="pub-nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="vie-academique.html" class="active">Vie Académique</a></li>
+        <li><a href="activites.html">Activités</a></li>
+        <li><a href="bourses.html">Bourses</a></li>
+      </ul>
+      <div class="pub-nav-actions">
+        <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
+          S'inscrire
+        </a>
+        <a href="login.html" class="pub-btn pub-btn-secondary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          Espace Privé
+        </a>
+      <button class="lang-btn" onclick="switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')" aria-label="Switch language">
+        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+        <span data-i18n-toggle>English</span>
+      </button>
+      <button class="pub-hamburger" aria-label="Menu" aria-expanded="false">
+        <svg class="hi hi-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="pub-hero">
+    <div class="pub-hero-bg">
+      <picture>
+        <source srcset="images/vie-acad-mique.webp" type="image/webp">
+        <img src="images/vie académique.jpg" alt="Vie Académique" width="1920" height="600" loading="lazy" />
+      </picture>
+    </div>
+    <div class="pub-hero-overlay"></div>
+    <div class="pub-hero-inner">
+      <h1 data-i18n="academic.hero.title">Règles et <span>processus académiques</span></h1>
+      <p data-i18n="academic.hero.desc">Transparence totale sur les méthodes d'évaluation, la discipline et le suivi comportemental de chaque élève.</p>
+    </div>
+  </section>
+
+  <!-- PAGE CONTENT -->
+
+  <!-- SYSTÈME D'ÉVALUATION -->
+  <section class="pub-section" style="padding-top:32px;">
+    <div class="pub-section-inner">
+      <div class="pub-section-header">
+        <h2 data-i18n="academic.eval.title">Système d'évaluation</h2>
+        <p data-i18n="academic.eval.subtitle">Trois types de notes pour un suivi complet des progrès</p>
+      </div>
+      <div class="pub-info-grid">
+        <div class="pub-info-card">
+          <h3>
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
+            Interrogations
+          </h3>
+          <ul>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Évaluations courtes (30 min à 1h)
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Portée sur les chapitres récents
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Coefficient 1 — Comptent pour 20% de la moyenne
+            </li>
+          </ul>
+        </div>
+        <div class="pub-info-card">
+          <h3>
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            Devoirs
+          </h3>
+          <ul>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Évaluations sur une durée plus longue
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Travaux à rendre avant la date limite
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Coefficient 2 — Comptent pour 30% de la moyenne
+            </li>
+          </ul>
+        </div>
+        <div class="pub-info-card">
+          <h3>
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75"/></svg>
+            Partiels
+          </h3>
+          <ul>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Examens de fin de semestre
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Couverture de tous les chapitres
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Coefficient 3 — Comptent pour 50% de la moyenne
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÈGLES D'ASSIDUITÉ -->
+  <section class="pub-section pub-section-alt">
+    <div class="pub-section-inner">
+      <div class="pub-section-header">
+        <h2 data-i18n="academic.attendance.title">Règles d'assiduité</h2>
+        <p data-i18n="academic.attendance.subtitle">Un cadre strict pour garantir la qualité de l'enseignement</p>
+      </div>
+      <ol class="pub-process-list">
+        <li class="pub-process-item">
+          <div class="pub-process-num">1</div>
+          <div class="pub-process-content">
+            <h4>Retard</h4>
+            <p>Tout retard de plus de 10 minutes est enregistré automatiquement. Un élève cumulant 3 retards dans un mois reçoit un avertissement écrit. Au-delà de 5 retards, une heure de colle est infligée.</p>
+          </div>
+        </li>
+        <li class="pub-process-item">
+          <div class="pub-process-num">2</div>
+          <div class="pub-process-content">
+            <h4>Absence justifiée</h4>
+            <p>Toute absence doit être justifiée par un justificatif officiel (certificat médical, convocation, etc.) remis dans les 48 heures. L'absence justifiée n'entraîne aucune sanction disciplinaire.</p>
+          </div>
+        </li>
+        <li class="pub-process-item">
+          <div class="pub-process-num">3</div>
+          <div class="pub-process-content">
+            <h4>Absence injustifiée</h4>
+            <p>Toute absence non justifiée entraîne automatiquement un retranchement sur la note de comportement. Après 3 absences injustifiées, les parents sont convoqués. Au-delà de 5 absences, une exclusion temporaire peut être prononcée.</p>
+          </div>
+        </li>
+        <li class="pub-process-item">
+          <div class="pub-process-num">4</div>
+          <div class="pub-process-content">
+            <h4>Heures de colle</h4>
+            <p>Les heures de colle sont des sanctions disciplinaires de travail supplémentaire effectuées en dehors des heures de cours. Elles sont encadrées par un surveillant et portées sur le bulletin.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SUIVI COMPORTEMENTAL -->
+  <section class="pub-section">
+    <div class="pub-section-inner">
+      <div class="pub-section-header">
+        <h2 data-i18n="academic.behavior.title">Suivi comportemental</h2>
+        <p data-i18n="academic.behavior.subtitle">Un système équilibré de sanctions et de reconnaissances</p>
+      </div>
+      <div class="pub-info-grid">
+        <div class="pub-info-card">
+          <h3>
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
+            Sanctions
+          </h3>
+          <ul>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Avertissement verbal
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Heure(s) de colle
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Punition écrite
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Exclusion temporaire (3 à 15 jours)
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Exclusion définitive (dernier recours)
+            </li>
+          </ul>
+        </div>
+        <div class="pub-info-card">
+          <h3>
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
+            Reconnaissances
+          </h3>
+          <ul>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Mention « Élève exemplaire »
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Bonus de comportement (+1 à +5)
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Certificat de mérite trimestriel
+            </li>
+            <li>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
+              Bourse d'excellence annuelle
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pub-section" style="padding-bottom:0;">
+    <div class="pub-cta">
+      <h2 data-i18n="cta.academic">Des questions sur le règlement ?</h2>
+      <p data-i18n="cta.academic.desc">Contactez notre administration pour toute question sur les procédures académiques ou disciplinaires.</p>
+      <a href="mailto:contact@ecole.fr" class="pub-btn pub-btn-primary pub-btn-lg">
+        <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+        Nous contacter
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pub-footer">
+    <div class="pub-footer-inner">
+      <div class="pub-footer-brand">
+        <div class="pub-logo" style="margin-bottom:4px;">
+          <div class="pub-logo-icon">
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+          </div>
+          <span data-pub="schoolName">Gestion Scolaire</span>
+        </div>
+        <p>Établissement d'enseignement supérieur dédié à l'excellence académique.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="vie-academique.html">Vie Académique</a></li>
+          <li><a href="activites.html">Activités</a></li>
+          <li><a href="bourses.html">Bourses</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Espaces</h4>
+        <ul>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="login.html">Espace Privé</a></li>
+          <li><a href="login.html">Portail Parents</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@ecole.fr">contact@ecole.fr</a></li>
+          <li><a href="tel:+33123456789">01 23 45 67 89</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pub-footer-bottom">© 2025 Gestion Scolaire. Tous droits réservés.</div>
+  </footer>
+
+  <!-- ====== FLAGS SHOWCASE ====== -->
+  <section class="pub-flags-section">
+    <div class="pub-flags-section-inner">
+      <h3 data-i18n="hero.scholarships.title">Étudiez à l'étranger</h3>
+      <p data-i18n="hero.scholarships.desc">Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
+      <div class="pub-flags-row">
+        <a href="bourses.html" class="pub-flag-item">🇨🇳<span>Chine</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇯🇵<span>Japon</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇰🇷<span>Corée</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇪<span>Allemagne</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇫🇷<span>France</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇪<span>Suède</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇳🇴<span>Norvège</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇷<span>Turquie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇦<span>Arabie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇷<span>Brésil</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇲🇽<span>Mexique</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇭<span>Thaïlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇫🇮<span>Finlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇷🇺<span>Russie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇰<span>Danemark</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇼<span>Taïwan</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇺🇾<span>Uruguay</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇪🇪<span>Estonie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇳<span>Brunei</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇶🇦<span>Qatar</span></a>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/public.js"></script>
+</body>
+</html>

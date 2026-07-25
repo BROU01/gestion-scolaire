@@ -1,0 +1,151 @@
+/* ============================================
+   FT3 — Classes CSS Utilitaires
+   Remplacement de tous les styles inline
+   ============================================ */
+
+/* --- Profil --- */
+.profile-card-compact { display: flex; gap: var(--space-4); align-items: flex-start; }
+.profile-avatar-sm { width: 56px; height: 56px; min-width: 56px; border-radius: var(--radius-full); background: var(--primary-light); display: flex; align-items: center; justify-content: center; color: var(--primary-dark); }
+.profile-name-sm { font-size: 1.1rem; font-weight: 700; }
+
+/* --- Texte --- */
+.text-lg { font-size: 1.5rem; }
+.text-sm { font-size: 0.8125rem; }
+.text-xs { font-size: 0.75rem; }
+.text-primary-color { color: var(--primary); }
+.font-extrabold { font-weight: 800; }
+.line-height-snug { line-height: 1.5; }
+
+/* --- Layout --- */
+.p-center { padding: var(--space-6); text-align: center; }
+.mt-n2 { margin-top: var(--space-2); }
+.mt-n4 { margin-top: var(--space-4); }
+.mt-n6 { margin-top: var(--space-6); }
+.mb-n2 { margin-bottom: var(--space-2); }
+.mb-n4 { margin-bottom: var(--space-4); }
+.mb-n6 { margin-bottom: var(--space-6); }
+.p-0 { padding: 0; }
+.p-sm { padding: 8px 0; }
+.p-md { padding: var(--space-4); }
+.p-lg { padding: var(--space-6); }
+
+/* --- Bordures --- */
+.border-bottom { border-bottom: 1px solid var(--border-light); }
+.border-bottom-sm { border-bottom: 1px solid var(--border-light); }
+
+/* --- Flex --- */
+.flex-row { display: flex; flex-direction: row; }
+.flex-col { display: flex; flex-direction: column; }
+.items-stretch { align-items: stretch; }
+.items-start { align-items: flex-start; }
+.gap-4 { gap: var(--space-4); }
+.gap-3 { gap: var(--space-3); }
+.gap-2 { gap: var(--space-2); }
+.flex-1 { flex: 1; }
+.ml-auto { margin-left: auto; }
+
+/* --- Élément de liste --- */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.list-item:last-child { border-bottom: none; }
+.list-item-date {
+  min-width: 80px;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+.list-item-date-sm {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* --- Calendrier navigation --- */
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.calendar-nav-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+.calendar-nav-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+.calendar-nav-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* --- Validation champ --- */
+.form-control.is-invalid {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+}
+.form-control.is-valid {
+  border-color: var(--success) !important;
+}
+.field-error {
+  color: var(--danger);
+  font-size: 0.75rem;
+  margin-top: var(--space-1);
+  display: none;
+  align-items: center;
+  gap: var(--space-1);
+}
+.field-error.visible {
+  display: flex;
+}
+
+/* --- Card header with actions --- */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  gap: var(--space-2);
+}
+.card-actions-row {
+  display: flex;
+  gap: var(--space-2);
+  padding: 0 var(--space-6) var(--space-2);
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* --- Empty state padding --- */
+.empty-pad { padding: 40px; }
+
+/* --- Confirm footer center --- */
+.confirm-footer { justify-content: center; }
+
+/* --- Stat value current year --- */
+.year-label {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: var(--space-2);
+}
+
+/* --- Quick action grid responsive --- */
+@media (max-width: 480px) {
+  .quick-actions { grid-template-columns: repeat(2, 1fr); }
+  .list-item { flex-wrap: wrap; }
+  .list-item-date { min-width: auto; }
+}
