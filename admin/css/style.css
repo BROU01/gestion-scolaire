@@ -2114,6 +2114,30 @@ input, select, textarea {
 }
 
 /* ============================================
+   ADMIN LANG TOGGLE — Override i18n.css for white header
+   ============================================ */
+.content-header .lang-btn {
+  background: #F8FAF8;
+  border: 2px solid #000;
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  padding: 4px 10px;
+}
+
+.content-header .lang-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border-color: #000;
+  transform: translate(-1px, -1px);
+}
+
+.content-header .lang-btn .lang-globe {
+  width: 14px;
+  height: 14px;
+  color: var(--primary);
+}
+
+/* ============================================
    UTILITY CLASSES
    ============================================ */
 .text-center { text-align: center; }

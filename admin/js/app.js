@@ -481,11 +481,11 @@ function gradeBadge(g) {
   return '<span class="badge ' + cls + '">' + g + '/20</span>';
 }
 function typeName(type) {
-  var m = { interro: 'Interrogation', devoir: 'Devoir', partiel: 'Partiel' };
+  var m = { interro: __('table.interro','Interrogation'), devoir: __('table.devoir','Devoir'), partiel: __('table.partiel','Partiel') };
   return m[type] || type;
 }
 function punTypeLabel(type) {
-  var m = { colle: 'Heure de colle', punition: 'Punition', exclusion_temp: 'Exclusion temp.', exclusion_def: 'Exclusion définitive' };
+  var m = { colle: __('punishment.heuredcolle','Heure de colle'), punition: __('punishment.punition','Punition'), exclusion_temp: __('punishment.exclusiontemp','Exclusion temp.'), exclusion_def: __('punishment.exclusiondef','Exclusion définitive') };
   return m[type] || type;
 }
 
@@ -515,15 +515,15 @@ function renderAdminDash(c) {
     + '<div class="stats-grid">'
     + statCard(ICONS.clock, __t('student.lates','Retards'), totalRetards, 'warning')
     + statCard(ICONS.noSymbol, __t('student.absences','Absences'), totalAbs, 'danger')
-    + statCard(ICONS.shieldExclamation, 'Punitions', d.punitions.length, 'danger')
-    + statCard(ICONS.musicalNote, 'Activités', d.activities.length, 'info')
+    + statCard(ICONS.shieldExclamation, __t('admin.punitions','Punitions'), d.punitions.length, 'danger')
+    + statCard(ICONS.musicalNote, __t('admin.activities','Activités'), d.activities.length, 'info')
     + '</div>'
     + '<div class="grid-2col">'
-    + '<div class="card"><div class="card-header"><h3>Dernières notes</h3></div><div class="card-body">' + recentGradesTable() + '</div></div>'
-    + '<div class="card"><div class="card-header"><h3>Année en cours</h3></div><div class="card-body">' + currentYearInfo() + '</div></div>'
+    + '<div class="card"><div class="card-header"><h3>' + __t('admin.recentGrades','Dernières notes') + '</h3></div><div class="card-body">' + recentGradesTable() + '</div></div>'
+    + '<div class="card"><div class="card-header"><h3>' + __t('admin.currentYear','Année en cours') + '</h3></div><div class="card-body">' + currentYearInfo() + '</div></div>'
     + '</div>'
     + '<!-- Flags Section -->'
-    + '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.globeAlt + ' Bourses internationales — 25+ pays</h3></div><div class="card-body">'
+    + '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.globeAlt + ' ' + __t('admin.international','Bourses internationales — 25+ pays') + '</h3></div><div class="card-body">'
     + '<div class="admin-flags-row">'
     + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Chine">🇨🇳<span>Chine</span></a>'
     + '<a href="#" onclick="renderView(\'scholarships\');return false;" class="admin-flag-item" title="Japon">🇯🇵<span>Japon</span></a>'
@@ -589,16 +589,16 @@ function renderStudentDash(c) {
     + '<div class="stats-grid">'
     + statCard(ICONS.chartBar, __t('student.avg','Moyenne'), avg + '/20', avg>=14?'success':avg>=10?'warning':'danger')
     + statCard(ICONS.bookOpen, __t('student.earnedGrades','Notes obtenues'), sg.length, 'info')
-    + statCard(ICONS.noSymbol, 'Absences', absCount, 'danger')
-    + statCard(ICONS.clock, 'Retards', retardCount, 'warning')
+    + statCard(ICONS.noSymbol, __t('student.absences','Absences'), absCount, 'danger')
+    + statCard(ICONS.clock, __t('student.lates','Retards'), retardCount, 'warning')
     + '</div>'
     + '<div class="grid-2col">'
-    + '<div class="card"><div class="card-header"><h3>Mon profil</h3></div><div class="card-body">'
+    + '<div class="card"><div class="card-header"><h3>' + __t('student.myProfile','Mon profil') + '</h3></div><div class="card-body">'
     + '<p><strong>' + s.firstName + ' ' + s.lastName + '</strong></p>'
     + '<p class="text-muted">' + s.email + '</p>'
     + '<p class="text-muted">' + (cls ? cls.name : '-') + ' — ' + (fil ? fil.name : '-') + '</p>'
     + '</div></div>'
-    + '<div class="card"><div class="card-header"><h3>Dernières notes</h3></div><div class="card-body">'
+    + '<div class="card"><div class="card-header"><h3>' + __t('student.recentGrades','Dernières notes') + '</h3></div><div class="card-body">'
     + studentRecentGrades(sid)
     + '</div></div>'
     + '</div>';
@@ -765,7 +765,7 @@ function teacherCols() {
 }
 function subjectCols() {
   return [
-    { key: 'code', label: 'Code' }, { key: 'name', label: 'Nom' }, { key: 'credits', label: 'Crédits' },
+    { key: 'code', label: __t('field.code','Code') }, { key: 'name', label: __t('field.name','Nom') }, { key: 'credits', label: __t('table.credits','Crédits') },
     { key: 'teacherId', label: 'Enseignant', render: function(v) { var t = findById(MOCK.teachers, v); return t ? t.firstName + ' ' + t.lastName : '-'; } },
     { key: 'classId', label: 'Classe', render: function(v) { var cl = findById(MOCK.classes, v); return cl ? cl.name : '-'; } }
   ];
@@ -828,7 +828,7 @@ function subjectForm() {
   return [
     { name: 'code', label: 'Code', type: 'text', placeholder: 'WEB101', required: true },
     { name: 'name', label: 'Nom', type: 'text', required: true },
-    { name: 'credits', label: 'Crédits', type: 'number', required: true },
+    { name: 'credits', label: __t('field.credits','Crédits'), type: 'number', required: true },
     { name: 'teacherId', label: 'Enseignant', type: 'select', options: MOCK.teachers.map(function(t){return {value:t.id,label:t.firstName+' '+t.lastName};}), required: true },
     { name: 'classId', label: 'Classe', type: 'select', options: MOCK.classes.map(function(cl){return {value:cl.id,label:cl.name};}), required: true }
   ];
@@ -872,8 +872,8 @@ function scholarshipForm() {
     { name: 'country', label: 'Pays', type: 'text', placeholder: 'France', required: true },
     { name: 'flag', label: 'Drapeau (emoji)', type: 'text', placeholder: '🇫🇷', required: true },
     { name: 'name', label: 'Nom de la bourse', type: 'text', required: true },
-    { name: 'eligibility', label: 'Éligibilité', type: 'text', required: true },
-    { name: 'deadline', label: 'Deadline', type: 'text', placeholder: 'Mars chaque année', required: true },
+    { name: 'eligibility', label: __t('scholarship.eligibility','Éligibilité'), type: 'text', required: true },
+    { name: 'deadline', label: __t('scholarship.deadline','Deadline'), type: 'text', placeholder: 'Mars chaque année', required: true },
     { name: 'amount', label: 'Montant', type: 'text', required: true },
     { name: 'process', label: 'Processus', type: 'text', required: true },
     { name: 'url', label: 'URL', type: 'text', placeholder: 'https://...', required: true }
@@ -1165,14 +1165,14 @@ function renderBonusMalus(c) {
 function openBonusMalusModal() {
   var studOpts = MOCK.students.map(function(s){return {value:s.id,label:s.firstName+' '+s.lastName};});
   var h = '<form id="bmForm" onsubmit="return false;">'
-    + formGroupSelect('studentId', 'Étudiant', studOpts, '')
-    + '<div class="form-group"><label>Valeur *</label><select id="f-value" class="form-control" required>'
-    + '<option value="">— Sélectionner —</option><option value="1">+1 (Bonus)</option><option value="2">+2 (Bonus)</option>'
-    + '<option value="-1">-1 (Malus)</option><option value="-2">-2 (Malus)</option></select></div>'
-    + formGroupText('reason', 'Raison', '', 'Raison...')
-    + formGroupDate('date', 'Date', new Date().toISOString().split('T')[0])
+    + formGroupSelect('studentId', __t('bonusmalus.student','Étudiant'), studOpts, '')
+    + '<div class="form-group"><label>' + __t('bonusmalus.value','Valeur') + ' *</label><select id="f-value" class="form-control" required>'
+    + '<option value="">' + __t('crud.select','— Sélectionner —') + '</option><option value="1">' + __t('bonusmalus.bonus','+1 (Bonus)') + '</option><option value="2">' + __t('bonusmalus.bonus2','+2 (Bonus)') + '</option>'
+    + '<option value="-1">' + __t('bonusmalus.malus','-1 (Malus)') + '</option><option value="-2">' + __t('bonusmalus.malus2','-2 (Malus)') + '</option></select></div>'
+    + formGroupText('reason', __t('bonusmalus.reason','Raison'), '', __t('bonusmalus.reasonPlaceholder','Raison...'))
+    + formGroupDate('date', __t('bonusmalus.date','Date'), new Date().toISOString().split('T')[0])
     + '</form>';
-  openModal('Bonus / Malus', h, 'bonus-malus');
+  openModal(__t('bonusmalus.title','Bonus / Malus'), h, 'bonus-malus');
 }
 
 function saveBonusMalus() {
@@ -1205,17 +1205,17 @@ function renderAbsences(c) {
   document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openAbsenceModal()">' + ICONS.plus + ' Ajouter</button>';
 
   var h = '<div class="stats-grid">'
-    + statCard(ICONS.noSymbol, 'Absences', MOCK.absences.filter(function(a){return a.type==='absence';}).length, 'danger')
-    + statCard(ICONS.clock, 'Retards', MOCK.absences.filter(function(a){return a.type==='retard';}).length, 'warning')
+    + statCard(ICONS.noSymbol, __t('student.absences','Absences'), MOCK.absences.filter(function(a){return a.type==='absence';}).length, 'danger')
+    + statCard(ICONS.clock, __t('student.lates','Retards'), MOCK.absences.filter(function(a){return a.type==='retard';}).length, 'warning')
     + '</div>'
     + '<div class="card"><div class="table-container"><table class="table"><thead><tr>'
     + '<th>' + __t('table.student','Étudiant') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.date','Date') + '</th><th>' + __t('table.reason','Motif') + '</th><th>' + __t('table.justified','Justifié') + '</th><th>' + __t('table.actions','Actions') + '</th>'
     + '</tr></thead><tbody>';
   MOCK.absences.forEach(function(a) {
     var st = findById(MOCK.students, a.studentId);
-    var typeBadge = a.type === 'absence' ? '<span class="badge badge-danger">Absence</span>' : '<span class="badge badge-warning">Retard ' + (a.duration ? a.duration + 'min' : '') + '</span>';
+    var typeBadge = a.type === 'absence' ? '<span class="badge badge-danger">' + __t('absence.absence','Absence') + '</span>' : '<span class="badge badge-warning">' + __t('absence.retard','Retard') + '  + (a.duration ? a.duration + 'min' : '') + '</span>';
     h += '<tr><td>' + (st ? st.firstName + ' ' + st.lastName : '-') + '</td><td>' + typeBadge + '</td><td>' + a.date + '</td>'
-      + '<td>' + (a.reason || '-') + '</td><td>' + (a.justified ? '<span class="badge badge-success">Oui</span>' : '<span class="badge badge-danger">Non</span>') + '</td>'
+      + '<td>' + (a.reason || '-') + '</td><td>' + (a.justified ? '<span class="badge badge-success">' + __t('crud.yes','Oui') + '</span>' : '<span class="badge badge-danger">' + __t('crud.no','Non') + '</span>') + '</td>'
       + '<td><button class="btn btn-ghost btn-sm" onclick="deleteAbsence(' + a.id + ')">' + ICONS.trash + '</button></td></tr>';
   });
   h += '</tbody></table></div></div>';
@@ -1225,15 +1225,15 @@ function renderAbsences(c) {
 function openAbsenceModal() {
   var studOpts = MOCK.students.map(function(s){return {value:s.id,label:s.firstName+' '+s.lastName};});
   var h = '<form onsubmit="return false;">'
-    + formGroupSelect('studentId', 'Étudiant', studOpts, '')
-    + '<div class="form-group"><label>Type *</label><select id="f-type" class="form-control" required>'
-    + '<option value="">— Sélectionner —</option><option value="absence">Absence</option><option value="retard">Retard</option></select></div>'
-    + formGroupDate('date', 'Date', new Date().toISOString().split('T')[0])
-    + formGroupText('reason', 'Motif', '', '')
-    + formGroupNumber('duration', 'Durée (min, si retard)', '', '0', '240')
-    + '<div class="form-group"><label><input type="checkbox" id="f-justified"> Justifié</label></div>'
+    + formGroupSelect('studentId', __t('form.student','Étudiant'), studOpts, '')
+    + '<div class="form-group"><label>' + __t('form.type','Type') + ' *</label><select id="f-type" class="form-control" required>'
+    + '<option value="">' + __t('form.select','— Sélectionner —') + '</option><option value="absence">' + __t('absence.absence','Absence') + '</option><option value="retard">' + __t('absence.retard','Retard') + '</option></select></div>'
+    + formGroupDate('date', __t('form.date','Date'), new Date().toISOString().split('T')[0])
+    + formGroupText('reason', __t('form.reason','Motif'), '', '')
+    + formGroupNumber('duration', __t('form.duration','Durée (min, si retard)'), '', '0', '240')
+    + '<div class="form-group"><label><input type="checkbox" id="f-justified"> ' + __t('form.justified','Justifié') + '</label></div>'
     + '</form>';
-  openModal('Ajouter une absence/retard', h, 'absences');
+  openModal(__t('absence.add','Ajouter une absence/retard'), h, 'absences');
 }
 
 function saveAbsence() {
@@ -1284,19 +1284,19 @@ function renderPunishments(c) {
 function openPunishModal() {
   var studOpts = MOCK.students.map(function(s){return {value:s.id,label:s.firstName+' '+s.lastName};});
   var h = '<form onsubmit="return false;">'
-    + formGroupSelect('studentId', 'Étudiant', studOpts, '')
-    + '<div class="form-group"><label>Type *</label><select id="f-type" class="form-control" required>'
-    + '<option value="">— Sélectionner —</option>'
-    + '<option value="colle">Heure de colle</option>'
-    + '<option value="punition">Punition</option>'
-    + '<option value="exclusion_temp">Exclusion temporaire</option>'
-    + '<option value="exclusion_def">Exclusion définitive</option></select></div>'
-    + formGroupText('description', 'Description', '', '')
-    + formGroupDate('date', 'Date', new Date().toISOString().split('T')[0])
-    + formGroupNumber('hours', 'Heures de colle', '', '0', '20')
-    + formGroupText('duration', 'Durée exclusion', '', '3 jours')
+    + formGroupSelect('studentId', __t('form.student','Étudiant'), studOpts, '')
+    + '<div class="form-group"><label>' + __t('form.type','Type') + ' *</label><select id="f-type" class="form-control" required>'
+    + '<option value="">' + __t('form.select','— Sélectionner —') + '</option>'
+    + '<option value="colle">' + __t('punishment.heuredcolle','Heure de colle') + '</option>'
+    + '<option value="punition">' + __t('punishment.punition','Punition') + '</option>'
+    + '<option value="exclusion_temp">' + __t('punishment.exclusiontemp','Exclusion temporaire') + '</option>'
+    + '<option value="exclusion_def">' + __t('punishment.exclusiondef','Exclusion définitive') + '</option></select></div>'
+    + formGroupText('description', __t('form.description','Description'), '', '')
+    + formGroupDate('date', __t('form.date','Date'), new Date().toISOString().split('T')[0])
+    + formGroupNumber('hours', __t('form.hours','Heures de colle'), '', '0', '20')
+    + formGroupText('duration', __t('form.exclusionDuration','Durée exclusion'), '', '3 jours')
     + '</form>';
-  openModal('Ajouter une punition', h, 'punishments');
+  openModal(__t('punishment.add','Ajouter une punition'), h, 'punishments');
 }
 
 function savePunishment() {
@@ -1328,9 +1328,9 @@ function deletePunish(id) {
    TEACHER ABSENCES & PUNISHMENTS
    ============================================ */
 function renderTeacherAbsences(c) {
-  var h = '<div class="card"><div class="table-container"><table class="table"><thead><tr><th>Date</th><th>Type</th><th>Motif</th><th>Durée</th></tr></thead><tbody>';
+  var h = '<div class="card"><div class="table-container"><table class="table"><thead><tr><th>' + __t('table.date','Date') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.reason','Motif') + '</th><th>' + __t('table.duration','Durée') + '</th></tr></thead><tbody>';
   MOCK.teacherAbsences.forEach(function(a) {
-    var typeBadge = a.type === 'absence' ? '<span class="badge badge-danger">Absence</span>' : '<span class="badge badge-warning">Retard</span>';
+    var typeBadge = a.type === 'absence' ? '<span class="badge badge-danger">' + __t('absence.absence','Absence') + '</span>' : '<span class="badge badge-warning">' + __t('absence.retard','Retard') + '</span>';
     h += '<tr><td>' + a.date + '</td><td>' + typeBadge + '</td><td>' + (a.reason || '-') + '</td><td>' + (a.duration ? a.duration + 'min' : '-') + '</td></tr>';
   });
   h += '</tbody></table></div></div>';
@@ -1338,7 +1338,7 @@ function renderTeacherAbsences(c) {
 }
 
 function renderTeacherPunishments(c) {
-  var h = '<div class="card"><div class="table-container"><table class="table"><thead><tr><th>Étudiant</th><th>Type</th><th>Description</th><th>Date</th></tr></thead><tbody>';
+  var h = '<div class="card"><div class="table-container"><table class="table"><thead><tr><th>' + __t('table.student','Étudiant') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.description','Description') + '</th><th>' + __t('table.date','Date') + '</th></tr></thead><tbody>';
   MOCK.punitions.forEach(function(p) {
     var st = findById(MOCK.students, p.studentId);
     h += '<tr><td>' + (st ? st.firstName + ' ' + st.lastName : '-') + '</td>'
@@ -1377,10 +1377,10 @@ function renderStudentFiliere(c) {
   var specHtml = specs.map(function(sp){return '<span class="badge badge-info">' + sp.name + '</span>';}).join(' ');
 
   var h = '<div class="grid-2col">'
-    + '<div class="card"><div class="card-header"><h3>Ma filière</h3></div><div class="card-body">'
+    + '<div class="card"><div class="card-header"><h3>' + __t('student.myFiliere','Ma filière') + '</h3></div><div class="card-body">'
     + '<h4>' + (fil ? fil.name : '-') + '</h4><p class="text-muted">' + (fil ? fil.description : '') + '</p></div></div>'
-    + '<div class="card"><div class="card-header"><h3>Spécialités</h3></div><div class="card-body">'
-    + (specHtml || '<p class="text-muted">Aucune spécialité</p>')
+    + '<div class="card"><div class="card-header"><h3>' + __t('student.specialities','Spécialités') + '</h3></div><div class="card-body">'
+    + (specHtml || '<p class="text-muted">' + __t('student.noSpeciality','Aucune spécialité') + '</p>')
     + '</div></div></div>';
   c.innerHTML = h;
 }
@@ -1390,8 +1390,8 @@ function renderStudentClass(c) {
   var cls = findById(MOCK.classes, s.classId);
   var classmates = MOCK.students.filter(function(st){return st.classId === s.classId;});
 
-  var h = '<div class="card"><div class="card-header"><h3>' + (cls ? cls.name : 'Ma classe') + '</h3><span class="badge badge-info">' + classmates.length + ' élèves</span></div>'
-    + '<div class="table-container"><table class="table"><thead><tr><th>Nom</th><th>Prénom</th><th>Email</th></tr></thead><tbody>';
+  var h = '<div class="card"><div class="card-header"><h3>' + (cls ? cls.name : __t('student.myClass','Ma classe')) + '</h3><span class="badge badge-info">' + classmates.length + ' ' + __t('student.students','élèves') + '</span></div>'
+    + '<div class="table-container"><table class="table"><thead><tr><th>' + __t('table.name','Nom') + '</th><th>' + __t('table.firstName','Prénom') + '</th><th>' + __t('table.email','Email') + '</th></tr></thead><tbody>';
   classmates.forEach(function(st) {
     h += '<tr><td>' + st.lastName + '</td><td>' + st.firstName + '</td><td>' + st.email + '</td></tr>';
   });
@@ -1422,17 +1422,17 @@ function renderStudentGrades(c) {
 
   var h = '<div class="grid-2col"><div class="card"><div class="card-body"><div class="average-display">'
     + '<div class="average-value ' + avgClass + '">' + avg + '/20</div>'
-    + '<div class="average-label">Moyenne générale</div></div></div></div>'
-    + '<div class="card"><div class="card-header"><h3>Répartition par type</h3></div><div class="card-body">';
+    + '<div class="average-label">' + __t('student.avgLabel','Moyenne générale') + '</div></div></div></div>'
+    + '<div class="card"><div class="card-header"><h3>' + __t('student.byType','Répartition par type') + '</h3></div><div class="card-body">';
   var interro = grades.filter(function(g){return g.type==='interro';});
   var devoir = grades.filter(function(g){return g.type==='devoir';});
   var partiel = grades.filter(function(g){return g.type==='partiel';});
-  h += '<p>Interrogations : ' + interro.length + ' notes</p>'
-    + '<p>Devoirs : ' + devoir.length + ' notes</p>'
-    + '<p>Partiels : ' + partiel.length + ' notes</p>';
+  h += '<p>' + __t('student.byTypeInterro','Interrogations : ') + interro.length + __t('student.notesCount',' notes') + '</p>'
+    + '<p>' + __t('student.byTypeDevoir','Devoirs : ') + devoir.length + __t('student.notesCount',' notes') + '</p>'
+    + '<p>' + __t('student.byTypePartiel','Partiels : ') + partiel.length + __t('student.notesCount',' notes') + '</p>';
   h += '</div></div></div>';
 
-  h += '<div class="card mt-3"><div class="table-container"><table class="table"><thead><tr><th>Matière</th><th>Type</th><th>Note</th><th>Date</th></tr></thead><tbody>';
+  h += '<div class="card mt-3"><div class="table-container"><table class="table"><thead><tr><th>' + __t('table.subject','Matière') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.grade','Note') + '</th><th>' + __t('table.date','Date') + '</th></tr></thead><tbody>';
   grades.forEach(function(g) {
     var sub = findById(MOCK.subjects, g.subjectId);
     h += '<tr><td>' + (sub ? sub.name : '-') + '</td><td><span class="badge badge-info">' + typeName(g.type) + '</span></td><td>' + gradeBadge(g.grade) + '</td><td>' + (g.date || '-') + '</td></tr>';
@@ -1447,13 +1447,13 @@ function renderStudentRecord(c) {
   var bm = MOCK.bonusMalus.filter(function(b){return b.studentId === sid;});
 
   var h = '<div class="stats-grid">'
-    + statCard(ICONS.sparkles, 'Bonus', bm.filter(function(b){return b.value>0;}).reduce(function(a,b){return a+b.value;},0), 'success')
-    + statCard(ICONS.noSymbol, 'Malus', bm.filter(function(b){return b.value<0;}).reduce(function(a,b){return a+Math.abs(b.value);},0), 'danger')
-    + statCard(ICONS.shieldExclamation, 'Punitions', puns.length, 'danger')
+    + statCard(ICONS.sparkles, __t('student.bonus','Bonus'), bm.filter(function(b){return b.value>0;}).reduce(function(a,b){return a+b.value;},0), 'success')
+    + statCard(ICONS.noSymbol, __t('student.malus','Malus'), bm.filter(function(b){return b.value<0;}).reduce(function(a,b){return a+Math.abs(b.value);},0), 'danger')
+    + statCard(ICONS.shieldExclamation, __t('student.punishments','Punitions'), puns.length, 'danger')
     + '</div>';
 
   if (puns.length) {
-    h += '<div class="card mt-3"><div class="card-header"><h3>Historique des punitions</h3></div><div class="table-container"><table class="table"><thead><tr><th>Type</th><th>Description</th><th>Date</th></tr></thead><tbody>';
+    h += '<div class="card mt-3"><div class="card-header"><h3>' + __t('student.punishmentHistory','Historique des punitions') + '</h3></div><div class="table-container"><table class="table"><thead><tr><th>' + __t('table.type','Type') + '</th><th>' + __t('table.description','Description') + '</th><th>' + __t('table.date','Date') + '</th></tr></thead><tbody>';
     puns.forEach(function(p) {
       h += '<tr><td><span class="badge badge-danger">' + punTypeLabel(p.type) + '</span></td><td>' + p.description + '</td><td>' + p.date + '</td></tr>';
     });
@@ -1470,11 +1470,11 @@ function renderStudentAttendance(c) {
   var justified = abs.filter(function(a){return a.justified;}).length;
 
   var h = '<div class="stats-grid">'
-    + statCard(ICONS.noSymbol, 'Absences', absCount, 'danger')
-    + statCard(ICONS.clock, 'Retards', retardCount, 'warning')
-    + statCard(ICONS.shieldCheck, 'Justifiées', justified, 'success')
+    + statCard(ICONS.noSymbol, __t('student.absences','Absences'), absCount, 'danger')
+    + statCard(ICONS.clock, __t('student.lates','Retards'), retardCount, 'warning')
+    + statCard(ICONS.shieldCheck, __t('student.justified','Justifiées'), justified, 'success')
     + '</div>'
-    + '<div class="card mt-3"><div class="table-container"><table class="table"><thead><tr><th>Date</th><th>Type</th><th>Motif</th><th>Justifié</th></tr></thead><tbody>';
+    + '<div class="card mt-3"><div class="table-container"><table class="table"><thead><tr><th>' + __t('table.date','Date') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.reason','Motif') + '</th><th>' + __t('table.justified','Justifié') + '</th></tr></thead><tbody>';
   abs.forEach(function(a) {
     h += '<tr><td>' + a.date + '</td><td>' + (a.type === 'absence' ? '<span class="badge badge-danger">Absence</span>' : '<span class="badge badge-warning">Retard</span>') + '</td>'
       + '<td>' + (a.reason || '-') + '</td><td>' + (a.justified ? '<span class="badge badge-success">Oui</span>' : '<span class="badge badge-danger">Non</span>') + '</td></tr>';
@@ -1611,15 +1611,15 @@ function renderMyExams(c) {
   past.sort(function(a,b){return new Date(b.date)-new Date(a.date);});
 
   var h = '<div class="stats-grid" style="margin-bottom:24px;">'
-    + statCard(ICONS.calendar, 'Examens à venir', upcoming.length, 'info')
-    + statCard(ICONS.chartBar, 'Examens passés', past.length, 'neutral')
+    + statCard(ICONS.calendar, __t('exam.upcoming','Examens à venir'), upcoming.length, 'info')
+    + statCard(ICONS.chartBar, __t('exam.past','Examens passés'), past.length, 'neutral')
     + '</div>';
 
-  h += '<div class="card"><div class="card-header"><h3>' + ICONS.calendar + ' Examens à venir</h3></div><div class="card-body">';
+  h += '<div class="card"><div class="card-header"><h3>' + ICONS.calendar + ' ' + __t('exam.upcoming','Examens à venir') + '</h3></div><div class="card-body">';
   if (upcoming.length === 0) {
-    h += '<div class="empty-state"><p>Aucun examen prévu.</p></div>';
+    h += '<div class="empty-state"><p>' + __t('exam.none','Aucun examen prévu.') + '</p></div>';
   } else {
-    h += '<div class="table-container"><table class="table"><thead><tr><th>Date</th><th>Événement</th><th>Période</th></tr></thead><tbody>';
+    h += '<div class="table-container"><table class="table"><thead><tr><th>' + __t('table.date','Date') + '</th><th>' + __t('table.event','Événement') + '</th><th>' + __t('table.period','Période') + '</th></tr></thead><tbody>';
     for (var u = 0; u < upcoming.length; u++) {
       h += '<tr><td><span class="badge badge-info">' + upcoming[u].date + '</span></td>'
         + '<td>' + upcoming[u].title + '</td>'
@@ -1629,11 +1629,11 @@ function renderMyExams(c) {
   }
   h += '</div></div>';
 
-  h += '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.chartBar + ' Examens passés</h3></div><div class="card-body">';
+  h += '<div class="card mt-3"><div class="card-header"><h3>' + ICONS.chartBar + ' ' + __t('exam.past','Examens passés') + '</h3></div><div class="card-body">';
   if (past.length === 0) {
-    h += '<div class="empty-state"><p>Aucun examen passé.</p></div>';
+    h += '<div class="empty-state"><p>' + __t('exam.none','Aucun examen passé.') + '</p></div>';
   } else {
-    h += '<div class="table-container"><table class="table"><thead><tr><th>Date</th><th>Événement</th><th>Période</th></tr></thead><tbody>';
+    h += '<div class="table-container"><table class="table"><thead><tr><th>' + __t('table.date','Date') + '</th><th>' + __t('table.event','Événement') + '</th><th>' + __t('table.period','Période') + '</th></tr></thead><tbody>';
     for (var p = 0; p < past.length; p++) {
       h += '<tr><td><span class="badge badge-neutral">' + past[p].date + '</span></td>'
         + '<td>' + past[p].title + '</td>'
@@ -1690,8 +1690,10 @@ function renderCalendar(c, yearOffset, monthOffset) {
   var month = calMonth;
   var firstDay = new Date(year, month, 1).getDay();
   var daysInMonth = new Date(year, month + 1, 0).getDate();
-  var monthNames = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  var dayNames = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  var monthKeys = ['month.jan','month.feb','month.mar','month.apr','month.may','month.jun','month.jul','month.aug','month.sep','month.oct','month.nov','month.dec'];
+  var monthNames = monthKeys.map(function(k){return __(k);});
+  var dayKeys = ['day.mon','day.tue','day.wed','day.thu','day.fri','day.sat','day.sun'];
+  var dayNames = dayKeys.map(function(k){return __(k);});
   var isAdmin = APP.role === 'admin';
 
   /* Charger les événements du mois */
@@ -1716,7 +1718,7 @@ function renderCalendar(c, yearOffset, monthOffset) {
 
   /* Bouton Ajouter pour admin */
   if (isAdmin) {
-    document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openCalendarEventModal()">' + ICONS.plus + ' Ajouter un événement</button>';
+    document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openCalendarEventModal()">' + ICONS.plus + ' ' + __t('calendar.addEvent','Ajouter un événement') + '</button>';
   }
 
   var calId = 'calGrid_' + Math.random().toString(36).substr(2, 5);
@@ -1765,7 +1767,7 @@ function renderCalendar(c, yearOffset, monthOffset) {
 
   /* Filtres */
   var filterTabs = ['all','academic','cultural','sport','holiday'];
-  var filterLabels = { all:'Tous', academic:'Académique', cultural:'Culturel', sport:'Sportif', holiday:'Vacances' };
+  var filterLabels = { all: __t('crud.all','Tous'), academic: __t('cal.filterAcademic','Académique'), cultural: __t('cal.filterCultural','Culturel'), sport: __t('cal.filterSport','Sportif'), holiday: __t('cal.filterHoliday','Vacances') };
   h += '<div class="card mt-3"><div class="card-body">'
     + '<div class="cal-filter-tabs">';
   for (var ft = 0; ft < filterTabs.length; ft++) {
@@ -2575,7 +2577,7 @@ function filterActivities(type, btn) {
   }
 
   var h = '<div class="toolbar"><div class="search-box"><span class="search-icon">' + ICONS.magnifyingGlass + '</span>'
-    + '<input type="text" id="scholarshipSearch" placeholder="Rechercher un pays..." oninput="filterScholarships()"></div></div>'
+    + '<input type="text" id="scholarshipSearch" placeholder="' + __t('scholarship.search.country','Rechercher un pays...') + '" oninput="filterScholarships()"></div></div>'
     + '<div class="scholarship-grid" id="scholarshipGrid">';
 
   MOCK.scholarships.forEach(function(s) {
@@ -2590,12 +2592,12 @@ function filterActivities(type, btn) {
       + '<div class="scholarship-card-header"><div class="scholarship-flag">' + s.flag + '</div>'
       + '<div><div class="scholarship-country">' + s.country + '</div><div class="scholarship-type">' + s.name + '</div></div></div>'
       + '<div class="scholarship-card-body">'
-      + scholarshipDetail(ICONS.users, 'Éligibilité', s.eligibility)
-      + scholarshipDetail(ICONS.calendar, 'Deadline', s.deadline)
-      + scholarshipDetail(ICONS.currencyDollar, 'Montant', s.amount)
-      + scholarshipDetail(ICONS.arrowTrendingUp, 'Processus', s.process)
+      + scholarshipDetail(ICONS.users, __t('scholarship.eligibility','Éligibilité'), s.eligibility)
+      + scholarshipDetail(ICONS.calendar, __t('scholarship.deadline','Deadline'), s.deadline)
+      + scholarshipDetail(ICONS.currencyDollar, __t('scholarship.amount','Montant'), s.amount)
+      + scholarshipDetail(ICONS.arrowTrendingUp, __t('scholarship.process','Processus'), s.process)
       + '</div>'
-      + '<div class="scholarship-card-footer"><a href="' + s.url + '" target="_blank" class="btn btn-primary btn-sm btn-block">' + ICONS.globeAlt + ' Visiter le site</a></div>'
+      + '<div class="scholarship-card-footer"><a href="' + s.url + '" target="_blank" class="btn btn-primary btn-sm btn-block">' + ICONS.globeAlt + ' ' + __t('scholarship.visitSite','Visiter le site') + '</a></div>'
       + '</div>';
   });
 
