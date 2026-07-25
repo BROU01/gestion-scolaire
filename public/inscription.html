@@ -76,83 +76,83 @@
           <div class="form-step-content" id="step1" data-step="1">
             <div class="pub-form-row">
               <div class="pub-form-group">
-                <label for="f-nom">Nom <span class="required">*</span></label>
-                <input type="text" id="f-nom" class="pub-form-input" placeholder="Ex: Dupont" required aria-required="true">
-                <div class="pub-form-error" id="err-nom">Le nom est requis (min. 2 caractères).</div>
+                <label for="f-nom" data-i18n="register.form.name">Nom <span class="required">*</span></label>
+                <input type="text" id="f-nom" class="pub-form-input" placeholder="Ex: Dupont" required aria-required="true" data-i18n-placeholder="register.name.placeholder">
+                <div class="pub-form-error" id="err-nom" data-i18n="register.err.name">Le nom est requis (min. 2 caractères).</div>
               </div>
               <div class="pub-form-group">
-                <label for="f-prenom">Prénom <span class="required">*</span></label>
-                <input type="text" id="f-prenom" class="pub-form-input" placeholder="Ex: Jean" required aria-required="true">
-                <div class="pub-form-error" id="err-prenom">Le prénom est requis (min. 2 caractères).</div>
+                <label for="f-prenom" data-i18n="register.form.firstName">Prénom <span class="required">*</span></label>
+                <input type="text" id="f-prenom" class="pub-form-input" placeholder="Ex: Jean" required aria-required="true" data-i18n-placeholder="register.firstName.placeholder">
+                <div class="pub-form-error" id="err-prenom" data-i18n="register.err.firstName">Le prénom est requis (min. 2 caractères).</div>
               </div>
             </div>
             <div class="pub-form-row">
               <div class="pub-form-group">
-                <label for="f-age">Âge <span class="required">*</span></label>
-                <input type="number" id="f-age" class="pub-form-input" min="14" max="25" placeholder="Ex: 18" required aria-required="true">
-                <div class="pub-form-error" id="err-age">L'âge doit être entre 14 et 25 ans.</div>
+                <label for="f-age" data-i18n="register.form.age">Âge <span class="required">*</span></label>
+                <input type="number" id="f-age" class="pub-form-input" min="14" max="25" placeholder="Ex: 18" required aria-required="true" data-i18n-placeholder="register.age.placeholder">
+                <div class="pub-form-error" id="err-age" data-i18n="register.err.age">L'âge doit être entre 14 et 25 ans.</div>
               </div>
               <div class="pub-form-group">
-                <label for="f-phone">Téléphone <span class="required">*</span></label>
-                <input type="tel" id="f-phone" class="pub-form-input" placeholder="06 12 34 56 78" required aria-required="true">
-                <div class="pub-form-error" id="err-phone">Numéro de téléphone invalide.</div>
+                <label for="f-phone" data-i18n="register.form.phone">Téléphone <span class="required">*</span></label>
+                <input type="tel" id="f-phone" class="pub-form-input" placeholder="06 12 34 56 78" required aria-required="true" data-i18n-placeholder="register.phone.placeholder">
+                <div class="pub-form-error" id="err-phone" data-i18n="register.err.phone">Numéro de téléphone invalide.</div>
               </div>
             </div>
             <div class="pub-form-group">
-              <label for="f-email">Email du parent/tuteur <span class="required">*</span></label>
-              <input type="email" id="f-email" class="pub-form-input" placeholder="parent@email.fr" required aria-required="true">
-              <div class="pub-form-error" id="err-email">Adresse email invalide.</div>
+              <label for="f-email" data-i18n="register.form.email">Email du parent/tuteur <span class="required">*</span></label>
+              <input type="email" id="f-email" class="pub-form-input" placeholder="parent@email.fr" required aria-required="true" data-i18n-placeholder="register.email.placeholder">
+              <div class="pub-form-error" id="err-email" data-i18n="register.err.email">Adresse email invalide.</div>
             </div>
           </div>
 
           <!-- Step 2: Parcours académique -->
           <div class="form-step-content" id="step2" data-step="2" style="display:none;">
             <div class="pub-form-group">
-              <label for="f-diplome">Dernier diplôme obtenu <span class="required">*</span></label>
+              <label for="f-diplome" data-i18n="register.form.diploma">Dernier diplôme obtenu <span class="required">*</span></label>
               <select id="f-diplome" class="pub-form-input" required aria-required="true">
-                <option value="">— Sélectionnez —</option>
-                <option value="brevet">Brevet des collèges</option>
-                <option value="bac_general">Baccalauréat Général</option>
-                <option value="bac_pro">Baccalauréat Professionnel</option>
-                <option value="bac_tech">Baccalauréat Technologique</option>
-                <option value="licence">Licence (L3)</option>
-                <option value="master">Master (M1/M2)</option>
-                <option value="autre">Autre</option>
+                <option value="" data-i18n="register.select.default">— Sélectionnez —</option>
+                <option value="brevet" data-i18n="register.diploma.brevet">Brevet des collèges</option>
+                <option value="bac_general" data-i18n="register.diploma.bacGeneral">Baccalauréat Général</option>
+                <option value="bac_pro" data-i18n="register.diploma.bacPro">Baccalauréat Professionnel</option>
+                <option value="bac_tech" data-i18n="register.diploma.bacTech">Baccalauréat Technologique</option>
+                <option value="licence" data-i18n="register.diploma.licence">Licence (L3)</option>
+                <option value="master" data-i18n="register.diploma.master">Master (M1/M2)</option>
+                <option value="autre" data-i18n="register.diploma.autre">Autre</option>
               </select>
-              <div class="pub-form-error" id="err-diplome">Veuillez sélectionner un diplôme.</div>
+              <div class="pub-form-error" id="err-diplome" data-i18n="register.err.diploma">Veuillez sélectionner un diplôme.</div>
             </div>
             <div class="pub-form-group">
-              <label for="f-etablissement">Établissement d'origine</label>
-              <input type="text" id="f-etablissement" class="pub-form-input" placeholder="Nom de l'établissement précédent">
+              <label for="f-etablissement" data-i18n="register.form.establishment">Établissement d'origine</label>
+              <input type="text" id="f-etablissement" class="pub-form-input" placeholder="Nom de l'établissement précédent" data-i18n-placeholder="register.establishment.placeholder">
             </div>
             <div class="pub-form-group">
-              <label for="f-moyenne">Dernière moyenne générale</label>
-              <input type="text" id="f-moyenne" class="pub-form-input" placeholder="Ex: 14.5/20" maxlength="10">
+              <label for="f-moyenne" data-i18n="register.form.avgGrade">Dernière moyenne générale</label>
+              <input type="text" id="f-moyenne" class="pub-form-input" placeholder="Ex: 14.5/20" maxlength="10" data-i18n-placeholder="register.avgGrade.placeholder">
             </div>
           </div>
 
           <!-- Step 3: Vœux d'orientation -->
           <div class="form-step-content" id="step3" data-step="3" style="display:none;">
             <div class="pub-form-group">
-              <label for="f-filiere">Filière souhaitée <span class="required">*</span></label>
+              <label for="f-filiere" data-i18n="register.form.field">Filière souhaitée <span class="required">*</span></label>
               <select id="f-filiere" class="pub-form-input" required aria-required="true">
-                <option value="">— Sélectionnez une filière —</option>
+                <option value="" data-i18n="register.select.fieldDefault">— Sélectionnez une filière —</option>
                 <option value="info">Informatique</option>
                 <option value="gestion">Gestion</option>
                 <option value="commerce">Commerce International</option>
               </select>
-              <div class="pub-form-error" id="err-filiere">Veuillez choisir une filière.</div>
+              <div class="pub-form-error" id="err-filiere" data-i18n="register.err.field">Veuillez choisir une filière.</div>
             </div>
             <div class="pub-form-group">
-              <label for="f-specialite">Spécialité souhaitée <span class="required">*</span></label>
+              <label for="f-specialite" data-i18n="register.form.specialty">Spécialité souhaitée <span class="required">*</span></label>
               <select id="f-specialite" class="pub-form-input" required aria-required="true" disabled>
-                <option value="">— Choisissez d'abord une filière —</option>
+                <option value="" data-i18n="register.select.specialtyDefault">— Choisissez d'abord une filière —</option>
               </select>
-              <div class="pub-form-error" id="err-specialite">Veuillez choisir une spécialité.</div>
+              <div class="pub-form-error" id="err-specialite" data-i18n="register.err.specialty">Veuillez choisir une spécialité.</div>
             </div>
             <div class="pub-form-group">
-              <label for="f-motivation">Lettre de motivation</label>
-              <textarea id="f-motivation" class="pub-form-input" rows="4" placeholder="Décrivez votre projet académique et professionnel…"></textarea>
+              <label for="f-motivation" data-i18n="register.form.motivation">Lettre de motivation</label>
+              <textarea id="f-motivation" class="pub-form-input" rows="4" placeholder="Décrivez votre projet académique et professionnel…" data-i18n-placeholder="register.motivation.placeholder"></textarea>
             </div>
           </div>
 
@@ -161,7 +161,7 @@
             <div class="pub-rdv-layout">
               <!-- Colonne Gauche : Calendrier Visuel -->
               <div class="pub-rdv-calendar-col">
-                <label class="pub-form-label">Choisissez une date <span class="required">*</span></label>
+                <label class="pub-form-label" data-i18n="register.form.date">Choisissez une date <span class="required">*</span></label>
                 <div class="pub-calendar-widget" id="calendarWidget">
                   <div class="pub-cal-widget-header">
                     <button type="button" class="pub-cal-nav-btn" id="calPrev" aria-label="Mois précédent">
@@ -177,28 +177,28 @@
                   </div>
                   <div class="pub-cal-days" id="calDays"></div>
                 </div>
-                <div class="pub-form-error" id="err-rdv-date">Veuillez choisir une date valide (min. 7 jours à l'avance, hors week-end).</div>
+                <div class="pub-form-error" id="err-rdv-date" data-i18n="register.err.date">Veuillez choisir une date valide (min. 7 jours à l'avance, hors week-end).</div>
                 <p class="pub-cal-hint" id="calHint">
                   <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
-                  Les rendez-vous sont disponibles du lundi au vendredi, minimum 7 jours à l'avance.
+                  <span data-i18n="register.calendar.hint">Les rendez-vous sont disponibles du lundi au vendredi, minimum 7 jours à l'avance.</span>
                 </p>
               </div>
 
               <!-- Colonne Droite : Créneaux & Notes -->
               <div class="pub-rdv-slots-col">
                 <div class="pub-form-group">
-                  <label>Créneau horaire <span class="required">*</span></label>
+                  <label data-i18n="register.form.slot">Créneau horaire <span class="required">*</span></label>
                   <div class="pub-timeslots" id="timeslots">
                     <div class="pub-timeslots-empty" id="slotsEmpty">
                       <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
-                      <span>Sélectionnez une date pour voir les créneaux disponibles</span>
+                      <span data-i18n="register.slots.empty">Sélectionnez une date pour voir les créneaux disponibles</span>
                     </div>
                   </div>
-                  <div class="pub-form-error" id="err-rdv-time">Veuillez choisir un créneau horaire.</div>
+                  <div class="pub-form-error" id="err-rdv-time" data-i18n="register.err.slot">Veuillez choisir un créneau horaire.</div>
                 </div>
                 <div class="pub-form-group">
-                  <label for="f-notes">Notes supplémentaires</label>
-                  <textarea id="f-notes" class="pub-form-input" rows="3" placeholder="Informations complémentaires pour le rendez-vous…"></textarea>
+                  <label for="f-notes" data-i18n="register.form.notes">Notes supplémentaires</label>
+                  <textarea id="f-notes" class="pub-form-input" rows="3" placeholder="Informations complémentaires pour le rendez-vous…" data-i18n-placeholder="register.notes.placeholder"></textarea>
                 </div>
                 <!-- Résumé de la sélection -->
                 <div class="pub-rdv-summary" id="rdvSummary" style="display:none;">
@@ -221,20 +221,19 @@
             <div class="pub-success-icon">
               <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
             </div>
-            <h3>Inscription enregistrée !</h3>
-            <p>Votre demande a bien été prise en compte. Vous recevrez un email de confirmation avec les détails de votre rendez-vous d'entretien.</p>
-            <a href="index.html" class="pub-btn pub-btn-primary pub-btn-lg" style="margin-top:24px;">Retour à l'accueil</a>
+            <h3 data-i18n="register.success.title">Inscription enregistrée !</h3>
+            <p data-i18n="register.success.desc">Votre demande a bien été prise en compte. Vous recevrez un email de confirmation avec les détails de votre rendez-vous d'entretien.</p>
+            <a href="index.html" class="pub-btn pub-btn-primary pub-btn-lg" style="margin-top:24px;" data-i18n="register.success.back">Retour à l'accueil</a>
           </div>
         </div>
 
         <!-- Navigation buttons -->
-        <div class="pub-form-actions" id="formActions">
-          <button type="button" class="pub-btn pub-btn-secondary" id="prevBtn" style="display:none;">
+        <div class="pub-form-actions" id="formActions">            <button type="button" class="pub-btn pub-btn-secondary" id="prevBtn" style="display:none;">
             <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 19.5 7.5-7.5-7.5-7.5"/></svg>
-            Précédent
+            <span data-i18n="register.prev">Précédent</span>
           </button>
           <button type="button" class="pub-btn pub-btn-primary" id="nextBtn">
-            Suivant
+            <span data-i18n="register.next">Suivant</span>
             <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
           </button>
         </div>
@@ -288,25 +287,25 @@
       <h3 data-i18n="hero.scholarships.title">Étudiez à l'étranger</h3>
       <p data-i18n="hero.scholarships.desc">Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
       <div class="pub-flags-row">
-        <a href="bourses.html" class="pub-flag-item">🇨🇳<span>Chine</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇯🇵<span>Japon</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇰🇷<span>Corée</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇩🇪<span>Allemagne</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇸🇪<span>Suède</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇳🇴<span>Norvège</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇹🇷<span>Turquie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇸🇦<span>Arabie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇧🇷<span>Brésil</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇲🇽<span>Mexique</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇹🇭<span>Thaïlande</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇫🇮<span>Finlande</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇷🇺<span>Russie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇩🇰<span>Danemark</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇹🇼<span>Taïwan</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇺🇾<span>Uruguay</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇪🇪<span>Estonie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇧🇳<span>Brunei</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇶🇦<span>Qatar</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇨🇳<span data-i18n="country.china">Chine</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇯🇵<span data-i18n="country.japan">Japon</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇰🇷<span data-i18n="country.korea">Corée</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇪<span data-i18n="country.germany">Allemagne</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇪<span data-i18n="country.sweden">Suède</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇳🇴<span data-i18n="country.norway">Norvège</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇷<span data-i18n="country.turkey">Turquie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇸🇦<span data-i18n="country.saudi">Arabie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇷<span data-i18n="country.brazil">Brésil</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇲🇽<span data-i18n="country.mexico">Mexique</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇭<span data-i18n="country.thailand">Thaïlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇫🇮<span data-i18n="country.finland">Finlande</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇷🇺<span data-i18n="country.russia">Russie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇩🇰<span data-i18n="country.denmark">Danemark</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇹🇼<span data-i18n="country.taiwan">Taïwan</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇺🇾<span data-i18n="country.uruguay">Uruguay</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇪🇪<span data-i18n="country.estonia">Estonie</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇧🇳<span data-i18n="country.brunei">Brunei</span></a>
+        <a href="bourses.html" class="pub-flag-item">🇶🇦<span data-i18n="country.qatar">Qatar</span></a>
       </div>
     </div>
   </section>

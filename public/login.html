@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connexion — Gestion Scolaire</title>
   <!-- Les styles sont entièrement définis ci-dessous - pas besoin des CSS racine -->
+  <link rel="stylesheet" href="css/i18n.css">
   <style>
     /* ============================================
        LOGIN PUBLIC — Néo-Brutaliste + Glassmorphism
@@ -310,67 +311,67 @@
             <path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
           </svg>
         </div>
-        <h1>Gestion Scolaire</h1>
-        <p>Connectez-vous à votre espace sécurisé</p>
+        <h1 data-i18n="login.title">Gestion Scolaire</h1>
+        <p data-i18n="login.subtitle">Connectez-vous à votre espace sécurisé</p>
       </div>
 
       <form id="loginForm">
         <div class="form-group">
-          <label for="loginRole">Rôle</label>
+          <label for="loginRole" data-i18n="login.role.label">Rôle</label>
           <select id="loginRole" class="form-control" required>
-            <option value="">— Sélectionnez votre rôle —</option>
-            <option value="admin">Administrateur</option>
-            <option value="teacher">Enseignant</option>
-            <option value="student">Étudiant</option>
-            <option value="parent">Parent</option>
+            <option value="" data-i18n="login.role.placeholder">— Sélectionnez votre rôle —</option>
+            <option value="admin" data-i18n="login.role.admin">Administrateur</option>
+            <option value="teacher" data-i18n="login.role.teacher">Enseignant</option>
+            <option value="student" data-i18n="login.role.student">Étudiant</option>
+            <option value="parent" data-i18n="login.role.parent">Parent</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="loginEmail">Adresse e-mail</label>
-          <input type="email" id="loginEmail" class="form-control" placeholder="exemple@ecole.fr" required>
+          <label for="loginEmail" data-i18n="login.email.label">Adresse e-mail</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="exemple@ecole.fr" required data-i18n-placeholder="login.email.placeholder">
           <div class="form-error" id="emailError">
             <svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-            Veuillez entrer une adresse e-mail valide.
+            <span data-i18n="login.email.error">Veuillez entrer une adresse e-mail valide.</span>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="loginPassword">Mot de passe</label>
+          <label for="loginPassword" data-i18n="login.password.label">Mot de passe</label>
           <div style="position:relative;">
-            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required data-i18n-placeholder="login.password.placeholder">
           </div>
           <div class="form-error" id="passwordError">
             <svg class="heroicon heroicon-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-            Le mot de passe doit contenir au moins 6 caractères.
+            <span data-i18n="login.password.error">Le mot de passe doit contenir au moins 6 caractères.</span>
           </div>
         </div>
 
         <button type="submit" class="btn-glass" id="loginBtn">
           <svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
-          Se connecter
+          <span data-i18n="login.submit">Se connecter</span>
         </button>
 
-        <p class="login-hint">
+        <p class="login-hint" data-i18n="login.hint">
           Identifiants de test : sélectionnez un rôle et les champs se remplissent automatiquement.
         </p>
 
         <!-- Flags showcase -->
         <div class="login-flags-row">
-          <a href="bourses.html" class="login-flag-link" title="Bourses internationales">🌍</a>
-          <a href="bourses.html" class="login-flag-link" title="Chine">🇨🇳</a>
-          <a href="bourses.html" class="login-flag-link" title="Japon">🇯🇵</a>
-          <a href="bourses.html" class="login-flag-link" title="Corée">🇰🇷</a>
-          <a href="bourses.html" class="login-flag-link" title="Allemagne">🇩🇪</a>
-          <a href="bourses.html" class="login-flag-link" title="Suède">🇸🇪</a>
-          <a href="bourses.html" class="login-flag-link" title="Brésil">🇧🇷</a>
-          <a href="bourses.html" class="login-flag-link" title="Turquie">🇹🇷</a>
-          <a href="bourses.html" class="login-flag-link" title="Qatar">🇶🇦</a>
+          <a href="bourses.html" class="login-flag-link" title="Bourses internationales" data-i18n-title="login.flag.title">🌍</a>
+          <a href="bourses.html" class="login-flag-link" title="Chine" data-i18n-title="country.china">🇨🇳</a>
+          <a href="bourses.html" class="login-flag-link" title="Japon" data-i18n-title="country.japan">🇯🇵</a>
+          <a href="bourses.html" class="login-flag-link" title="Corée" data-i18n-title="country.korea">🇰🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Allemagne" data-i18n-title="country.germany">🇩🇪</a>
+          <a href="bourses.html" class="login-flag-link" title="Suède" data-i18n-title="country.sweden">🇸🇪</a>
+          <a href="bourses.html" class="login-flag-link" title="Brésil" data-i18n-title="country.brazil">🇧🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Turquie" data-i18n-title="country.turkey">🇹🇷</a>
+          <a href="bourses.html" class="login-flag-link" title="Qatar" data-i18n-title="country.qatar">🇶🇦</a>
         </div>
 
         <div class="secure-badge">
           <svg class="heroicon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
-          Connexion sécurisée • Chiffrement de bout en bout
+          <span data-i18n="login.secure">Connexion sécurisée • Chiffrement de bout en bout</span>
         </div>
       </form>
     </div>

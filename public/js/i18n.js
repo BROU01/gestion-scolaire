@@ -341,7 +341,104 @@ var LANG_DATA = {
     'scholarship.detailEligibility': 'Éligibilité',
     'scholarship.detailDeadline': 'Deadline',
     'scholarship.detailAmount': 'Montant',
-    'scholarship.detailProcess': 'Processus'
+    'scholarship.detailProcess': 'Processus',
+
+    /* Login page */
+    'login.title': 'Connexion',
+    'login.subtitle': 'Connectez-vous à votre espace sécurisé',
+    'login.role.label': 'Rôle',
+    'login.role.placeholder': '— Sélectionnez votre rôle —',
+    'login.role.admin': 'Administrateur',
+    'login.role.teacher': 'Enseignant',
+    'login.role.student': 'Étudiant',
+    'login.role.parent': 'Parent',
+    'login.email.label': 'Adresse e-mail',
+    'login.email.placeholder': 'exemple@ecole.fr',
+    'login.email.error': 'Veuillez entrer une adresse e-mail valide.',
+    'login.password.label': 'Mot de passe',
+    'login.password.placeholder': '••••••••',
+    'login.password.error': 'Le mot de passe doit contenir au moins 6 caractères.',
+    'login.submit': 'Se connecter',
+    'login.hint': 'Identifiants de test : sélectionnez un rôle et les champs se remplissent automatiquement.',
+    'login.secure': 'Connexion sécurisée • Chiffrement de bout en bout',
+    'login.toast.selectRole': 'Veuillez sélectionner un rôle.',
+    'login.toast.invalid': 'Identifiants incorrects. Utilisez les identifiants de test.',
+    'login.toast.success': 'Connexion réussie ! Bienvenue',
+    'login.connecting': 'Connexion...',
+    'login.flag.title': 'Bourses internationales',
+
+    /* Register form labels */
+    'register.form.name': 'Nom',
+    'register.form.firstName': 'Prénom',
+    'register.form.age': 'Âge',
+    'register.form.phone': 'Téléphone',
+    'register.form.email': 'Email du parent/tuteur',
+    'register.form.diploma': 'Dernier diplôme obtenu',
+    'register.form.establishment': "Établissement d'origine",
+    'register.form.avgGrade': 'Dernière moyenne générale',
+    'register.form.field': 'Filière souhaitée',
+    'register.form.specialty': 'Spécialité souhaitée',
+    'register.form.motivation': 'Lettre de motivation',
+    'register.form.date': 'Choisissez une date',
+    'register.form.slot': 'Créneau horaire',
+    'register.form.notes': 'Notes supplémentaires',
+    'register.name.placeholder': 'Ex: Dupont',
+    'register.firstName.placeholder': 'Ex: Jean',
+    'register.age.placeholder': 'Ex: 18',
+    'register.phone.placeholder': '06 12 34 56 78',
+    'register.email.placeholder': 'parent@email.fr',
+    'register.establishment.placeholder': "Nom de l'établissement précédent",
+    'register.avgGrade.placeholder': 'Ex: 14.5/20',
+    'register.motivation.placeholder': 'Décrivez votre projet académique et professionnel…',
+    'register.notes.placeholder': 'Informations complémentaires pour le rendez-vous…',
+    'register.err.name': 'Le nom est requis (min. 2 caractères).',
+    'register.err.firstName': 'Le prénom est requis (min. 2 caractères).',
+    'register.err.age': "L'âge doit être entre 14 et 25 ans.",
+    'register.err.phone': 'Numéro de téléphone invalide.',
+    'register.err.email': 'Adresse email invalide.',
+    'register.err.diploma': 'Veuillez sélectionner un diplôme.',
+    'register.err.field': 'Veuillez choisir une filière.',
+    'register.err.specialty': 'Veuillez choisir une spécialité.',
+    'register.err.date': 'Veuillez choisir une date valide (min. 7 jours à l\'avance, hors week-end).',
+    'register.err.slot': 'Veuillez choisir un créneau horaire.',
+    'register.prev': 'Précédent',
+    'register.next': 'Suivant',
+    'register.success.title': 'Inscription enregistrée !',
+    'register.success.desc': 'Votre demande a bien été prise en compte. Vous recevrez un email de confirmation avec les détails de votre rendez-vous d\'entretien.',
+    'register.success.back': 'Retour à l\'accueil',
+    'register.slots.empty': 'Sélectionnez une date pour voir les créneaux disponibles',
+    'register.calendar.hint': 'Les rendez-vous sont disponibles du lundi au vendredi, minimum 7 jours à l\'avance.',
+    'register.select.default': '— Sélectionnez —',
+    'register.select.fieldDefault': '— Sélectionnez une filière —',
+    'register.select.specialtyDefault': '— Choisissez d\'abord une filière —',
+    'register.diploma.brevet': 'Brevet des collèges',
+    'register.diploma.bacGeneral': 'Baccalauréat Général',
+    'register.diploma.bacPro': 'Baccalauréat Professionnel',
+    'register.diploma.bacTech': 'Baccalauréat Technologique',
+    'register.diploma.licence': 'Licence (L3)',
+    'register.diploma.master': 'Master (M1/M2)',
+    'register.diploma.autre': 'Autre',
+
+    /* Country names for flags */
+    'country.china': 'Chine',
+    'country.japan': 'Japon',
+    'country.korea': 'Corée',
+    'country.germany': 'Allemagne',
+    'country.sweden': 'Suède',
+    'country.norway': 'Norvège',
+    'country.turkey': 'Turquie',
+    'country.saudi': 'Arabie',
+    'country.brazil': 'Brésil',
+    'country.mexico': 'Mexique',
+    'country.thailand': 'Thaïlande',
+    'country.finland': 'Finlande',
+    'country.russia': 'Russie',
+    'country.denmark': 'Danemark',
+    'country.taiwan': 'Taïwan',
+    'country.uruguay': 'Uruguay',
+    'country.estonia': 'Estonie',
+    'country.brunei': 'Brunei',
+    'country.qatar': 'Qatar'
   },
 
   en: {
@@ -681,7 +778,104 @@ var LANG_DATA = {
     'scholarship.detailEligibility': 'Eligibility',
     'scholarship.detailDeadline': 'Deadline',
     'scholarship.detailAmount': 'Amount',
-    'scholarship.detailProcess': 'Process'
+    'scholarship.detailProcess': 'Process',
+
+    /* Login page */
+    'login.title': 'Login',
+    'login.subtitle': 'Log in to your secure space',
+    'login.role.label': 'Role',
+    'login.role.placeholder': '— Select your role —',
+    'login.role.admin': 'Administrator',
+    'login.role.teacher': 'Teacher',
+    'login.role.student': 'Student',
+    'login.role.parent': 'Parent',
+    'login.email.label': 'Email Address',
+    'login.email.placeholder': 'example@school.fr',
+    'login.email.error': 'Please enter a valid email address.',
+    'login.password.label': 'Password',
+    'login.password.placeholder': '••••••••',
+    'login.password.error': 'Password must be at least 6 characters.',
+    'login.submit': 'Log in',
+    'login.hint': 'Test credentials: select a role and fields auto-fill.',
+    'login.secure': 'Secure connection • End-to-end encryption',
+    'login.toast.selectRole': 'Please select a role.',
+    'login.toast.invalid': 'Invalid credentials. Use test credentials.',
+    'login.toast.success': 'Login successful! Welcome',
+    'login.connecting': 'Connecting...',
+    'login.flag.title': 'International Scholarships',
+
+    /* Register form labels */
+    'register.form.name': 'Last Name',
+    'register.form.firstName': 'First Name',
+    'register.form.age': 'Age',
+    'register.form.phone': 'Phone',
+    'register.form.email': 'Parent/Guardian Email',
+    'register.form.diploma': 'Last Diploma Obtained',
+    'register.form.establishment': 'Previous School',
+    'register.form.avgGrade': 'Last GPA',
+    'register.form.field': 'Desired Program',
+    'register.form.specialty': 'Desired Specialty',
+    'register.form.motivation': 'Motivation Letter',
+    'register.form.date': 'Choose a Date',
+    'register.form.slot': 'Time Slot',
+    'register.form.notes': 'Additional Notes',
+    'register.name.placeholder': 'Ex: Smith',
+    'register.firstName.placeholder': 'Ex: John',
+    'register.age.placeholder': 'Ex: 18',
+    'register.phone.placeholder': '+1 234 567 890',
+    'register.email.placeholder': 'parent@email.com',
+    'register.establishment.placeholder': 'Previous school name',
+    'register.avgGrade.placeholder': 'Ex: 3.5/4.0',
+    'register.motivation.placeholder': 'Describe your academic and professional project…',
+    'register.notes.placeholder': 'Additional information for the appointment…',
+    'register.err.name': 'Last name is required (min. 2 characters).',
+    'register.err.firstName': 'First name is required (min. 2 characters).',
+    'register.err.age': 'Age must be between 14 and 25.',
+    'register.err.phone': 'Invalid phone number.',
+    'register.err.email': 'Invalid email address.',
+    'register.err.diploma': 'Please select a diploma.',
+    'register.err.field': 'Please choose a program.',
+    'register.err.specialty': 'Please choose a specialty.',
+    'register.err.date': 'Please choose a valid date (min. 7 days in advance, weekdays only).',
+    'register.err.slot': 'Please choose a time slot.',
+    'register.prev': 'Previous',
+    'register.next': 'Next',
+    'register.success.title': 'Registration Saved!',
+    'register.success.desc': 'Your request has been recorded. You will receive a confirmation email with your interview appointment details.',
+    'register.success.back': 'Back to Home',
+    'register.slots.empty': 'Select a date to see available slots',
+    'register.calendar.hint': 'Appointments are available Monday to Friday, minimum 7 days in advance.',
+    'register.select.default': '— Select —',
+    'register.select.fieldDefault': '— Select a program —',
+    'register.select.specialtyDefault': '— Choose a program first —',
+    'register.diploma.brevet': 'Middle School Diploma',
+    'register.diploma.bacGeneral': 'General Baccalaureate',
+    'register.diploma.bacPro': 'Professional Baccalaureate',
+    'register.diploma.bacTech': 'Technological Baccalaureate',
+    'register.diploma.licence': "Bachelor's (L3)",
+    'register.diploma.master': "Master's (M1/M2)",
+    'register.diploma.autre': 'Other',
+
+    /* Country names for flags */
+    'country.china': 'China',
+    'country.japan': 'Japan',
+    'country.korea': 'South Korea',
+    'country.germany': 'Germany',
+    'country.sweden': 'Sweden',
+    'country.norway': 'Norway',
+    'country.turkey': 'Turkey',
+    'country.saudi': 'Saudi Arabia',
+    'country.brazil': 'Brazil',
+    'country.mexico': 'Mexico',
+    'country.thailand': 'Thailand',
+    'country.finland': 'Finland',
+    'country.russia': 'Russia',
+    'country.denmark': 'Denmark',
+    'country.taiwan': 'Taiwan',
+    'country.uruguay': 'Uruguay',
+    'country.estonia': 'Estonia',
+    'country.brunei': 'Brunei',
+    'country.qatar': 'Qatar'
   }
 };
 
@@ -725,7 +919,6 @@ function applyTranslations() {
         if (el.childNodes[j].nodeType === 3) { textNodes.push(el.childNodes[j]); }
       }
       if (textNodes.length > 0) {
-        /* Replace first text node with translation, clear the rest */
         textNodes[0].textContent = trans;
         for (var k = 1; k < textNodes.length; k++) {
           textNodes[k].textContent = '';
@@ -736,6 +929,18 @@ function applyTranslations() {
     } else {
       el.textContent = trans;
     }
+  });
+  /* Translate data-i18n-placeholder */
+  var placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+  placeholders.forEach(function(el) {
+    var key = el.getAttribute('data-i18n-placeholder');
+    if (key) el.placeholder = __(key);
+  });
+  /* Translate data-i18n-title */
+  var titles = document.querySelectorAll('[data-i18n-title]');
+  titles.forEach(function(el) {
+    var key = el.getAttribute('data-i18n-title');
+    if (key) el.title = __(key);
   });
   /* Update html lang attribute */
   document.documentElement.lang = CURRENT_LANG === 'en' ? 'en' : 'fr';

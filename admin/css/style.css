@@ -2117,24 +2117,38 @@ input, select, textarea {
    ADMIN LANG TOGGLE — Override i18n.css for white header
    ============================================ */
 .content-header .lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: #F8FAF8;
   border: 2px solid #000;
   color: var(--text-primary);
   font-size: 0.7rem;
-  padding: 4px 10px;
+  font-weight: 700;
+  padding: 6px 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 120ms ease;
+  box-shadow: 2px 2px 0 #000;
 }
 
 .content-header .lang-btn:hover {
-  background: var(--primary-light);
-  color: var(--primary-dark);
+  background: var(--primary);
+  color: #fff;
   border-color: #000;
-  transform: translate(-1px, -1px);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 #000;
 }
 
 .content-header .lang-btn .lang-globe {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   color: var(--primary);
+}
+
+.content-header .lang-btn:hover .lang-globe {
+  color: #fff;
 }
 
 /* ============================================
