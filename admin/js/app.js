@@ -1213,7 +1213,7 @@ function renderAbsences(c) {
     + '</tr></thead><tbody>';
   MOCK.absences.forEach(function(a) {
     var st = findById(MOCK.students, a.studentId);
-    var typeBadge = a.type === 'absence' ? '<span class="badge badge-danger">' + __t('absence.absence','Absence') + '</span>' : '<span class="badge badge-warning">' + __t('absence.retard','Retard') + '  + (a.duration ? a.duration + 'min' : '') + '</span>';
+    var typeBadge = a.type === 'absence' ? '<span class="badge badge-danger">' + __t('absence.absence','Absence') + '</span>' : '<span class="badge badge-warning">' + __t('absence.retard','Retard') + '</span>' + (a.duration ? ' (' + a.duration + __t('calendar.month',' min') + ')' : '');
     h += '<tr><td>' + (st ? st.firstName + ' ' + st.lastName : '-') + '</td><td>' + typeBadge + '</td><td>' + a.date + '</td>'
       + '<td>' + (a.reason || '-') + '</td><td>' + (a.justified ? '<span class="badge badge-success">' + __t('crud.yes','Oui') + '</span>' : '<span class="badge badge-danger">' + __t('crud.no','Non') + '</span>') + '</td>'
       + '<td><button class="btn btn-ghost btn-sm" onclick="deleteAbsence(' + a.id + ')">' + ICONS.trash + '</button></td></tr>';
