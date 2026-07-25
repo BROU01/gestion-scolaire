@@ -243,7 +243,7 @@ function buildSidebar() {
 
   document.getElementById('userName').textContent = APP.session.name;
   document.getElementById('userAvatar').textContent = APP.session.name.charAt(0).toUpperCase();
-  var roleLabels = { admin: 'Administrateur', teacher: 'Enseignant', student: 'Étudiant', parent: 'Parent' };
+  var roleLabels = { admin: __t('role.admin','Administrateur'), teacher: __t('role.teacher','Enseignant'), student: __t('role.student','Étudiant'), parent: __t('role.parent','Parent') };
   document.getElementById('userRole').textContent = roleLabels[role] || role;
   document.getElementById('sidebarRoleBadge').textContent = roleLabels[role] || role;
 
@@ -485,14 +485,14 @@ function renderAdminDash(c) {
 
   c.innerHTML = ''
     + '<div class="stats-grid">'
-    + statCard(ICONS.userGroup, 'Étudiants', d.students.length, 'success')
-    + statCard(ICONS.users, 'Enseignants', d.teachers.length, 'info')
+    + statCard(ICONS.userGroup, __t('admin.students','Étudiants'), d.students.length, 'success')
+    + statCard(ICONS.users, __t('admin.teachers','Enseignants'), d.teachers.length, 'info')
     + statCard(ICONS.buildingLibrary, 'Classes', d.classes.length, 'primary')
-    + statCard(ICONS.chartBar, 'Moyenne générale', avg + '/20', 'warning')
+    + statCard(ICONS.chartBar, __t('student.avg','Moyenne générale'), avg + '/20', 'warning')
     + '</div>'
     + '<div class="stats-grid">'
-    + statCard(ICONS.clock, 'Retards', totalRetards, 'warning')
-    + statCard(ICONS.noSymbol, 'Absences', totalAbs, 'danger')
+    + statCard(ICONS.clock, __t('student.lates','Retards'), totalRetards, 'warning')
+    + statCard(ICONS.noSymbol, __t('student.absences','Absences'), totalAbs, 'danger')
     + statCard(ICONS.shieldExclamation, 'Punitions', d.punitions.length, 'danger')
     + statCard(ICONS.musicalNote, 'Activités', d.activities.length, 'info')
     + '</div>'
@@ -538,18 +538,18 @@ function renderTeacherDash(c) {
 
   c.innerHTML = ''
     + '<div class="stats-grid">'
-    + statCard(ICONS.bookOpen, 'Matières', mySubs.length, 'primary')
-    + statCard(ICONS.userGroup, 'Étudiants', myStuds.length, 'success')
-    + statCard(ICONS.buildingLibrary, 'Classes', myClassIds.length, 'info')
+    + statCard(ICONS.bookOpen, __t('admin.subjects','Matières'), mySubs.length, 'primary')
+    + statCard(ICONS.userGroup, __t('admin.students','Étudiants'), myStuds.length, 'success')
+    + statCard(ICONS.buildingLibrary, __t('admin.classes','Classes'), myClassIds.length, 'info')
     + statCard(ICONS.shieldExclamation, 'Punitions données', myPunish.length, 'danger')
     + '</div>'
     + '<div class="card">'
     + '<div class="card-header"><h3>Actions rapides</h3></div>'
     + '<div class="card-body"><div class="quick-actions">'
-    + quickAction(ICONS.chartBar, 'Saisir les notes', 'grades')
-    + quickAction(ICONS.userGroup, 'Mes étudiants', 'my-students')
-    + quickAction(ICONS.bookOpen, 'Mes matières', 'my-subjects')
-    + quickAction(ICONS.sparkles, 'Bonus / Malus', 'bonus-malus')
+    + quickAction(ICONS.chartBar, __t('crud.enterGrades','Saisir les notes'), 'grades')
+    + quickAction(ICONS.userGroup, __t('label.my-students','Mes étudiants'), 'my-students')
+    + quickAction(ICONS.bookOpen, __t('label.my-subjects','Mes matières'), 'my-subjects')
+    + quickAction(ICONS.sparkles, __t('label.bonus-malus','Bonus / Malus'), 'bonus-malus')
     + '</div></div></div>';
 }
 
@@ -565,8 +565,8 @@ function renderStudentDash(c) {
 
   c.innerHTML = ''
     + '<div class="stats-grid">'
-    + statCard(ICONS.chartBar, 'Moyenne', avg + '/20', avg>=14?'success':avg>=10?'warning':'danger')
-    + statCard(ICONS.bookOpen, 'Notes obtenues', sg.length, 'info')
+    + statCard(ICONS.chartBar, __t('student.avg','Moyenne'), avg + '/20', avg>=14?'success':avg>=10?'warning':'danger')
+    + statCard(ICONS.bookOpen, __t('student.earnedGrades','Notes obtenues'), sg.length, 'info')
     + statCard(ICONS.noSymbol, 'Absences', absCount, 'danger')
     + statCard(ICONS.clock, 'Retards', retardCount, 'warning')
     + '</div>'
@@ -587,7 +587,7 @@ function renderParentDash(c) {
   var parent = findById(MOCK.parents, pid);
   var children = parent.childrenIds.map(function(id){return findById(MOCK.students, id);}).filter(Boolean);
 
-  var html = '<h2 class="mb-3">Mes enfants</h2><div class="grid-2col">';
+  var html = '<h2 class="mb-3">' + __t('parent.myChildren','Mes enfants') + '</h2><div class="grid-2col">';
   children.forEach(function(s) {
     var sg = MOCK.grades.filter(function(g){return g.studentId===s.id;});
     var avg = sg.length ? (sg.reduce(function(a,g){return a+g.grade;},0)/sg.length).toFixed(1) : '—';
@@ -600,9 +600,9 @@ function renderParentDash(c) {
       + '<span class="profile-meta-item">' + ICONS.chartBar + ' Moy: ' + avg + '/20</span></div>'
       + '</div></div>'
       + '<div class="mt-2"><div class="quick-actions">'
-      + '<button class="quick-action-btn" onclick="navigateTo(\'child-grades\')"><span>' + ICONS.chartBar + '</span><span>Notes</span></button>'
-      + '<button class="quick-action-btn" onclick="navigateTo(\'child-attendance\')"><span>' + ICONS.clock + '</span><span>Absences</span></button>'
-      + '<button class="quick-action-btn" onclick="navigateTo(\'child-record\')"><span>' + ICONS.shieldCheck + '</span><span>Comportement</span></button>'
+      + '<button class="quick-action-btn" onclick="navigateTo(\'child-grades\')"><span>' + ICONS.chartBar + '</span><span>' + __t('parent.notes','Notes') + '</span></button>'
+      + '<button class="quick-action-btn" onclick="navigateTo(\'child-attendance\')"><span>' + ICONS.clock + '</span><span>' + __t('parent.absences','Absences') + '</span></button>'
+      + '<button class="quick-action-btn" onclick="navigateTo(\'child-record\')"><span>' + ICONS.shieldCheck + '</span><span>' + __t('parent.behavior','Comportement') + '</span></button>'
       + '</div></div></div></div>';
   });
   html += '</div>';
@@ -622,7 +622,7 @@ function quickAction(icon, label, view) {
 function recentGradesTable() {
   var g = MOCK.grades.slice(-5).reverse();
   if (!g.length) return '<p class="text-muted">Aucune note.</p>';
-  var h = '<table class="table"><thead><tr><th>Étudiant</th><th>Matière</th><th>Note</th></tr></thead><tbody>';
+  var h = '<table class="table"><thead><tr><th>' + __t('table.student','Étudiant') + '</th><th>' + __t('table.subject','Matière') + '</th><th>' + __t('table.grade','Note') + '</th></tr></thead><tbody>';
   g.forEach(function(r) {
     var st = findById(MOCK.students, r.studentId);
     var sub = findById(MOCK.subjects, r.subjectId);
@@ -862,7 +862,7 @@ function buildForm(fields, dataKey, data) {
   var h = '<form id="crudForm" onsubmit="return false;">';
   fields.forEach(function(f) {
     var val = data ? (data[f.name] !== undefined ? data[f.name] : '') : '';
-    h += '<div class="form-group"><label for="f-' + f.name + '">' + f.label + (f.required ? ' *' : '') + '</label>';
+    h += '<div class="form-group"><label for="f-' + f.name + '">' + __t('field.' + f.name, f.label) + (f.required ? ' *' : '') + '</label>';
     if (f.type === 'select') {
       h += '<select id="f-' + f.name + '" class="form-control" ' + (f.required ? 'required' : '') + '>';
       h += '<option value="">— Sélectionner —</option>';
@@ -1042,7 +1042,7 @@ function renderGrades(c) {
   document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openGradeModal()">' + ICONS.plus + ' Ajouter une note</button>';
 
   var h = '<div class="card"><div class="table-container"><table class="table"><thead><tr>'
-    + '<th>Étudiant</th><th>Matière</th><th>Type</th><th>Note</th><th>Date</th><th>Actions</th>'
+    + '<th>' + __t('table.student','Étudiant') + '</th><th>' + __t('table.subject','Matière') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.grade','Note') + '</th><th>' + __t('table.date','Date') + '</th><th>' + __t('table.actions','Actions') + '</th>'
     + '</tr></thead><tbody>';
   MOCK.grades.forEach(function(g) {
     var st = findById(MOCK.students, g.studentId);
@@ -1125,7 +1125,7 @@ function renderBonusMalus(c) {
   document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openBonusMalusModal()">' + ICONS.plus + ' Ajouter</button>';
 
   var h = '<div class="card"><div class="table-container"><table class="table"><thead><tr>'
-    + '<th>Étudiant</th><th>Valeur</th><th>Raison</th><th>Date</th><th>Actions</th>'
+    + '<th>' + __t('table.student','Étudiant') + '</th><th>' + __t('table.value','Valeur') + '</th><th>' + __t('table.reason','Raison') + '</th><th>' + __t('table.date','Date') + '</th><th>' + __t('table.actions','Actions') + '</th>'
     + '</tr></thead><tbody>';
   MOCK.bonusMalus.forEach(function(bm) {
     var st = findById(MOCK.students, bm.studentId);
@@ -1187,7 +1187,7 @@ function renderAbsences(c) {
     + statCard(ICONS.clock, 'Retards', MOCK.absences.filter(function(a){return a.type==='retard';}).length, 'warning')
     + '</div>'
     + '<div class="card"><div class="table-container"><table class="table"><thead><tr>'
-    + '<th>Étudiant</th><th>Type</th><th>Date</th><th>Motif</th><th>Justifié</th><th>Actions</th>'
+    + '<th>' + __t('table.student','Étudiant') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.date','Date') + '</th><th>' + __t('table.reason','Motif') + '</th><th>' + __t('table.justified','Justifié') + '</th><th>' + __t('table.actions','Actions') + '</th>'
     + '</tr></thead><tbody>';
   MOCK.absences.forEach(function(a) {
     var st = findById(MOCK.students, a.studentId);
@@ -1245,7 +1245,7 @@ function renderPunishments(c) {
   document.getElementById('headerActions').innerHTML = '<button class="btn btn-primary" onclick="openPunishModal()">' + ICONS.plus + ' Ajouter</button>';
 
   var h = '<div class="card"><div class="table-container"><table class="table"><thead><tr>'
-    + '<th>Étudiant</th><th>Type</th><th>Description</th><th>Date</th><th>Durée/Heures</th><th>Actions</th>'
+    + '<th>' + __t('table.student','Étudiant') + '</th><th>' + __t('table.type','Type') + '</th><th>' + __t('table.description','Description') + '</th><th>' + __t('table.date','Date') + '</th><th>' + __t('table.duration','Durée/Heures') + '</th><th>' + __t('table.actions','Actions') + '</th>'
     + '</tr></thead><tbody>';
   MOCK.punitions.forEach(function(p) {
     var st = findById(MOCK.students, p.studentId);
@@ -2502,9 +2502,9 @@ function deleteCalendarEventLocal(id) {
   }
 
   var h = '<div class="tabs">'
-    + '<button class="tab-btn active" onclick="filterActivities(\'all\', this)">Toutes</button>'
-    + '<button class="tab-btn" onclick="filterActivities(\'extrascolaire\', this)">Extrascolaires</button>'
-    + '<button class="tab-btn" onclick="filterActivities(\'culturelle\', this)">Culturelles</button>'
+    + '<button class="tab-btn active" onclick="filterActivities(\'all\', this)">' + __t('crud.all','Toutes') + '</button>'
+    + '<button class="tab-btn" onclick="filterActivities(\'extrascolaire\', this)">' + __t('activities.extrascolaire.plural','Extrascolaires') + '</button>'
+    + '<button class="tab-btn" onclick="filterActivities(\'culturelle\', this)">' + __t('activities.culturelle.plural','Culturelles') + '</button>'
     + '</div>'
     + '<div class="activity-grid" id="activitiesGrid">';
 
@@ -2524,7 +2524,7 @@ function deleteCalendarEventLocal(id) {
       + '<div class="activity-card-meta">'
       + '<span>' + ICONS.calendar + ' ' + act.schedule + '</span>'
       + '<span>' + ICONS.users + ' ' + act.enrolled.length + '/' + act.maxStudents + '</span>'
-      + '<span class="badge ' + typeBadge + '">' + (act.type === 'extrascolaire' ? 'Extrascolaire' : 'Culturelle') + '</span>'
+      + '<span class="badge ' + typeBadge + '">' + (act.type === 'extrascolaire' ? __t('activities.extrascolaire','Extrascolaire') : __t('activities.culturelle','Culturelle')) + '</span>'
       + '</div></div>';
   });
 
