@@ -22,7 +22,7 @@ var API = (function() {
           localStorage.removeItem('ecole_session');
           localStorage.removeItem('ecole_token');
           window.location.href = '../public/login.html';
-          throw new Error('Session expirée. Veuillez vous reconnecter.');
+          return; /* stop ici, pas de throw pour éviter le double catch */
         }
         if (!res.ok) {
           return res.json().then(function(err) {

@@ -241,8 +241,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   /* Vérifier que le token est toujours valide (non expiré) */
   if (token && token.indexOf('mock-') !== 0) {
+    /* 1. Vérification rapide côté client : décoder le JWT et vérifier l'expiration */
+    try {
+      var payload = JSON.parse(atob(token.split('.')[1]));
+      if (payload.exp && Date.now() >= payload.exp * 1000) {
+        /* Token expiré → redirect immédiat sans appel serveur */
+        localStorage.removeItem('ecole_session');
+        localStorage.removeItem('ecole_token');
+        window.location.href = '../public/login.html';
+        return;
+      }
+    } catch(e) { /* payload invalide, on continue vers la vérif serveur */ }
+
+    /* 2. Vérification serveur (token révoqué, utilisateur supprimé, etc.) */
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/api/auth/me', false); /* synchrone pour bloquer le rendu */
+    xhr.open('GET', '/api/auth/me', false);
     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
     try {
       xhr.send();
@@ -253,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
     } catch(e) {
-      /* Si le serveur est indisponible, on continue avec les données mockées */
+      /* Serveur down → mode dégradé avec données mockées */
     }
   }
 
