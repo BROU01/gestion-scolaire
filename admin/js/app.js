@@ -234,9 +234,28 @@ var APP = {
    ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
   var raw = localStorage.getItem('ecole_session');
+  var token = localStorage.getItem('ecole_token');
   if (!raw) { window.location.href = '../public/login.html'; return; }
   APP.session = JSON.parse(raw);
   APP.role = APP.session.role;
+
+  /* Vérifier que le token est toujours valide (non expiré) */
+  if (token && token.indexOf('mock-') !== 0) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/api/auth/me', false); /* synchrone pour bloquer le rendu */
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+    try {
+      xhr.send();
+      if (xhr.status === 401) {
+        localStorage.removeItem('ecole_session');
+        localStorage.removeItem('ecole_token');
+        window.location.href = '../public/login.html';
+        return;
+      }
+    } catch(e) {
+      /* Si le serveur est indisponible, on continue avec les données mockées */
+    }
+  }
 
   buildSidebar();
   restoreSidebarState();
@@ -247,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /* --- Logout --- */
 function logout() {
   localStorage.removeItem('ecole_session');
+  localStorage.removeItem('ecole_token');
   window.location.href = '../public/login.html';
 }
 

@@ -17,6 +17,13 @@ var API = (function() {
 
     return fetch(BASE + path, opts)
       .then(function(res) {
+        if (res.status === 401) {
+          /* Token expiré ou invalide → rediriger vers login */
+          localStorage.removeItem('ecole_session');
+          localStorage.removeItem('ecole_token');
+          window.location.href = '../public/login.html';
+          throw new Error('Session expirée. Veuillez vous reconnecter.');
+        }
         if (!res.ok) {
           return res.json().then(function(err) {
             throw new Error(err.error || 'Erreur serveur (' + res.status + ')');
