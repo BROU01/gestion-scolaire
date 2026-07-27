@@ -52,9 +52,6 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString(), uptime: process.uptime() });
 });
 
-// Servir les fichiers statiques du frontend
-app.use(express.static(path.join(__dirname, '..')));
-
 // Routes API
 app.use('/api/auth', authRoutes);
 app.use('/api/calendar', calendarRoutes);
@@ -448,6 +445,29 @@ app.get('/api/stats', authenticate, (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// Per-role login pages
+app.get('/admin/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+});
+app.get('/enseignant/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+});
+app.get('/prof/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+});
+app.get('/etudiant/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+});
+app.get('/eleve/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+});
+app.get('/parent/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
+});
+
+// Servir les fichiers statiques du frontend (après les routes spécifiques)
+app.use(express.static(path.join(__dirname, '..')));
 
 // Fallback SPA : servir index.html pour les routes inconnues
 app.get('*', (req, res) => {

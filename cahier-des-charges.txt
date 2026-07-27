@@ -1,0 +1,232 @@
+ PROMPT FINAL — GÉNÉRATION DU FRONT-END
+
+
+
+Contexte général
+
+Tu es un développeur front-end senior.
+
+Génère le front-end complet et professionnel d’une application web de gestion d’école, basée sur le diagramme de cas d’utilisation fourni ci- dessous.
+
+Le projet est destiné à être connecté plus tard à un backend ASP.NET / C.
+
+
+
+—
+
+
+
+Fonctionnalités à couvrir (issues du PDF)
+
+
+
+L’application comporte 3 rôles :
+
+
+
+ Administrateur
+
+Connexion / Déconnexion
+
+Gestion :
+
+Années académiques
+
+Filières
+
+Spécialités (liées aux filières)
+
+Classes
+
+Étudiants
+
+Enseignants
+
+Matières
+
+Pour chaque gestion :
+
+Ajouter / Modifier / Supprimer / Consulter
+
+
+
+ Enseignant
+
+Connexion / Déconnexion
+
+Consulter :
+
+Ses classes
+
+Les étudiants
+
+Les matières enseignées
+
+Saisir et modifier les notes des étudiants
+
+
+
+
+
+Étudiant
+
+
+
+Connexion / Déconnexion
+
+Consulter :
+
+
+
+Son profil
+
+Sa filière
+
+
+
+Les spécialités de sa filière
+
+Sa classe
+
+Ses matières
+
+Ses notes
+
+Sa moyenne
+
+
+
+ Toutes ces fonctionnalités doivent être représentées côté UI (front-end uniquement).
+
+
+
+—
+
+
+
+ Contraintes techniques
+
+HTML / CSS / JavaScript pur
+
+Aucun framework JS
+
+CSS pur (pas de Bootstrap, pas de Tailwind)
+
+
+
+—
+
+
+
+ Responsive (obligatoire)
+
+Compatible mobile / tablette / desktop
+
+Layout fluide
+
+Menu responsive (sidebar ou navbar adaptative)
+
+Tableaux adaptatifs (scroll horizontal ou cartes sur mobile)
+
+
+
+—
+
+
+
+ Design & UI
+
+Style : Professionnel – Moderne – Clair – Minimaliste
+
+Couleurs :
+
+Jaune doux → accents (boutons, badges, éléments actifs)
+
+Vert clair → validation, succès, états positifs
+
+Pas d’abus de couleurs
+
+Fond clair (blanc / gris très clair)
+
+Animations légères et élégantes :
+
+hover
+
+transitions
+
+fade / slide discrets
+
+
+
+—
+
+
+
+ JavaScript (niveau avancé)
+
+Gestion dynamique de l’interface
+
+Tableaux interactifs
+
+Formulaires avec validation
+
+Navigation simulée entre pages
+
+Données mockées (faux élèves, profs, notes…)
+
+Code structuré et lisible
+
+Architecture prête pour intégration API ASP.NET plus tard
+
+
+
+—
+
+
+
+
+
+Livrables attendus
+
+
+
+Fichiers séparés :
+
+index.html
+
+login.html
+
+autres pages si nécessaire
+
+css/style.css
+
+js/app.js
+
+Structure de dossiers claire
+
+Code bien commenté
+
+ET AUSSI le code fourni en blocs formatés :
+
+
+
+
+
+
+
+
+
+
+
+Objectif final
+
+
+
+Obtenir un front-end complet, propre, responsive et professionnel, adapté à :
+
+un projet académique
+
+une présentation devant jury
+
+une future connexion à un backend ASP.NET / C
+
