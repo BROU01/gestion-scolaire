@@ -1889,7 +1889,7 @@ function saveCalendarEvent() {
   var body = JSON.stringify({ title: title, date: date, endDate: endDate, type: type, description: description });
 
   var session = JSON.parse(localStorage.getItem('ecole_session') || '{}');
-  var token = session.token;
+  var token = localStorage.getItem('ecole_token');
 
   /* Si token mocké ou API indisponible, enregistrer localement */
   if (!token || token.indexOf('mock-') === 0) {
@@ -1977,7 +1977,7 @@ function confirmDeleteCalendar(id, title) {
 
 function deleteCalendarEvent(id) {
   var session = JSON.parse(localStorage.getItem('ecole_session') || '{}');
-  var token = session.token;
+  var token = localStorage.getItem('ecole_token');
 
   /* Si token mocké ou API indisponible, supprimer localement */
   if (!token || token.indexOf('mock-') === 0) {

@@ -949,19 +949,9 @@ function applyTranslations() {
       if (el.childNodes[i].nodeType === 1) { hasChildElements = true; break; }
     }
     if (hasChildElements) {
-      /* Replace only text nodes, preserve child elements */
-      var textNodes = [];
-      for (var j = 0; j < el.childNodes.length; j++) {
-        if (el.childNodes[j].nodeType === 3) { textNodes.push(el.childNodes[j]); }
-      }
-      if (textNodes.length > 0) {
-        textNodes[0].textContent = trans;
-        for (var k = 1; k < textNodes.length; k++) {
-          textNodes[k].textContent = '';
-        }
-      } else {
-        el.textContent = trans;
-      }
+      /* Remplacer tout le contenu HTML pour éviter que les <span> enfants
+         ne restent dans l'ancienne langue après traduction */
+      el.innerHTML = trans;
     } else {
       el.textContent = trans;
     }
@@ -986,4 +976,7 @@ function applyTranslations() {
 document.addEventListener('DOMContentLoaded', function() {
   CURRENT_LANG = localStorage.getItem('ft3_lang') || 'fr';
   applyTranslations();
+  /* Initialiser le texte du bouton de langue */
+  var toggles = document.querySelectorAll('[data-i18n-toggle]');
+  toggles.forEach(function(el) { el.textContent = __('nav.lang'); });
 });
