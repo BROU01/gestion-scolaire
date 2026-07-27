@@ -154,6 +154,25 @@
     </div>
   </section>
 
+  <!-- ====== TESTIMONIALS ====== -->
+  <section class="pub-section pub-testimonials">
+    <div class="pub-section-inner">
+      <div class="pub-section-header">
+        <h2 data-i18n="testimonials.title">Ce que disent nos parents et élèves</h2>
+        <p data-i18n="testimonials.subtitle">Découvrez les témoignages de ceux qui vivent l'expérience au quotidien</p>
+      </div>
+      <div class="pub-testimonials-grid" id="testimonialsGrid">
+        <!-- Rempli par JS -->
+      </div>
+      <div class="pub-testimonials-cta">
+        <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-lg">
+          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
+          <span data-i18n="testimonials.cta">Rejoignez notre communauté</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ====== PORTAIL PARENTS ====== -->
   <section class="pub-section pub-section-alt">
     <div class="pub-section-inner">
@@ -289,5 +308,39 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/public.js"></script>
+  <script>
+  /* --- Témoignages --- */
+  (function() {
+    var testimonialsData = [
+      { name: 'Sophie Martin', role: "Parent d'élève", content: 'Un suivi scolaire exceptionnel. Je peux voir les notes et absences de mon fils en temps réel. Le portail parents est vraiment bien conçu et facile à utiliser au quotidien.', avatar: 'SM', rating: 5 },
+      { name: 'Marc Dubois', role: "Élève de Terminale", content: "Grâce à la plateforme, j'ai pu suivre ma progression tout au long de l'année. Les enseignants sont à l'écoute et les outils numériques facilitent vraiment les apprentissages.", avatar: 'MD', rating: 5 },
+      { name: 'Isabelle Petit', role: 'Professeur de Mathématiques', content: 'La gestion des notes et des absences est devenue beaucoup plus rapide. Je gagne un temps précieux que je peux consacrer à mes élèves. Un outil indispensable pour tout enseignant.', avatar: 'IP', rating: 4 },
+      { name: 'Jean-Pierre Lefevre', role: "Parent d'élève", content: "Mon enfant a intégré cette école l'année dernière et les progrès sont remarquables. La communication avec l'administration est fluide et les notifications en temps réel sont très appréciables.", avatar: 'JL', rating: 5 },
+      { name: 'Amina Diallo', role: "Élève de Première", content: 'Les activités extrascolaires proposées sont variées et enrichissantes. Le club de robotique m\'a permis de développer des compétences incroyables. Une expérience unique !', avatar: 'AD', rating: 5 },
+      { name: 'Pierre Moreau', role: 'Ancien élève', content: "Cette école m'a préparé efficacement pour mes études supérieures. Le suivi personnalisé et la rigueur académique m'ont donné toutes les clés pour réussir à l'université.", avatar: 'PM', rating: 5 }
+    ];
+
+    var grid = document.getElementById('testimonialsGrid');
+    if (grid) {
+      var h = '';
+      testimonialsData.forEach(function(t) {
+        var stars = '';
+        for (var i = 0; i < t.rating; i++) { stars += '⭐'; }
+        h += '<div class="pub-testimonial-card">';
+        h += '<div class="pub-testimonial-header">';
+        h += '<div class="pub-testimonial-avatar">' + (t.avatar || t.name.charAt(0)) + '</div>';
+        h += '<div class="pub-testimonial-meta">';
+        h += '<strong>' + t.name + '</strong>';
+        h += '<span>' + t.role + '</span>';
+        h += '</div>';
+        h += '</div>';
+        h += '<div class="pub-testimonial-rating">' + stars + '</div>';
+        h += '<p class="pub-testimonial-text">"' + t.content + '"</p>';
+        h += '</div>';
+      });
+      grid.innerHTML = h;
+    }
+  })();
+  </script>
 </body>
 </html>

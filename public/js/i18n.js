@@ -10,6 +10,7 @@ var LANG_DATA = {
     'nav.academic': 'Vie Académique',
     'nav.activities': 'Activités',
     'nav.scholarships': 'Bourses',
+    'nav.blog': 'Actualités',
     'nav.register': "S'inscrire",
     'nav.login': 'Espace Privé',
     'nav.lang': 'English',
@@ -116,6 +117,11 @@ var LANG_DATA = {
     'activities.cta.btn': 'S\'inscrire à l\'établissement',
 
     /* CTA */
+    /* Testimonials */
+    'testimonials.title': 'Ce que disent nos parents et élèves',
+    'testimonials.subtitle': "Découvrez les témoignages de ceux qui vivent l'expérience au quotidien",
+    'testimonials.cta': 'Rejoignez notre communauté',
+
     'cta.title': 'Rejoignez notre établissement',
     'cta.desc': 'Inscrivez votre enfant dès maintenant et bénéficiez d\'un suivi scolaire moderne et transparent.',
     'cta.btn': "Commencer l'inscription",
@@ -466,6 +472,7 @@ var LANG_DATA = {
     'nav.academic': 'Academic Life',
     'nav.activities': 'Activities',
     'nav.scholarships': 'Scholarships',
+    'nav.blog': 'News',
     'nav.register': 'Register',
     'nav.login': 'Private Area',
     'nav.lang': 'Français',
@@ -563,6 +570,11 @@ var LANG_DATA = {
     'scholarships.tip.text': 'The countries listed above offer affordable study conditions and a safe environment. China, Korea, Thailand and Turkey are particularly interesting for their low cost of living and quality programs.',
 
     /* CTA */
+    /* Testimonials */
+    'testimonials.title': 'What Our Parents & Students Say',
+    'testimonials.subtitle': 'Discover the experiences of those who live it every day',
+    'testimonials.cta': 'Join Our Community',
+
     'cta.title': 'Join Our Institution',
     'cta.desc': 'Register your child now and benefit from modern, transparent academic monitoring.',
     'cta.btn': 'Start Registration',
@@ -578,6 +590,19 @@ var LANG_DATA = {
     'activities.cta.title': 'Want to join an activity?',
     'activities.cta.desc': 'Register now and enrich your school experience.',
     'activities.cta.btn': 'Register at the School',
+
+    /* Blog */
+    'blog.hero.title': 'News & Events',
+    'blog.hero.desc': 'Follow the latest news, events and announcements from our school.',
+    'blog.filter.all': 'All',
+    'blog.filter.news': 'News',
+    'blog.filter.events': 'Events',
+    'blog.filter.academic': 'Academic',
+    'blog.filter.tips': 'Tips',
+    'blog.readMore': 'Read More',
+    'blog.cta.title': 'Stay Informed',
+    'blog.cta.desc': 'Follow all the news from our school and never miss an important event.',
+    'blog.cta.btn': 'Register at the School',
 
     /* Footer */
     'footer.desc': 'Higher education institution dedicated to academic excellence and international openness.',

@@ -281,6 +281,120 @@ app.get('/api/scholarships', (req, res) => {
   catch (err) { res.status(500).json({ error: err.message }); }
 });
 
+/* --- BLOG/ACTUALITÉS --- */
+app.get('/api/blog', (req, res) => {
+  try {
+    const db = getDb();
+    const { category, limit } = req.query;
+    let query = 'SELECT * FROM blog_posts WHERE published = 1';
+    const params = [];
+    if (category) { query += ' AND category = ?'; params.push(category); }
+    query += ' ORDER BY createdAt DESC';
+    if (limit) { query += ' LIMIT ?'; params.push(parseInt(limit)); }
+    res.json(db.prepare(query).all(...params));
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/api/blog/all', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    res.json(db.prepare('SELECT * FROM blog_posts ORDER BY createdAt DESC').all());
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/api/blog/:slug', (req, res) => {
+  try {
+    const db = getDb();
+    const post = db.prepare('SELECT * FROM blog_posts WHERE slug = ? OR id = ?').get(req.params.slug, req.params.slug);
+    if (!post) return res.status(404).json({ error: 'Article non trouvé' });
+    if (!post.published) return res.status(404).json({ error: 'Article non trouvé' });
+    res.json(post);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/blog', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    const { title, slug, excerpt, content, image, category, author, published } = req.body;
+    if (!title || !content) return res.status(400).json({ error: 'Titre et contenu requis' });
+    const id = require('uuid').v4();
+    const postSlug = slug || title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    db.prepare('INSERT INTO blog_posts (id, title, slug, excerpt, content, image, category, author, published) VALUES (?,?,?,?,?,?,?,?,?)')
+      .run(id, title, postSlug, excerpt || '', content, image || '', category || 'news', author || 'Administration', published ? 1 : 0);
+    res.status(201).json({ success: true, id, slug: postSlug });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/blog/:id', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    const existing = db.prepare('SELECT id FROM blog_posts WHERE id = ?').get(req.params.id);
+    if (!existing) return res.status(404).json({ error: 'Article non trouvé' });
+    const { title, slug, excerpt, content, image, category, author, published } = req.body;
+    const postSlug = slug || title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    db.prepare("UPDATE blog_posts SET title=?, slug=?, excerpt=?, content=?, image=?, category=?, author=?, published=?, updatedAt=datetime('now') WHERE id=?")
+      .run(title, postSlug, excerpt || '', content, image || '', category || 'news', author || 'Administration', published ? 1 : 0, req.params.id);
+    res.json({ success: true });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/blog/:id', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    const result = db.prepare('DELETE FROM blog_posts WHERE id = ?').run(req.params.id);
+    if (result.changes === 0) return res.status(404).json({ error: 'Article non trouvé' });
+    res.json({ success: true });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+/* --- TESTIMONIALS --- */
+app.get('/api/testimonials', (req, res) => {
+  try {
+    const db = getDb();
+    res.json(db.prepare('SELECT * FROM testimonials WHERE active = 1 ORDER BY sortOrder ASC, createdAt DESC').all());
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/api/testimonials/all', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    res.json(db.prepare('SELECT * FROM testimonials ORDER BY sortOrder ASC, createdAt DESC').all());
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/testimonials', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    const { name, role, content, avatar, rating, active, sortOrder } = req.body;
+    if (!name || !content) return res.status(400).json({ error: 'Nom et contenu requis' });
+    const id = require('uuid').v4();
+    db.prepare('INSERT INTO testimonials (id, name, role, content, avatar, rating, active, sortOrder) VALUES (?,?,?,?,?,?,?,?)')
+      .run(id, name, role || '', content, avatar || '', rating || 5, active !== undefined ? (active ? 1 : 0) : 1, sortOrder || 0);
+    res.status(201).json({ success: true, id });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/testimonials/:id', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    const existing = db.prepare('SELECT id FROM testimonials WHERE id = ?').get(req.params.id);
+    if (!existing) return res.status(404).json({ error: 'Témoignage non trouvé' });
+    const { name, role, content, avatar, rating, active, sortOrder } = req.body;
+    db.prepare("UPDATE testimonials SET name=?, role=?, content=?, avatar=?, rating=?, active=?, sortOrder=?, updatedAt=datetime('now') WHERE id=?")
+      .run(name, role || '', content, avatar || '', rating || 5, active !== undefined ? (active ? 1 : 0) : 1, sortOrder || 0, req.params.id);
+    res.json({ success: true });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/testimonials/:id', authenticate, (req, res) => {
+  try {
+    const db = getDb();
+    const result = db.prepare('DELETE FROM testimonials WHERE id = ?').run(req.params.id);
+    if (result.changes === 0) return res.status(404).json({ error: 'Témoignage non trouvé' });
+    res.json({ success: true });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
 app.get('/api/candidates', authenticate, (req, res) => {
   try { const db = getDb(); res.json(db.prepare('SELECT * FROM candidates ORDER BY createdAt DESC').all()); }
   catch (err) { res.status(500).json({ error: err.message }); }

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualités — Gestion Scolaire</title>
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/i18n.css">
+  <script src="js/theme.js"></script>
+  <style>
+    /* Blog card specific styles */
+    .pub-blog-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--pub-radius-md) var(--pub-radius-md) 0 0;
+      display: block;
+    }
+    .pub-blog-card .pub-card-top {
+      padding: 0;
+    }
+    .pub-blog-body {
+      padding: 16px 20px;
+    }
+    .pub-blog-body .pub-card-meta {
+      margin-bottom: 4px;
+      font-size: 0.8125rem;
+    }
+    .pub-blog-body .pub-card-title {
+      font-size: 1.0625rem;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .pub-blog-body p {
+      font-size: 0.875rem;
+      color: var(--pub-text-secondary);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin: 0 0 12px 0;
+    }
+    .pub-blog-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-top: 1px solid var(--pub-border);
+      font-size: 0.8125rem;
+      color: var(--pub-text-secondary);
+    }
+    .pub-blog-footer button {
+      background: none;
+      border: none;
+      color: var(--pub-primary);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.8125rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+    }
+    .pub-blog-footer button:hover {
+      text-decoration: underline;
+    }
+
+    /* Article detail modal */
+    .pub-article-modal {
+      max-width: 720px;
+      margin: 40px auto;
+      background: var(--pub-bg);
+      border-radius: var(--pub-radius-lg);
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+    }
+    .pub-article-modal img {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+    }
+    .pub-article-content {
+      padding: 32px;
+    }
+    .pub-article-content h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      line-height: 1.3;
+    }
+    .pub-article-content .pub-article-meta {
+      font-size: 0.875rem;
+      color: var(--pub-text-secondary);
+      margin-bottom: 20px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .pub-article-content .pub-article-body {
+      font-size: 0.9375rem;
+      line-height: 1.8;
+      color: var(--pub-text);
+    }
+    .pub-article-content .pub-article-body p {
+      margin-bottom: 12px;
+    }
+    .pub-article-content .pub-article-body ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    .pub-article-content .pub-article-body li {
+      margin-bottom: 4px;
+    }
+    .pub-close-article {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      z-index: 1001;
+      transition: background .2s;
+    }
+    .pub-close-article:hover {
+      background: rgba(0,0,0,0.7);
+    }
+
+    /* Blog CTA section */
+    .pub-blog-cta {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .pub-blog-cta h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .pub-blog-cta p {
+      color: var(--pub-text-secondary);
+      margin-bottom: 20px;
+    }
+
+    /* Blog overlay */
+    .pub-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .pub-overlay.open {
+      display: block;
+    }
+
+    /* Category badges in blog cards */
+    .pub-blog-cat {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .pub-blog-cat.news { background: #dbeafe; color: #1d4ed8; }
+    .pub-blog-cat.events { background: #fce7f3; color: #be185d; }
+    .pub-blog-cat.academic { background: #d1fae5; color: #047857; }
+    .pub-blog-cat.tips { background: #fef3c7; color: #b45309; }
+
+    /* Read more arrow */
+    .pub-read-more {
+      transition: gap .2s;
+    }
+    .pub-read-more:hover {
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="pub-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
+    <div class="pub-nav-inner">
+      <a href="index.html" class="pub-logo">
+        <div class="pub-logo-icon">
+          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+        </div>
+        <span data-pub="schoolName">Gestion Scolaire</span>
+      </a>
+      <ul class="pub-nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="vie-academique.html" data-i18n="nav.academic">Vie Académique</a></li>
+        <li><a href="activites.html" data-i18n="nav.activities">Activités</a></li>
+        <li><a href="bourses.html" data-i18n="nav.scholarships">Bourses</a></li>
+        <li><a href="actualites.html" class="active" data-i18n="nav.blog">Actualités</a></li>
+      </ul>
+      <div class="pub-nav-actions">
+        <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
+          <span data-i18n="nav.register">S'inscrire</span>
+        </a>
+        <a href="login.html" class="pub-btn pub-btn-secondary pub-btn-sm">
+          <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
+          <span data-i18n="nav.login">Espace Privé</span>
+        </a>
+        <button class="lang-btn" onclick="switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')" aria-label="Switch language">
+          <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+          <span data-i18n-toggle>English</span>
+        </button>
+        <button class="pub-hamburger" aria-label="Menu" aria-expanded="false">
+          <svg class="hi hi-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pub-hero">
+    <div class="pub-hero-bg">
+      <picture>
+        <source srcset="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1920&q=80" type="image/webp">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1920&q=80" alt="Actualités" width="1920" height="600" loading="lazy" />
+      </picture>
+    </div>
+    <div class="pub-hero-overlay"></div>
+    <div class="pub-hero-inner">
+      <h1 data-i18n="blog.hero.title">Actualités et <span>événements</span></h1>
+      <p data-i18n="blog.hero.desc">Suivez les dernières nouvelles, événements et annonces de notre établissement.</p>
+    </div>
+  </section>
+
+  <!-- FILTRES + GRILLE -->
+  <section class="pub-section">
+    <div class="pub-section-inner">
+      <div class="pub-filter-bar" id="blogFilterBar">
+        <div class="pub-filter-chips">
+          <button class="pub-chip active" data-filter="all" data-i18n="blog.filter.all">Tous</button>
+          <button class="pub-chip" data-filter="news" data-i18n="blog.filter.news">Actualités</button>
+          <button class="pub-chip" data-filter="events" data-i18n="blog.filter.events">Événements</button>
+          <button class="pub-chip" data-filter="academic" data-i18n="blog.filter.academic">Académique</button>
+          <button class="pub-chip" data-filter="tips" data-i18n="blog.filter.tips">Conseils</button>
+        </div>
+      </div>
+
+      <div class="pub-card-grid" id="blogGrid">
+
+        <!-- ARTICLE 1 : Journée Portes Ouvertes -->
+        <div class="pub-card pub-blog-card" data-type="events">
+          <div class="pub-card-top">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=800&q=80" alt="Journée Portes Ouvertes" class="pub-blog-img" loading="lazy">
+          </div>
+          <div class="pub-blog-body">
+            <div class="pub-card-meta"><span class="pub-blog-cat events">Événement</span></div>
+            <div class="pub-card-title">Journée Portes Ouvertes 2025</div>
+            <p>Venez découvrir notre établissement lors de la journée portes ouvertes du 15 novembre 2025. Visites guidées, rencontres avec les enseignants et ateliers interactifs.</p>
+          </div>
+          <div class="pub-blog-footer">
+            <span>15 Oct 2025</span>
+            <button onclick="openArticle(1)" class="pub-read-more">
+              <span data-i18n="blog.readMore">Lire la suite</span>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ARTICLE 2 : Résultats Examens -->
+        <div class="pub-card pub-blog-card" data-type="academic">
+          <div class="pub-card-top">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80" alt="Résultats examens" class="pub-blog-img" loading="lazy">
+          </div>
+          <div class="pub-blog-body">
+            <div class="pub-card-meta"><span class="pub-blog-cat academic">Académique</span></div>
+            <div class="pub-card-title">Résultats Examens Semestre 1</div>
+            <p>Les résultats du premier semestre sont disponibles. Félicitations à tous les étudiants pour leur travail. Taux de réussite global : 87%.</p>
+          </div>
+          <div class="pub-blog-footer">
+            <span>15 Jan 2025</span>
+            <button onclick="openArticle(2)" class="pub-read-more">
+              <span data-i18n="blog.readMore">Lire la suite</span>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ARTICLE 3 : Inscriptions -->
+        <div class="pub-card pub-blog-card" data-type="news">
+          <div class="pub-card-top">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80" alt="Inscriptions" class="pub-blog-img" loading="lazy">
+          </div>
+          <div class="pub-blog-body">
+            <div class="pub-card-meta"><span class="pub-blog-cat news">Actualité</span></div>
+            <div class="pub-card-title">Inscriptions 2025-2026 Ouvertes</div>
+            <p>Les inscriptions pour l'année académique 2025-2026 sont officiellement ouvertes. Réservez votre place dès maintenant.</p>
+          </div>
+          <div class="pub-blog-footer">
+            <span>1 Mar 2025</span>
+            <button onclick="openArticle(3)" class="pub-read-more">
+              <span data-i18n="blog.readMore">Lire la suite</span>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ARTICLE 4 : Tournoi Football -->
+        <div class="pub-card pub-blog-card" data-type="events">
+          <div class="pub-card-top">
+            <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80" alt="Tournoi football" class="pub-blog-img" loading="lazy">
+          </div>
+          <div class="pub-blog-body">
+            <div class="pub-card-meta"><span class="pub-blog-cat events">Événement</span></div>
+            <div class="pub-card-title">Tournoi Inter-Écoles de Football</div>
+            <p>Notre équipe participera au tournoi inter-écoles le 22 novembre. Venez nombreux soutenir nos joueurs au stade municipal !</p>
+          </div>
+          <div class="pub-blog-footer">
+            <span>1 Nov 2025</span>
+            <button onclick="openArticle(4)" class="pub-read-more">
+              <span data-i18n="blog.readMore">Lire la suite</span>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ARTICLE 5 : Bourses -->
+        <div class="pub-card pub-blog-card" data-type="news">
+          <div class="pub-card-top">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=800&q=80" alt="Bourses internationales" class="pub-blog-img" loading="lazy">
+          </div>
+          <div class="pub-blog-body">
+            <div class="pub-card-meta"><span class="pub-blog-cat news">Actualité</span></div>
+            <div class="pub-card-title">Bourses Internationales 2025-2026</div>
+            <p>Découvrez les nouvelles opportunités de bourses d'études à l'étranger pour nos étudiants. Chine, Japon, Corée et bien plus.</p>
+          </div>
+          <div class="pub-blog-footer">
+            <span>1 Déc 2025</span>
+            <button onclick="openArticle(5)" class="pub-read-more">
+              <span data-i18n="blog.readMore">Lire la suite</span>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ARTICLE 6 : Exposition Photo -->
+        <div class="pub-card pub-blog-card" data-type="events">
+          <div class="pub-card-top">
+            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80" alt="Exposition photo" class="pub-blog-img" loading="lazy">
+          </div>
+          <div class="pub-blog-body">
+            <div class="pub-card-meta"><span class="pub-blog-cat events">Événement</span></div>
+            <div class="pub-card-title">Atelier Photo : Exposition de Fin d'Année</div>
+            <p>Les membres de l'atelier photo présentent leurs meilleures œuvres. Vernissage le 10 mars dans le hall principal.</p>
+          </div>
+          <div class="pub-blog-footer">
+            <span>5 Mar 2025</span>
+            <button onclick="openArticle(6)" class="pub-read-more">
+              <span data-i18n="blog.readMore">Lire la suite</span>
+              <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pub-section pub-section-alt">
+    <div class="pub-section-inner">
+      <div class="pub-blog-cta">
+        <h2 data-i18n="blog.cta.title">Restez informé</h2>
+        <p data-i18n="blog.cta.desc">Suivez toute l'actualité de notre établissement et ne manquez aucun événement important.</p>
+        <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-lg">
+          <span data-i18n="blog.cta.btn">S'inscrire à l'établissement</span>
+          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pub-footer">
+    <div class="pub-footer-inner">
+      <div class="pub-footer-brand">
+        <div class="pub-logo" style="margin-bottom:4px;">
+          <div class="pub-logo-icon">
+            <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+          </div>
+          <span data-pub="schoolName">Gestion Scolaire</span>
+        </div>
+        <p data-i18n="footer.desc">Établissement d'enseignement supérieur dédié à l'excellence académique et à l'ouverture internationale.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer.nav">Navigation</h4>
+        <ul>
+          <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+          <li><a href="vie-academique.html" data-i18n="nav.academic">Vie Académique</a></li>
+          <li><a href="activites.html" data-i18n="nav.activities">Activités</a></li>
+          <li><a href="bourses.html" data-i18n="nav.scholarships">Bourses</a></li>
+          <li><a href="actualites.html" data-i18n="nav.blog">Actualités</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.spaces">Espaces</h4>
+        <ul>
+          <li><a href="inscription.html" data-i18n="footer.register">Inscription</a></li>
+          <li><a href="login.html" data-i18n="footer.private">Espace Privé</a></li>
+          <li><a href="login.html" data-i18n="footer.parents">Portail Parents</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@ecole.fr">contact@ecole.fr</a></li>
+          <li><a href="tel:+33123456789">01 23 45 67 89</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pub-footer-bottom" data-i18n="footer.copyright">© 2025 Gestion Scolaire. Tous droits réservés.</div>
+  </footer>
+
+  <!-- Article Detail Overlay -->
+  <div class="pub-overlay" id="articleOverlay">
+    <button class="pub-close-article" onclick="closeArticle()">
+      <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="pub-article-modal" id="articleContent"></div>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/public.js"></script>
+  <script>
+    /* --- Articles data --- */
+    var BLOG_ARTICLES = [
+      {
+        id: 1,
+        title: 'Journée Portes Ouvertes 2025',
+        image: 'https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=800&q=80',
+        category: 'Événement',
+        author: 'Administration',
+        date: '15 Oct 2025',
+        content: '<p>Nous avons le plaisir de vous inviter à notre <strong>Journée Portes Ouvertes</strong> le <strong>15 novembre 2025</strong> de 9h à 17h.</p><p>Au programme :</p><ul><li>Visite guidée des locaux</li><li>Rencontre avec les enseignants</li><li>Présentation des filières et spécialités</li><li>Ateliers interactifs</li><li>Inscriptions en ligne</li></ul><p>Venez nombreux découvrir notre cadre d\'étude exceptionnel et nos programmes adaptés aux défis de demain.</p>'
+      },
+      {
+        id: 2,
+        title: 'Résultats Examens Semestre 1',
+        image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80',
+        category: 'Académique',
+        author: 'Service Scolarité',
+        date: '15 Jan 2025',
+        content: '<p>Les résultats du <strong>Semestre 1</strong> sont désormais disponibles sur le portail étudiant.</p><p>Taux de réussite global : <strong>87%</strong></p><p>Nos meilleures filières :</p><ul><li>Informatique : 92% de réussite</li><li>Gestion : 85% de réussite</li><li>Commerce : 84% de réussite</li></ul><p>Les relevés de notes peuvent être téléchargés depuis votre espace personnel. Les délibérations du jury ont eu lieu le 10 janvier.</p>'
+      },
+      {
+        id: 3,
+        title: 'Inscriptions 2025-2026 Ouvertes',
+        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80',
+        category: 'Actualité',
+        author: 'Service Admissions',
+        date: '1 Mar 2025',
+        content: '<p>Les <strong>inscriptions</strong> pour l\'année académique <strong>2025-2026</strong> sont maintenant ouvertes !</p><p>Dates importantes :</p><ul><li>Début des inscriptions : 1er mars 2025</li><li>Date limite : 31 juillet 2025</li><li>Rentrée : 2 septembre 2025</li></ul><p>Pour inscrire votre enfant, rendez-vous sur notre page d\'inscription en ligne ou contactez notre service des admissions au 01 23 45 67 89.</p>'
+      },
+      {
+        id: 4,
+        title: 'Tournoi Inter-Écoles de Football',
+        image: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80',
+        category: 'Événement',
+        author: 'Club Sportif',
+        date: '1 Nov 2025',
+        content: '<p>L\'équipe de football de notre établissement participera au <strong>Tournoi Inter-Écoles</strong> le <strong>22 novembre 2025</strong>.</p><p>Cet événement sportif rassemble 8 établissements de la région. Nos joueurs se préparent intensivement depuis septembre sous la direction de notre coach.</p><p>Venez soutenir notre équipe au stade municipal à partir de 14h ! Entrée libre.</p>'
+      },
+      {
+        id: 5,
+        title: 'Bourses Internationales 2025-2026',
+        image: 'https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=800&q=80',
+        category: 'Actualité',
+        author: 'Relations Internationales',
+        date: '1 Déc 2025',
+        content: '<p>Nous sommes fiers d\'annoncer les <strong>nouvelles opportunités de bourses</strong> pour nos étudiants.</p><p>Partenaires :</p><ul><li>Chine — Bourse CSC (Avril)</li><li>Japon — MEXT (Avril-Mai)</li><li>Corée — KGSP (Février-Mars)</li><li>Suède — SISS (Février)</li></ul><p>Une réunion d\'information aura lieu le 15 décembre. Inscrivez-vous auprès du service des relations internationales.</p>'
+      },
+      {
+        id: 6,
+        title: 'Atelier Photo : Exposition de Fin d\'Année',
+        image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80',
+        category: 'Événement',
+        author: 'Atelier Photo',
+        date: '5 Mar 2025',
+        content: '<p>L\'<strong>Atelier Photo</strong> de notre établissement vous invite à son <strong>exposition de fin d\'année</strong>.</p><p>Cette exposition présente les meilleures œuvres réalisées par nos étudiants tout au long de l\'année. Thèmes abordés : portrait, paysage, photographie de rue et noir et blanc.</p><p>Vernissage le 10 mars à 18h dans le hall principal. L\'exposition sera visible du 10 au 20 mars.</p>'
+      }
+    ];
+
+    /* Open article detail */
+    function openArticle(id) {
+      var article = BLOG_ARTICLES.find(function(a) { return a.id === id; });
+      if (!article) return;
+
+      document.getElementById('articleContent').innerHTML = ''
+        + '<img src="' + article.image + '" alt="' + article.title + '" loading="lazy">'
+        + '<div class="pub-article-content">'
+        + '<h1>' + article.title + '</h1>'
+        + '<div class="pub-article-meta">'
+        + '<span>' + article.category + '</span>'
+        + '<span>Par ' + article.author + '</span>'
+        + '<span>' + article.date + '</span>'
+        + '</div>'
+        + '<div class="pub-article-body">' + article.content + '</div>'
+        + '</div>';
+
+      document.getElementById('articleOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      /* Close on overlay click (outside modal) */
+      document.getElementById('articleOverlay').onclick = function(e) {
+        if (e.target === this) closeArticle();
+      };
+
+      /* Close on Escape */
+      document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') { closeArticle(); document.removeEventListener('keydown', escHandler); }
+      });
+    }
+
+    function closeArticle() {
+      document.getElementById('articleOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* Init filters */
+    document.addEventListener('DOMContentLoaded', function() {
+      initFilterChips('#blogFilterBar', '#blogGrid .pub-card');
+    });
+  </script>
+</body>
+</html>

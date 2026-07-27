@@ -63,6 +63,7 @@ var ICONS = {
   academicCapSolid: '<svg class="heroicon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 45.055 45.055 0 0 0-9.192 0 2.25 2.25 0 0 1-1.337-1.337A60.588 60.588 0 0 1 11.7 2.805ZM11.8 4.75a56.013 56.013 0 0 0-9.033 1.106A2.25 2.25 0 0 0 1.152 8.33a60.37 60.37 0 0 0 9.287 12.933A60.644 60.644 0 0 0 11.8 4.75Zm-3.49 7.53a44.764 44.764 0 0 1 6.98 0 44.33 44.33 0 0 1 5.225-7.384 59.958 59.958 0 0 0-6.98-1.087 59.958 59.958 0 0 0-5.225 7.384ZM3.75 12a.75.75 0 0 1 .75-.75 60.46 60.46 0 0 1 12.75 0 .75.75 0 0 1-.75.75v3.29a.75.75 0 0 1-.364.647 60.63 60.63 0 0 1-12.022 0 .75.75 0 0 1-.364-.647V12Z"/></svg>',
   paintbrush: '<svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"/></svg>',
   clipboard: '<svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"/></svg>',
+  chatBubble: '<svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg>',
   calendarDays: '<svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"/></svg>',
   cog: '<svg class="heroicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 0 1 0 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 0 1 0-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281Z"/><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>'
 };
@@ -170,6 +171,22 @@ var MOCK = {
     { id: 3, name: 'Débat & Éloquence', type: 'culturelle', description: 'Art oratoire et argumentation', schedule: 'Jeudi 15h-17h', maxStudents: 15, teacherId: 3, enrolled: [1, 3] },
     { id: 4, name: 'Football', type: 'extrascolaire', description: 'Entraînement et matchs inter-écoles', schedule: 'Mardi & Jeudi 17h-18h30', maxStudents: 22, teacherId: 2, enrolled: [2, 4, 5] },
     { id: 5, name: 'Atelier Photo', type: 'culturelle', description: 'Prise de vue et retouche numérique', schedule: 'Lundi 16h-18h', maxStudents: 12, teacherId: 1, enrolled: [6] }
+  ],
+  blog: [
+    { id: 1, title: 'Journée Portes Ouvertes 2025', slug: 'journee-portes-ouvertes-2025', excerpt: 'Venez découvrir notre établissement lors de la journée portes ouvertes du 15 novembre 2025.', content: '<p>Nous avons le plaisir de vous inviter à notre <strong>Journée Portes Ouvertes</strong> le <strong>15 novembre 2025</strong> de 9h à 17h.</p><p>Au programme :</p><ul><li>Visite guidée des locaux</li><li>Rencontre avec les enseignants</li><li>Présentation des filières et spécialités</li><li>Ateliers interactifs</li><li>Inscriptions en ligne</li></ul><p>Venez nombreux découvrir notre cadre d\'étude exceptionnel et nos programmes adaptés aux défis de demain.</p>', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=800&q=80', category: 'events', author: 'Administration', published: 1, createdAt: '2025-10-15', updatedAt: '2025-10-15' },
+    { id: 2, title: 'Résultats Examens Semestre 1', slug: 'resultats-examens-semestre-1', excerpt: 'Les résultats du premier semestre sont disponibles. Félicitations à tous les étudiants pour leur travail.', content: '<p>Les résultats du <strong>Semestre 1</strong> sont désormais disponibles sur le portail étudiant.</p><p>Taux de réussite global : <strong>87%</strong></p><p>Nos meilleures filières :</p><ul><li>Informatique : 92% de réussite</li><li>Gestion : 85% de réussite</li><li>Commerce : 84% de réussite</li></ul><p>Les relevés de notes peuvent être téléchargés depuis votre espace personnel. Les délibérations du jury ont eu lieu le 10 janvier.</p>', image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80', category: 'academic', author: 'Service Scolarité', published: 1, createdAt: '2025-01-15', updatedAt: '2025-01-15' },
+    { id: 3, title: 'Inscriptions 2025-2026 Ouvertes', slug: 'inscriptions-2025-2026', excerpt: 'Les inscriptions pour l\'année académique 2025-2026 sont officiellement ouvertes. Réservez votre place dès maintenant.', content: '<p>Les <strong>inscriptions</strong> pour l\'année académique <strong>2025-2026</strong> sont maintenant ouvertes !</p><p>Dates importantes :</p><ul><li>Début des inscriptions : 1er mars 2025</li><li>Date limite : 31 juillet 2025</li><li>Rentrée : 2 septembre 2025</li></ul><p>Pour inscrire votre enfant, rendez-vous sur notre page d\'inscription en ligne ou contactez notre service des admissions au 01 23 45 67 89.</p>', image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80', category: 'news', author: 'Service Admissions', published: 1, createdAt: '2025-03-01', updatedAt: '2025-03-01' },
+    { id: 4, title: 'Tournoi Inter-Écoles de Football', slug: 'tournoi-football-2025', excerpt: 'Notre équipe de football participera au tournoi inter-écoles le 22 novembre.', content: '<p>L\'équipe de football de notre établissement participera au <strong>Tournoi Inter-Écoles</strong> le <strong>22 novembre 2025</strong>.</p><p>Cet événement sportif rassemble 8 établissements de la région. Nos joueurs se préparent intensivement depuis septembre sous la direction de notre coach.</p><p>Venez soutenir notre équipe au stade municipal à partir de 14h ! Entrée libre.</p>', image: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80', category: 'events', author: 'Club Sportif', published: 1, createdAt: '2025-11-01', updatedAt: '2025-11-01' },
+    { id: 5, title: 'Bourses Internationales 2025-2026', slug: 'bourses-internationales-2025', excerpt: 'Découvrez les nouvelles opportunités de bourses d\'études à l\'étranger pour nos étudiants.', content: '<p>Nous sommes fiers d\'annoncer les <strong>nouvelles opportunités de bourses</strong> pour nos étudiants.</p><p>Partenaires :</p><ul><li>Chine — Bourse CSC (Avril)</li><li>Japon — MEXT (Avril-Mai)</li><li>Corée — KGSP (Février-Mars)</li><li>Suède — SISS (Février)</li></ul><p>Une réunion d\'information aura lieu le 15 décembre. Inscrivez-vous auprès du service des relations internationales.</p>', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c7f1?w=800&q=80', category: 'news', author: 'Relations Internationales', published: 1, createdAt: '2025-12-01', updatedAt: '2025-12-01' },
+    { id: 6, title: 'Atelier Photo : Exposition de Fin d\'Année', slug: 'exposition-photo-2025', excerpt: 'Les membres de l\'atelier photo présentent leurs meilleures œuvres lors de l\'exposition annuelle.', content: '<p>L\'<strong>Atelier Photo</strong> de notre établissement vous invite à son <strong>exposition de fin d\'année</strong>.</p><p>Cette exposition présente les meilleures œuvres réalisées par nos étudiants tout au long de l\'année. Thèmes abordés : portrait, paysage, photographie de rue et noir et blanc.</p><p>Vernissage le 10 mars à 18h dans le hall principal. L\'exposition sera visible du 10 au 20 mars.</p>', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80', category: 'events', author: 'Atelier Photo', published: 1, createdAt: '2025-03-05', updatedAt: '2025-03-05' }
+  ],
+  testimonials: [
+    { id: 1, name: 'Sophie Martin', role: "Parent d'élève", content: 'Un suivi scolaire exceptionnel. Je peux voir les notes et absences de mon fils en temps réel. Le portail parents est vraiment bien conçu et facile à utiliser au quotidien.', avatar: 'SM', rating: 5, active: true, sortOrder: 0, createdAt: '2026-01-10' },
+    { id: 2, name: 'Marc Dubois', role: "Élève de Terminale", content: "Grâce à la plateforme, j'ai pu suivre ma progression tout au long de l'année. Les enseignants sont à l'écoute et les outils numériques facilitent vraiment les apprentissages.", avatar: 'MD', rating: 5, active: true, sortOrder: 1, createdAt: '2026-01-12' },
+    { id: 3, name: 'Isabelle Petit', role: 'Professeur de Mathématiques', content: 'La gestion des notes et des absences est devenue beaucoup plus rapide. Je gagne un temps précieux que je peux consacrer à mes élèves. Un outil indispensable pour tout enseignant.', avatar: 'IP', rating: 4, active: true, sortOrder: 2, createdAt: '2026-01-15' },
+    { id: 4, name: 'Jean-Pierre Lefevre', role: "Parent d'élève", content: "Mon enfant a intégré cette école l'année dernière et les progrès sont remarquables. La communication avec l'administration est fluide et les notifications en temps réel sont très appréciables.", avatar: 'JL', rating: 5, active: true, sortOrder: 3, createdAt: '2026-01-18' },
+    { id: 5, name: 'Amina Diallo', role: "Élève de Première", content: 'Les activités extrascolaires proposées sont variées et enrichissantes. Le club de robotique m\'a permis de développer des compétences que je n\'aurais jamais imaginées. Une expérience unique !', avatar: 'AD', rating: 5, active: true, sortOrder: 4, createdAt: '2026-01-20' },
+    { id: 6, name: 'Pierre Moreau', role: 'Ancien élève', content: "Cette école m'a préparé efficacement pour mes études supérieures. Le suivi personnalisé et la rigueur académique m'ont donné toutes les clés pour réussir à l'université.", avatar: 'PM', rating: 5, active: true, sortOrder: 5, createdAt: '2026-01-25' }
   ],
   scholarships: [
     { id: 1, country: 'Chine', flag: '🇨🇳', name: 'Bourse du Gouvernement Chinois (CSC)', eligibility: 'Bachelors ou Masters, <35 ans, bonne moyenne', deadline: 'Avril chaque année', amount: 'Frais de scolarité + allocation mensuelle (~800 USD)', process: 'Candidature en ligne via le site CSC, recommandation de l\'université d\'origine', url: 'https://www.csc.edu.cn' },
@@ -342,7 +359,9 @@ function getMenuSections(role) {
       { view: 'calendar-view', icon: i.calendar, label: 'Calendrier' }
     ]},
     { title: 'Ressources', items: [
-      { view: 'scholarships', icon: i.globeAlt, label: 'Bourses d\'études' }
+      { view: 'scholarships', icon: i.globeAlt, label: 'Bourses d\'études' },
+      { view: 'blog', icon: i.clipboard, label: 'Blog / Actualités' },
+      { view: 'testimonials', icon: i.chatBubble, label: 'Témoignages' }
     ]},
     { title: 'Site Public', items: [
       { view: 'theme', icon: i.paintbrush, label: 'Personnalisation' },
@@ -407,7 +426,8 @@ function getMenuSections(role) {
     ]},
     { title: 'Ressources', items: [
       { view: 'calendar-view', icon: i.calendar, label: 'Calendrier' },
-      { view: 'scholarships', icon: i.globeAlt, label: 'Bourses d\'études' }
+      { view: 'scholarships', icon: i.globeAlt, label: 'Bourses d\'études' },
+      { view: 'testimonials', icon: i.chatBubble, label: 'Témoignages' }
     ]}
   ];
 
@@ -432,7 +452,9 @@ var TITLES = {
   'child-attendance': 'Absences & Retards', 'child-record': 'Comportement',
   'activities': 'Activités', 'calendar-view': 'Calendrier académique',
   'my-exams': 'Mes examens', 'site-editor': 'Personnalisation du site',
-  'scholarships': 'Bourses d\'études internationales'
+  'scholarships': 'Bourses d\'études internationales',
+  'blog': 'Blog / Actualités',
+  'testimonials': 'Témoignages'
 };
 
 function navigateTo(view) {
@@ -486,6 +508,8 @@ function renderView(view) {
     case 'my-exams': renderMyExams(b); break;
     case 'site-editor': renderSiteEditor(b); break;
     case 'scholarships': renderScholarships(b); break;
+    case 'blog': if (APP.role !== 'admin') { showToast('Accès réservé à l\'administration.', 'error'); renderDashboard(b); break; } renderBlog(b); break;
+    case 'testimonials': if (APP.role !== 'admin') { showToast('Accès réservé à l\'administration.', 'error'); renderDashboard(b); break; } renderTestimonials(b); break;
     case 'theme': if (APP.role !== 'admin') { showToast('Accès réservé à l\'administration.', 'error'); renderDashboard(b); break; } renderThemeSettings(b); break;
     case 'candidates': if (APP.role !== 'admin') { showToast('Accès réservé à l\'administration.', 'error'); renderDashboard(b); break; } renderCandidates(b); break;
     case 'appointments': if (APP.role !== 'admin') { showToast('Accès réservé à l\'administration.', 'error'); renderDashboard(b); break; } renderAppointments(b); break;
@@ -880,7 +904,7 @@ function openEditModal(dataKey, id, label) {
 }
 
 function getFormFor(dataKey) {
-  var m = { academicYears: yearForm, filieres: filiereForm, specialites: specForm, classes: classForm, students: studentForm, teachers: teacherForm, subjects: subjectForm, activities: activityForm, scholarships: scholarshipForm };
+  var m = { academicYears: yearForm, filieres: filiereForm, specialites: specForm, classes: classForm, students: studentForm, teachers: teacherForm, subjects: subjectForm, activities: activityForm, scholarships: scholarshipForm, blog: blogForm, testimonials: testimonialForm };
   return m[dataKey] || function(){return[];};
 }
 
@@ -2847,6 +2871,77 @@ function resetThemeConfig() {
   /* Reload page to reset form */
   navigateTo('theme');
   showToast('Thème réinitialisé aux valeurs par défaut.', 'info');
+}
+
+/* ============================================
+   BLOG / ACTUALITÉS
+   ============================================ */
+function renderBlog(c) {
+  renderCrud(c, 'blog', 'Article de blog', blogCols(), blogForm());
+}
+
+function blogCols() {
+  return [
+    { key: 'title', label: 'Titre' },
+    { key: 'category', label: 'Catégorie', render: function(v) {
+      var labels = { news: 'Actualité', events: 'Événement', academic: 'Académique', tips: 'Conseil' };
+      return '<span class="badge badge-info">' + (labels[v] || v) + '</span>';
+    }},
+    { key: 'published', label: 'Publié', render: function(v) {
+      return v ? '<span class="badge badge-success">Oui</span>' : '<span class="badge badge-warning">Brouillon</span>';
+    }},
+    { key: 'author', label: 'Auteur' },
+    { key: 'createdAt', label: 'Date' }
+  ];
+}
+
+function testimonialCols() {
+  return [
+    { key: 'name', label: 'Nom' },
+    { key: 'role', label: 'Rôle' },
+    { key: 'content', label: 'Contenu', render: function(v) { return v ? v.substring(0, 80) + '...' : ''; } },
+    { key: 'rating', label: 'Note', render: function(v) { var s = ''; for (var i = 0; i < v; i++) { s += '⭐'; } return s; } },
+    { key: 'active', label: 'Actif', render: function(v) { return v ? '<span class="badge badge-success">Oui</span>' : '<span class="badge badge-secondary">Non</span>'; } },
+    { key: 'sortOrder', label: 'Ordre' }
+  ];
+}
+
+function testimonialForm() {
+  return [
+    { name: 'name', label: 'Nom complet', type: 'text', required: true },
+    { name: 'role', label: "Rôle (ex: Parent d'élève)", type: 'text', placeholder: "Parent d'élève, Enseignant, Élève..." },
+    { name: 'content', label: 'Témoignage', type: 'textarea', required: true, placeholder: 'Saisissez le témoignage...' },
+    { name: 'avatar', label: 'Initiales avatar (ex: JD)', type: 'text', placeholder: 'SM' },
+    { name: 'rating', label: 'Note (1-5)', type: 'select', options: [
+        { value: 5, label: '5 étoiles' },
+        { value: 4, label: '4 étoiles' },
+        { value: 3, label: '3 étoiles' },
+        { value: 2, label: '2 étoiles' },
+        { value: 1, label: '1 étoile' }
+      ]},
+    { name: 'active', label: 'Actif sur le site', type: 'checkbox' },
+    { name: 'sortOrder', label: "Ordre d'affichage", type: 'number', placeholder: '0' }
+  ];
+}
+
+function renderTestimonials(c) {
+  renderCrud(c, 'testimonials', 'Témoignage', testimonialCols(), testimonialForm());
+}function blogForm() {
+  return [
+    { name: 'title', label: 'Titre', type: 'text', required: true },
+    { name: 'slug', label: 'Slug (URL)', type: 'text', placeholder: 'Laisser vide pour génération auto' },
+    { name: 'category', label: 'Catégorie', type: 'select', options: [
+        { value: 'news', label: 'Actualité' },
+        { value: 'events', label: 'Événement' },
+        { value: 'academic', label: 'Académique' },
+        { value: 'tips', label: 'Conseil' }
+      ]},
+    { name: 'excerpt', label: 'Résumé (extrait)', type: 'textarea' },
+    { name: 'content', label: 'Contenu (HTML)', type: 'textarea', required: true },
+    { name: 'image', label: 'URL de l\'image', type: 'text', placeholder: 'https://...' },
+    { name: 'author', label: 'Auteur', type: 'text' },
+    { name: 'published', label: 'Publié', type: 'checkbox' }
+  ];
 }
 
 /* ============================================
