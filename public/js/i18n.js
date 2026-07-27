@@ -91,6 +91,10 @@ var LANG_DATA = {
 
     /* Scholarships Page */
     'scholarships.filter.all': 'Tous',
+    'scholarships.filter.asia': 'Asie',
+    'scholarships.filter.europe': 'Europe',
+    'scholarships.filter.middleeast': 'Moyen-Orient',
+    'scholarships.filter.americas': 'Amérique',
     'scholarships.search': 'Rechercher un pays, une bourse…',
     'scholarships.asia': 'Asie',
     'scholarships.europe': 'Europe',
@@ -101,6 +105,15 @@ var LANG_DATA = {
     'scholarships.website': 'Site officiel',
     'scholarships.tip.title': 'Conseil pour les parents',
     'scholarships.tip.text': 'Les pays mentionnés ci-dessus offrent des conditions d\'études abordables et un environnement sûr. La Chine, la Corée, la Thaïlande et la Turquie sont particulièrement intéressantes pour leur coût de vie faible et la qualité de leurs programmes.',
+    'scholarships.cta.title': 'Besoin d\'accompagnement ?',
+    'scholarships.cta.desc': 'Notre équipe vous guide dans vos démarches de candidature pour les bourses internationales.',
+
+    /* Activities extras */
+    'activities.calendar.title': 'Calendrier des événements',
+    'activities.calendar.desc': 'Événements académiques, culturels et sportifs à venir',
+    'activities.cta.title': 'Envie de rejoindre une activité ?',
+    'activities.cta.desc': 'Inscrivez-vous dès maintenant et enrichissez votre expérience scolaire.',
+    'activities.cta.btn': 'S\'inscrire à l\'établissement',
 
     /* CTA */
     'cta.title': 'Rejoignez notre établissement',
@@ -438,7 +451,13 @@ var LANG_DATA = {
     'country.uruguay': 'Uruguay',
     'country.estonia': 'Estonie',
     'country.brunei': 'Brunei',
-    'country.qatar': 'Qatar'
+    'country.qatar': 'Qatar',
+    'country.luxembourg': 'Luxembourg',
+    'country.scotland': 'Écosse',
+    'country.greece': 'Grèce',
+    'country.latvia': 'Lettonie',
+    'country.moldova': 'Moldavie',
+    'country.belarus': 'Biélorussie'
   },
 
   en: {
@@ -528,6 +547,10 @@ var LANG_DATA = {
 
     /* Scholarships Page */
     'scholarships.filter.all': 'All',
+    'scholarships.filter.asia': 'Asia',
+    'scholarships.filter.europe': 'Europe',
+    'scholarships.filter.middleeast': 'Middle East',
+    'scholarships.filter.americas': 'Americas',
     'scholarships.search': 'Search for a country, scholarship…',
     'scholarships.asia': 'Asia',
     'scholarships.europe': 'Europe',
@@ -548,6 +571,13 @@ var LANG_DATA = {
     'cta.scholarships': 'Need guidance?',
     'cta.scholarships.desc': 'Our team guides you through your application process for international scholarships.',
     'cta.contact': 'Contact Us',
+
+    /* Activities extras */
+    'activities.calendar.title': 'Events Calendar',
+    'activities.calendar.desc': 'Upcoming academic, cultural and sports events',
+    'activities.cta.title': 'Want to join an activity?',
+    'activities.cta.desc': 'Register now and enrich your school experience.',
+    'activities.cta.btn': 'Register at the School',
 
     /* Footer */
     'footer.desc': 'Higher education institution dedicated to academic excellence and international openness.',
@@ -875,7 +905,13 @@ var LANG_DATA = {
     'country.uruguay': 'Uruguay',
     'country.estonia': 'Estonia',
     'country.brunei': 'Brunei',
-    'country.qatar': 'Qatar'
+    'country.qatar': 'Qatar',
+    'country.luxembourg': 'Luxembourg',
+    'country.scotland': 'Scotland',
+    'country.greece': 'Greece',
+    'country.latvia': 'Latvia',
+    'country.moldova': 'Moldova',
+    'country.belarus': 'Belarus'
   }
 };
 
@@ -913,19 +949,9 @@ function applyTranslations() {
       if (el.childNodes[i].nodeType === 1) { hasChildElements = true; break; }
     }
     if (hasChildElements) {
-      /* Replace only text nodes, preserve child elements */
-      var textNodes = [];
-      for (var j = 0; j < el.childNodes.length; j++) {
-        if (el.childNodes[j].nodeType === 3) { textNodes.push(el.childNodes[j]); }
-      }
-      if (textNodes.length > 0) {
-        textNodes[0].textContent = trans;
-        for (var k = 1; k < textNodes.length; k++) {
-          textNodes[k].textContent = '';
-        }
-      } else {
-        el.textContent = trans;
-      }
+      /* Remplacer tout le contenu HTML pour éviter que les <span> enfants
+         ne restent dans l'ancienne langue après traduction */
+      el.innerHTML = trans;
     } else {
       el.textContent = trans;
     }
@@ -950,4 +976,7 @@ function applyTranslations() {
 document.addEventListener('DOMContentLoaded', function() {
   CURRENT_LANG = localStorage.getItem('ft3_lang') || 'fr';
   applyTranslations();
+  /* Initialiser le texte du bouton de langue */
+  var toggles = document.querySelectorAll('[data-i18n-toggle]');
+  toggles.forEach(function(el) { el.textContent = __('nav.lang'); });
 });

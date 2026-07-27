@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bourses d'études — Gestion Scolaire</title>
   <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/i18n.css">
   <script src="js/theme.js"></script>
 </head>
 <body>
@@ -19,21 +20,24 @@
         <span data-pub="schoolName">Gestion Scolaire</span>
       </a>
       <ul class="pub-nav-links">
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="vie-academique.html">Vie Académique</a></li>
-        <li><a href="activites.html">Activités</a></li>
-        <li><a href="bourses.html" class="active">Bourses</a></li>
+        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="vie-academique.html" data-i18n="nav.academic">Vie Académique</a></li>
+        <li><a href="activites.html" data-i18n="nav.activities">Activités</a></li>
+        <li><a href="bourses.html" class="active" data-i18n="nav.scholarships">Bourses</a></li>
       </ul>
       <div class="pub-nav-actions">
         <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-sm">
           <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
-          S'inscrire
+          <span data-i18n="nav.register">S'inscrire</span>
         </a>
         <a href="login.html" class="pub-btn pub-btn-secondary pub-btn-sm">
           <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
-          Espace Privé
+          <span data-i18n="nav.login">Espace Privé</span>
         </a>
-      </div>
+      <button class="lang-btn" onclick="switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')" aria-label="Switch language">
+        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+        <span data-i18n-toggle>English</span>
+      </button>
       <button class="pub-hamburger" aria-label="Menu" aria-expanded="false">
         <svg class="hi hi-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
@@ -50,8 +54,8 @@
     </div>
     <div class="pub-hero-overlay"></div>
     <div class="pub-hero-inner">
-      <h1>Étudiez à <span>l'étranger</span></h1>
-      <p>Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
+      <h1 data-i18n="hero.scholarships.title">Étudiez à <span>l'étranger</span></h1>
+      <p data-i18n="hero.scholarships.desc">Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
     </div>
   </section>
 
@@ -63,45 +67,15 @@
           <span class="pub-search-icon">
             <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
           </span>
-          <input type="text" id="scholarshipSearch" placeholder="Rechercher un pays, une bourse…" aria-label="Rechercher une bourse">
+          <input type="text" id="scholarshipSearch" placeholder="Rechercher un pays, une bourse…" aria-label="Rechercher une bourse" data-i18n-placeholder="scholarships.search">
         </div>
         <div class="pub-filter-chips">
-          <button class="pub-chip active" data-filter="all">Tous</button>
-          <button class="pub-chip" data-filter="asie">Asie</button>
-          <button class="pub-chip" data-filter="europe">Europe</button>
-          <button class="pub-chip" data-filter="moyen-orient">Moyen-Orient</button>
-          <button class="pub-chip" data-filter="amerique">Amérique</button>
+          <button class="pub-chip active" data-filter="all" data-i18n="scholarships.filter.all">Tous</button>
+          <button class="pub-chip" data-filter="asie" data-i18n="scholarships.filter.asia">Asie</button>
+          <button class="pub-chip" data-filter="europe" data-i18n="scholarships.filter.europe">Europe</button>
+          <button class="pub-chip" data-filter="moyen-orient" data-i18n="scholarships.filter.middleeast">Moyen-Orient</button>
+          <button class="pub-chip" data-filter="amerique" data-i18n="scholarships.filter.americas">Amérique</button>
         </div>
-      </div>
-
-      <!-- BANDEAU DRAPEAUX -- Filtre rapide par pays -->
-      <div class="pub-flags-bar" id="flagsFilterBar">
-        <button class="pub-flag-chip active" data-flag="all" onclick="filterByFlag('all')" title="Tous les pays">🌍<span class="pub-flag-tooltip">Tous</span></button>
-        <button class="pub-flag-chip" data-flag="chine" onclick="filterByFlag('chine')">🇨🇳<span class="pub-flag-tooltip">Chine</span></button>
-        <button class="pub-flag-chip" data-flag="japon" onclick="filterByFlag('japon')">🇯🇵<span class="pub-flag-tooltip">Japon</span></button>
-        <button class="pub-flag-chip" data-flag="coree" onclick="filterByFlag('coree')">🇰🇷<span class="pub-flag-tooltip">Corée du Sud</span></button>
-        <button class="pub-flag-chip" data-flag="luxembourg" onclick="filterByFlag('luxembourg')">🇱🇺<span class="pub-flag-tooltip">Luxembourg</span></button>
-        <button class="pub-flag-chip" data-flag="suede" onclick="filterByFlag('suede')">🇸🇪<span class="pub-flag-tooltip">Suède</span></button>
-        <button class="pub-flag-chip" data-flag="norvege" onclick="filterByFlag('norvege')">🇳🇴<span class="pub-flag-tooltip">Norvège</span></button>
-        <button class="pub-flag-chip" data-flag="turquie" onclick="filterByFlag('turquie')">🇹🇷<span class="pub-flag-tooltip">Turquie</span></button>
-        <button class="pub-flag-chip" data-flag="allemagne" onclick="filterByFlag('allemagne')">🇩🇪<span class="pub-flag-tooltip">Allemagne</span></button>
-        <button class="pub-flag-chip" data-flag="arabie" onclick="filterByFlag('arabie')">🇸🇦<span class="pub-flag-tooltip">Arabie Saoudite</span></button>
-        <button class="pub-flag-chip" data-flag="qatar" onclick="filterByFlag('qatar')">🇶🇦<span class="pub-flag-tooltip">Qatar</span></button>
-        <button class="pub-flag-chip" data-flag="russie" onclick="filterByFlag('russie')">🇷🇺<span class="pub-flag-tooltip">Russie</span></button>
-        <button class="pub-flag-chip" data-flag="mexique" onclick="filterByFlag('mexique')">🇲🇽<span class="pub-flag-tooltip">Mexique</span></button>
-        <button class="pub-flag-chip" data-flag="bresil" onclick="filterByFlag('bresil')">🇧🇷<span class="pub-flag-tooltip">Brésil</span></button>
-        <button class="pub-flag-chip" data-flag="thailande" onclick="filterByFlag('thailande')">🇹🇭<span class="pub-flag-tooltip">Thaïlande</span></button>
-        <button class="pub-flag-chip" data-flag="ecosse" onclick="filterByFlag('ecosse')">🏴󠁧󠁢󠁳󠁣󠁴󠁿<span class="pub-flag-tooltip">Écosse</span></button>
-        <button class="pub-flag-chip" data-flag="finlande" onclick="filterByFlag('finlande')">🇫🇮<span class="pub-flag-tooltip">Finlande</span></button>
-        <button class="pub-flag-chip" data-flag="grece" onclick="filterByFlag('grece')">🇬🇷<span class="pub-flag-tooltip">Grèce</span></button>
-        <button class="pub-flag-chip" data-flag="danemark" onclick="filterByFlag('danemark')">🇩🇰<span class="pub-flag-tooltip">Danemark</span></button>
-        <button class="pub-flag-chip" data-flag="taiwan" onclick="filterByFlag('taiwan')">🇹🇼<span class="pub-flag-tooltip">Taïwan</span></button>
-        <button class="pub-flag-chip" data-flag="estonie" onclick="filterByFlag('estonie')">🇪🇪<span class="pub-flag-tooltip">Estonie</span></button>
-        <button class="pub-flag-chip" data-flag="lettonie" onclick="filterByFlag('lettonie')">🇱🇻<span class="pub-flag-tooltip">Lettonie</span></button>
-        <button class="pub-flag-chip" data-flag="moldavie" onclick="filterByFlag('moldavie')">🇲🇩<span class="pub-flag-tooltip">Moldavie</span></button>
-        <button class="pub-flag-chip" data-flag="bielorussie" onclick="filterByFlag('bielorussie')">🇧🇾<span class="pub-flag-tooltip">Biélorussie</span></button>
-        <button class="pub-flag-chip" data-flag="brunei" onclick="filterByFlag('brunei')">🇧🇳<span class="pub-flag-tooltip">Brunei</span></button>
-        <button class="pub-flag-chip" data-flag="uruguay" onclick="filterByFlag('uruguay')">🇺🇾<span class="pub-flag-tooltip">Uruguay</span></button>
       </div>
 
       <div class="pub-card-grid" id="scholarshipGrid">
@@ -109,7 +83,7 @@
         <!-- Chine -->
         <div class="pub-card" data-type="asie" data-country="chine">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag teal">🇨🇳</div>
+            <div class="pub-card-icon pub-flag teal"><img src="https://flagcdn.com/28x21/cn.png" alt="Chine" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Asie</div>
               <div class="pub-card-title">Chine — Bourse CSC</div>
@@ -141,7 +115,7 @@
         <!-- Japon -->
         <div class="pub-card" data-type="asie" data-country="japon">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag teal">🇯🇵</div>
+            <div class="pub-card-icon pub-flag teal"><img src="https://flagcdn.com/28x21/jp.png" alt="Japon" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Asie</div>
               <div class="pub-card-title">Japon — MEXT Scholarship</div>
@@ -173,7 +147,7 @@
         <!-- Corée du Sud -->
         <div class="pub-card" data-type="asie" data-country="coree">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag teal">🇰🇷</div>
+            <div class="pub-card-icon pub-flag teal"><img src="https://flagcdn.com/28x21/kr.png" alt="Corée du Sud" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Asie</div>
               <div class="pub-card-title">Corée du Sud — KGSP</div>
@@ -205,7 +179,7 @@
         <!-- Luxembourg -->
         <div class="pub-card" data-type="europe" data-country="luxembourg">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇱🇺</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/lu.png" alt="Luxembourg" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Luxembourg — Bourse OFPIL</div>
@@ -237,7 +211,7 @@
         <!-- Suède -->
         <div class="pub-card" data-type="europe" data-country="suede">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇸🇪</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/se.png" alt="Suède" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Suède — SISS</div>
@@ -269,7 +243,7 @@
         <!-- Norvège -->
         <div class="pub-card" data-type="europe" data-country="norvege">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇳🇴</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/no.png" alt="Norvège" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Norvège — Quota Scheme</div>
@@ -297,7 +271,7 @@
         <!-- Turquie -->
         <div class="pub-card" data-type="europe" data-country="turquie">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇹🇷</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/tr.png" alt="Turquie" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe / Asie</div>
               <div class="pub-card-title">Turquie — Türkiye Burslari</div>
@@ -325,7 +299,7 @@
         <!-- Allemagne -->
         <div class="pub-card" data-type="europe" data-country="allemagne">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇩🇪</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/de.png" alt="Allemagne" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Allemagne — DAAD</div>
@@ -353,7 +327,7 @@
         <!-- Russie -->
         <div class="pub-card" data-type="europe" data-country="russie">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇷🇺</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/ru.png" alt="Russie" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Russie — Bourse Gouvernementale</div>
@@ -385,7 +359,7 @@
         <!-- Danemark -->
         <div class="pub-card" data-type="europe" data-country="danemark">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇩🇰</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/dk.png" alt="Danemark" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Danemark — Danish Scholarships</div>
@@ -413,7 +387,7 @@
         <!-- Grèce -->
         <div class="pub-card" data-type="europe" data-country="grece">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇬🇷</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/gr.png" alt="Grèce" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Grèce — IKY Scholarships</div>
@@ -441,7 +415,7 @@
         <!-- Arabie Saoudite -->
         <div class="pub-card" data-type="moyen-orient" data-country="arabie">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag amber">🇸🇦</div>
+            <div class="pub-card-icon pub-flag amber"><img src="https://flagcdn.com/28x21/sa.png" alt="Arabie Saoudite" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Moyen-Orient</div>
               <div class="pub-card-title">Arabie Saoudite — KAUST</div>
@@ -469,7 +443,7 @@
         <!-- Qatar -->
         <div class="pub-card" data-type="moyen-orient" data-country="qatar">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag amber">🇶🇦</div>
+            <div class="pub-card-icon pub-flag amber"><img src="https://flagcdn.com/28x21/qa.png" alt="Qatar" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Moyen-Orient</div>
               <div class="pub-card-title">Qatar — Qatar University</div>
@@ -497,7 +471,7 @@
         <!-- Taïwan -->
         <div class="pub-card" data-type="asie" data-country="taiwan">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag teal">🇹🇼</div>
+            <div class="pub-card-icon pub-flag teal"><img src="https://flagcdn.com/28x21/tw.png" alt="Taïwan" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Asie</div>
               <div class="pub-card-title">Taïwan — MOFA Scholarship</div>
@@ -525,7 +499,7 @@
         <!-- Mexique -->
         <div class="pub-card" data-type="amerique" data-country="mexique">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag green">🇲🇽</div>
+            <div class="pub-card-icon pub-flag green"><img src="https://flagcdn.com/28x21/mx.png" alt="Mexique" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Amérique</div>
               <div class="pub-card-title">Mexique — AMEXCID</div>
@@ -553,7 +527,7 @@
         <!-- Uruguay -->
         <div class="pub-card" data-type="amerique" data-country="uruguay">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag green">🇺🇾</div>
+            <div class="pub-card-icon pub-flag green"><img src="https://flagcdn.com/28x21/uy.png" alt="Uruguay" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Amérique</div>
               <div class="pub-card-title">Uruguay — ANII Scholarships</div>
@@ -581,7 +555,7 @@
         <!-- Brésil -->
         <div class="pub-card" data-type="amerique" data-country="bresil">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag green">🇧🇷</div>
+            <div class="pub-card-icon pub-flag green"><img src="https://flagcdn.com/28x21/br.png" alt="Brésil" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Amérique</div>
               <div class="pub-card-title">Brésil — CAPES/CSF</div>
@@ -609,7 +583,7 @@
         <!-- Thaïlande -->
         <div class="pub-card" data-type="asie" data-country="thailande">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag teal">🇹🇭</div>
+            <div class="pub-card-icon pub-flag teal"><img src="https://flagcdn.com/28x21/th.png" alt="Thaïlande" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Asie</div>
               <div class="pub-card-title">Thaïlande — Royal Thai Gov.</div>
@@ -633,7 +607,7 @@
         <!-- Estonie -->
         <div class="pub-card" data-type="europe" data-country="estonie">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇪🇪</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/ee.png" alt="Estonie" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Estonie — Gov. Scholarships</div>
@@ -661,7 +635,7 @@
         <!-- Lettonie -->
         <div class="pub-card" data-type="europe" data-country="lettonie">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇱🇻</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/lv.png" alt="Lettonie" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Lettonie — State Scholarships</div>
@@ -689,7 +663,7 @@
         <!-- Moldavie -->
         <div class="pub-card" data-type="europe" data-country="moldavie">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇲🇩</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/md.png" alt="Moldavie" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Moldavie — Gov. Scholarship</div>
@@ -717,7 +691,7 @@
         <!-- Biélorussie -->
         <div class="pub-card" data-type="europe" data-country="bielorussie">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇧🇾</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/by.png" alt="Biélorussie" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Biélorussie — Gov. Scholarship</div>
@@ -745,7 +719,7 @@
         <!-- Brunei -->
         <div class="pub-card" data-type="asie" data-country="brunei">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag teal">🇧🇳</div>
+            <div class="pub-card-icon pub-flag teal"><img src="https://flagcdn.com/28x21/bn.png" alt="Brunei" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Asie</div>
               <div class="pub-card-title">Brunei — Gov. Scholarship</div>
@@ -773,7 +747,7 @@
         <!-- Écosse -->
         <div class="pub-card" data-type="europe" data-country="ecosse">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/gb-sct.png" alt="Écosse" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Écosse — Saltire Scholarships</div>
@@ -801,7 +775,7 @@
         <!-- Finlande -->
         <div class="pub-card" data-type="europe" data-country="finlande">
           <div class="pub-card-top">
-            <div class="pub-card-icon pub-flag blue">🇫🇮</div>
+            <div class="pub-card-icon pub-flag blue"><img src="https://flagcdn.com/28x21/fi.png" alt="Finlande" class="pub-flag-img" loading="lazy"></div>
             <div>
               <div class="pub-card-meta">Europe</div>
               <div class="pub-card-title">Finlande — Finland Scholarship</div>
@@ -832,8 +806,8 @@
       <div style="margin-top:32px;padding:20px 24px;background:var(--pub-surface);border:1px solid var(--pub-border);border-radius:var(--pub-radius-md);display:flex;gap:12px;align-items:flex-start;">
         <svg class="hi" style="color:var(--pub-accent);flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
         <div>
-          <strong style="font-size:0.9375rem;">Conseil pour les parents</strong>
-          <p style="font-size:0.875rem;color:var(--pub-text-secondary);margin-top:4px;">Les pays mentionnés ci-dessus offrent des conditions d'études abordables et un environnement sûr. La Chine, la Corée, la Thaïlande et la Turquie sont particulièrement intéressantes pour leur coût de vie faible et la qualité de leurs programmes. L'Europe (Luxembourg, Suède, Finlande, Danemark) offre un cadre de vie exceptionnel avec des systèmes de santé et d'éducation performants.</p>
+          <strong style="font-size:0.9375rem;" data-i18n="scholarships.tip.title">Conseil pour les parents</strong>
+          <p style="font-size:0.875rem;color:var(--pub-text-secondary);margin-top:4px;" data-i18n="scholarships.tip.text">Les pays mentionnés ci-dessus offrent des conditions d'études abordables et un environnement sûr. La Chine, la Corée, la Thaïlande et la Turquie sont particulièrement intéressantes pour leur coût de vie faible et la qualité de leurs programmes. L'Europe (Luxembourg, Suède, Finlande, Danemark) offre un cadre de vie exceptionnel avec des systèmes de santé et d'éducation performants.</p>
         </div>
       </div>
     </div>
@@ -842,8 +816,8 @@
   <!-- CTA -->
   <section class="pub-section" style="padding-bottom:0;">
     <div class="pub-cta">
-      <h2>Besoin d'accompagnement ?</h2>
-      <p>Notre équipe vous guide dans vos démarches de candidature pour les bourses internationales.</p>
+      <h2 data-i18n="cta.scholarships">Besoin d'accompagnement ?</h2>
+      <p data-i18n="cta.scholarships.desc">Notre équipe vous guide dans vos démarches de candidature pour les bourses internationales.</p>
       <a href="mailto:contact@ecole.fr" class="pub-btn pub-btn-primary pub-btn-lg">
         <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
         Nous contacter
@@ -888,35 +862,12 @@
         </ul>
       </div>
     </div>
-    <div class="pub-footer-bottom">© 2025 Gestion Scolaire. Tous droits réservés.</div>
+    <div class="pub-footer-bottom" data-i18n="footer.copyright">© 2025 Gestion Scolaire. Tous droits réservés.</div>
   </footer>
 
+  <script src="js/i18n.js"></script>
   <script src="js/public.js"></script>
   <script>
-  /* Filtre par drapeau */
-  function filterByFlag(country) {
-    /* Désactive les chips région */
-    var regionChips = document.querySelectorAll('.pub-chip');
-    regionChips.forEach(function(c) { c.classList.remove('active'); });
-    var allRegion = document.querySelector('.pub-chip[data-filter="all"]');
-    if (allRegion) allRegion.classList.add('active');
-
-    /* Active le chip drapeau cliqué */
-    var flagChips = document.querySelectorAll('.pub-flag-chip');
-    flagChips.forEach(function(c) { c.classList.remove('active'); });
-    var active = document.querySelector('.pub-flag-chip[data-flag="' + country + '"]');
-    if (active) active.classList.add('active');
-
-    /* Applique le filtre */
-    var cards = document.querySelectorAll('#scholarshipGrid .pub-card');
-    cards.forEach(function(card) {
-      if (country === 'all' || card.dataset.country === country) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -924,56 +875,6 @@
       initFilterChips('#scholarshipFilterBar', '#scholarshipGrid .pub-card');
       /* Recherche bourses */
       initSearch('#scholarshipSearch', '#scholarshipGrid .pub-card', ['.pub-card-title', '.pub-card-meta', '.pub-card-body p']);
-
-      /* --- Chargement dynamique depuis l'API avec drapeaux --- */
-      var grid = document.getElementById('scholarshipGrid');
-      if (!grid) return;
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/api/scholarships', true);
-      xhr.onload = function() {
-        if (xhr.status !== 200) return; /* Fallback hardcodé conservé */
-        try {
-          var data = JSON.parse(xhr.responseText);
-          if (!data || !data.length) return;
-
-          var regions = {
-            'Chine':'asie','Japon':'asie','Corée du Sud':'asie','Thaïlande':'asie',
-            'Luxembourg':'europe','Suède':'europe','Norvège':'europe','Turquie':'europe',
-            'Allemagne':'europe','Écosse':'europe','Finlande':'europe',
-            'Arabie Saoudite':'moyen-orient','Qatar':'moyen-orient',
-            'Mexique':'amerique','Brésil':'amerique'
-          };
-          var regionColors = {'asie':'teal','europe':'blue','moyen-orient':'amber','amerique':'green'};
-
-          var html = '';
-          for (var i = 0; i < data.length; i++) {
-            var s = data[i];
-            var region = regions[s.country] || 'europe';
-            var color = regionColors[region] || 'blue';
-            var flagHtml = s.flag || '';
-            var urlHtml = s.url
-              ? '<a href="' + s.url + '" target="_blank" rel="noopener" style="font-size:0.875rem;font-weight:600;color:var(--pub-primary);display:inline-flex;align-items:center;gap:4px;">Site officiel<svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 6V4.5M13.5 4.5H18M13.5 4.5 4.5 13.5M10.5 19.5V21M10.5 21H6M10.5 21l9-9"/></svg></a>'
-              : '';
-            html += '<div class="pub-card" data-type="' + region + '">'
-              + '<div class="pub-card-top">'
-              + '<div class="pub-card-icon ' + color + '" style="font-size:1.8rem;background:var(--pub-bg);position:relative;">'
-              + flagHtml
-              + '</div>'
-              + '<div><div class="pub-card-meta">' + region.charAt(0).toUpperCase() + region.slice(1) + '</div>'
-              + '<div class="pub-card-title">' + s.country + ' — ' + s.name + '</div></div></div>'
-              + '<div class="pub-card-body"><p>' + (s.eligibility || '') + '</p>'
-              + '<div class="pub-card-detail"><svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>Deadline : ' + (s.deadline || '—') + '</div>'
-              + '<div class="pub-card-detail"><svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>' + (s.amount || '') + '</div>'
-              + '</div><div class="pub-card-footer"><div class="pub-scholarship-tags"><span class="pub-tag ' + color + '">' + (s.process || '') + '</span></div>' + urlHtml + '</div></div>';
-          }
-          if (html) {
-            grid.innerHTML = html;
-            initFilterChips('#scholarshipFilterBar', '#scholarshipGrid .pub-card');
-            initSearch('#scholarshipSearch', '#scholarshipGrid .pub-card', ['.pub-card-title', '.pub-card-meta', '.pub-card-body p']);
-          }
-        } catch(e) { /* Fallback hardcodé */ }
-      };
-      xhr.send();
     });
   </script>
 </body>

@@ -20,21 +20,20 @@
         <span data-pub="schoolName">Gestion Scolaire</span>
       </a>
       <ul class="pub-nav-links">
-        <li><a href="index.html" class="active">Accueil</a></li>
-        <li><a href="vie-academique.html">Vie Académique</a></li>
-        <li><a href="activites.html">Activités</a></li>
-        <li><a href="bourses.html">Bourses</a></li>
+        <li><a href="index.html" class="active" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="vie-academique.html" data-i18n="nav.academic">Vie Académique</a></li>
+        <li><a href="activites.html" data-i18n="nav.activities">Activités</a></li>
+        <li><a href="bourses.html" data-i18n="nav.scholarships">Bourses</a></li>
       </ul>
       <div class="pub-nav-actions">
         <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-sm">
           <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
-          S'inscrire
+          <span data-i18n="nav.register">S'inscrire</span>
         </a>
         <a href="login.html" class="pub-btn pub-btn-secondary pub-btn-sm">
           <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
-          Espace Privé
+          <span data-i18n="nav.login">Espace Privé</span>
         </a>
-      </div>
       <button class="lang-btn" onclick="switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')" aria-label="Switch language">
         <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
         <span data-i18n-toggle>English</span>
@@ -42,6 +41,7 @@
       <button class="pub-hamburger" aria-label="Menu" aria-expanded="false">
         <svg class="hi hi-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
+      </div>
     </div>
   </nav>
 
@@ -79,11 +79,9 @@
 
       <div class="pub-hero-actions">
         <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-lg">
-          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
-          S'inscrire maintenant
-        </a>
+          <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>          <span data-i18n="hero.cta">S'inscrire maintenant</span></a>
         <a href="vie-academique.html" class="pub-btn pub-btn-secondary pub-btn-lg">
-          Découvrir l'établissement
+          <span data-i18n="hero.cta2">Découvrir l'établissement</span>
           <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
         </a>
       </div>
@@ -92,7 +90,7 @@
     <!-- Scroll Indicator -->
     <div class="pub-hero-scroll" onclick="document.getElementById('featuresSection').scrollIntoView({behavior:'smooth'})">
       <div class="pub-hero-scroll-mouse"></div>
-      <span>Découvrir</span>
+      <span data-i18n="hero.scroll">Découvrir</span>
     </div>
   </section>
 
@@ -172,15 +170,15 @@
           <ul>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Notes d'interrogations et devoirs
+              <span data-i18n="parents.grades.i1">Notes d'interrogations et devoirs</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Résultats des partiels
+              <span data-i18n="parents.grades.i2">Résultats des partiels</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Moyennes par matière
+              <span data-i18n="parents.grades.i3">Moyennes par matière</span>
             </li>
           </ul>
         </div>
@@ -192,15 +190,15 @@
           <ul>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Absences et retards
+              <span data-i18n="parents.behavior.i1">Absences et retards</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Punitions et heures de colle
+              <span data-i18n="parents.behavior.i2">Punitions et heures de colle</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Bonus et malus enseignants
+              <span data-i18n="parents.behavior.i3">Bonus et malus enseignants</span>
             </li>
           </ul>
         </div>
@@ -212,15 +210,15 @@
           <ul>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Notifications en temps réel
+              <span data-i18n="parents.communication.i1">Notifications en temps réel</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Messages directs aux enseignants
+              <span data-i18n="parents.communication.i2">Messages directs aux enseignants</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Bulletins téléchargeables
+              <span data-i18n="parents.communication.i3">Bulletins téléchargeables</span>
             </li>
           </ul>
         </div>
@@ -256,27 +254,27 @@
           </div>
           <span data-pub="schoolName">Gestion Scolaire</span>
         </div>
-        <p>Établissement d'enseignement supérieur dédié à l'excellence académique et à l'ouverture internationale.</p>
+        <p data-i18n="footer.desc">Établissement d'enseignement supérieur dédié à l'excellence académique et à l'ouverture internationale.</p>
       </div>
       <div>
-        <h4>Navigation</h4>
+        <h4 data-i18n="footer.nav">Navigation</h4>
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="vie-academique.html">Vie Académique</a></li>
-          <li><a href="activites.html">Activités</a></li>
-          <li><a href="bourses.html">Bourses</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+          <li><a href="vie-academique.html" data-i18n="nav.academic">Vie Académique</a></li>
+          <li><a href="activites.html" data-i18n="nav.activities">Activités</a></li>
+          <li><a href="bourses.html" data-i18n="nav.scholarships">Bourses</a></li>
         </ul>
       </div>
       <div>
-        <h4>Espaces</h4>
+        <h4 data-i18n="footer.spaces">Espaces</h4>
         <ul>
-          <li><a href="inscription.html">Inscription</a></li>
-          <li><a href="login.html">Espace Privé</a></li>
-          <li><a href="login.html">Portail Parents</a></li>
+          <li><a href="inscription.html" data-i18n="footer.register">Inscription</a></li>
+          <li><a href="login.html" data-i18n="footer.private">Espace Privé</a></li>
+          <li><a href="login.html" data-i18n="footer.parents">Portail Parents</a></li>
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h4 data-i18n="footer.contact">Contact</h4>
         <ul>
           <li><a href="mailto:contact@ecole.fr">contact@ecole.fr</a></li>
           <li><a href="tel:+33123456789">01 23 45 67 89</a></li>
@@ -285,7 +283,7 @@
       </div>
     </div>
     <div class="pub-footer-bottom">
-      © 2025 Gestion Scolaire. Tous droits réservés.
+      <span data-i18n="footer.copyright">© 2025 Gestion Scolaire. Tous droits réservés.</span>
     </div>
   </footer>
 

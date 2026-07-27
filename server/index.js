@@ -8,6 +8,7 @@ const path = require('path');
 const { getDb } = require('./database');
 const authRoutes = require('./routes/auth');
 const calendarRoutes = require('./routes/calendar');
+const v1Router = require('./routes/v1');
 const { authenticate, authorize } = require('./middleware/auth');
 
 const app = express();
@@ -21,11 +22,11 @@ app.use(helmet({
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN || '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-/* Rate limiting : 100 requêtes/15min par IP */
+/* Rate limiting global */
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: parseInt(process.env.RATE_LIMIT_MAX) || 100,
@@ -35,10 +36,11 @@ const apiLimiter = rateLimit({
 });
 app.use('/api', apiLimiter);
 
-/* Rate limiting strict pour les tentatives de connexion : 5 tentatives/15min */
+/* Rate limiting strict pour login */
+const AUTH_RATE_LIMIT = process.env.NODE_ENV === 'test' ? 100 : (parseInt(process.env.RATE_LIMIT_AUTH_MAX) || 5);
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: AUTH_RATE_LIMIT,
   message: { error: 'Trop de tentatives de connexion. Réessayez dans 15 minutes.' },
   standardHeaders: true,
   legacyHeaders: false
@@ -52,14 +54,14 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString(), uptime: process.uptime() });
 });
 
-// Servir les fichiers statiques du frontend
-app.use(express.static(path.join(__dirname, '..')));
+/* --- API v1 (multi-tenant) --- */
+app.use('/api/v1', v1Router);
 
-// Routes API
+/* --- API v0 (compatibilité existante, pas de tenant) --- */
 app.use('/api/auth', authRoutes);
 app.use('/api/calendar', calendarRoutes);
 
-// === PROFILS UTILISATEURS ===
+// Routes compatibilité (existantes, inchangées)
 app.get('/api/profile/:url', (req, res) => {
   try {
     const db = getDb();
@@ -71,7 +73,6 @@ app.get('/api/profile/:url', (req, res) => {
   }
 });
 
-// === USERS CRUD ===
 app.get('/api/users', authenticate, (req, res) => {
   try {
     const db = getDb();
@@ -104,7 +105,7 @@ app.delete('/api/users/:id', authenticate, (req, res) => {
   }
 });
 
-// === STUDENTS ===
+// Students (compatibilité)
 app.get('/api/students', authenticate, (req, res) => {
   try {
     const db = getDb();
@@ -121,7 +122,6 @@ app.get('/api/students', authenticate, (req, res) => {
   }
 });
 
-// === TEACHERS ===
 app.get('/api/teachers', authenticate, (req, res) => {
   try {
     const db = getDb();
@@ -136,7 +136,6 @@ app.get('/api/teachers', authenticate, (req, res) => {
   }
 });
 
-// === CLASSES ===
 app.get('/api/classes', authenticate, (req, res) => {
   try {
     const db = getDb();
@@ -147,7 +146,6 @@ app.get('/api/classes', authenticate, (req, res) => {
   }
 });
 
-// === SUBJECTS ===
 app.get('/api/subjects', authenticate, (req, res) => {
   try {
     const db = getDb();
@@ -163,27 +161,16 @@ app.get('/api/subjects', authenticate, (req, res) => {
   }
 });
 
-// === GRADES ===
 app.get('/api/grades', authenticate, (req, res) => {
   try {
     const db = getDb();
     const { studentId } = req.query;
-    let query = `
-      SELECT g.*, sub.name as subjectName, sub.code as subjectCode
-      FROM grades g
-      JOIN subjects sub ON sub.id = g.subjectId
-    `;
+    let query = `SELECT g.*, sub.name as subjectName, sub.code as subjectCode FROM grades g JOIN subjects sub ON sub.id = g.subjectId`;
     const params = [];
-    if (studentId) {
-      query += ' WHERE g.studentId = ?';
-      params.push(studentId);
-    }
+    if (studentId) { query += ' WHERE g.studentId = ?'; params.push(studentId); }
     query += ' ORDER BY g.date DESC';
-    const grades = db.prepare(query).all(...params);
-    res.json(grades);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    res.json(db.prepare(query).all(...params));
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.post('/api/grades', authenticate, (req, res) => {
@@ -194,38 +181,24 @@ app.post('/api/grades', authenticate, (req, res) => {
     db.prepare('INSERT INTO grades (id, studentId, subjectId, grade, maxGrade, type, label, date) VALUES (?,?,?,?,?,?,?,?)')
       .run(id, studentId, subjectId, grade, maxGrade || 20, type, label, date);
     res.json({ success: true, id });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.delete('/api/grades/:id', authenticate, (req, res) => {
-  try {
-    const db = getDb();
-    db.prepare('DELETE FROM grades WHERE id=?').run(req.params.id);
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  try { const db = getDb(); db.prepare('DELETE FROM grades WHERE id=?').run(req.params.id); res.json({ success: true }); }
+  catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === ABSENCES ===
 app.get('/api/absences', authenticate, (req, res) => {
   try {
     const db = getDb();
     const { studentId } = req.query;
     let query = 'SELECT * FROM absences';
     const params = [];
-    if (studentId) {
-      query += ' WHERE studentId = ?';
-      params.push(studentId);
-    }
+    if (studentId) { query += ' WHERE studentId = ?'; params.push(studentId); }
     query += ' ORDER BY date DESC';
-    const absences = db.prepare(query).all(...params);
-    res.json(absences);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    res.json(db.prepare(query).all(...params));
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.post('/api/absences', authenticate, (req, res) => {
@@ -236,30 +209,17 @@ app.post('/api/absences', authenticate, (req, res) => {
     db.prepare('INSERT INTO absences (id, studentId, date, reason, justified, type, duration) VALUES (?,?,?,?,?,?,?)')
       .run(id, studentId, date, reason, justified ? 1 : 0, type, duration);
     res.json({ success: true, id });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.delete('/api/absences/:id', authenticate, (req, res) => {
-  try {
-    const db = getDb();
-    db.prepare('DELETE FROM absences WHERE id=?').run(req.params.id);
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  try { const db = getDb(); db.prepare('DELETE FROM absences WHERE id=?').run(req.params.id); res.json({ success: true }); }
+  catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === PUNITIONS ===
 app.get('/api/punitions', authenticate, (req, res) => {
-  try {
-    const db = getDb();
-    const punitions = db.prepare('SELECT * FROM punitions ORDER BY date DESC').all();
-    res.json(punitions);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  try { const db = getDb(); res.json(db.prepare('SELECT * FROM punitions ORDER BY date DESC').all()); }
+  catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.post('/api/punitions', authenticate, (req, res) => {
@@ -270,20 +230,14 @@ app.post('/api/punitions', authenticate, (req, res) => {
     db.prepare('INSERT INTO punitions (id, studentId, type, description, hours, duration, date, teacherId) VALUES (?,?,?,?,?,?,?,?)')
       .run(id, studentId, type, description, hours, duration, date, teacherId);
     res.json({ success: true, id });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === BONUS/MALUS ===
 app.get('/api/bonus-malus', authenticate, (req, res) => {
   try {
     const db = getDb();
-    const data = db.prepare('SELECT bm.*, u.firstName, u.lastName FROM bonus_malus bm JOIN users u ON u.id = (SELECT userId FROM students WHERE id = bm.studentId) ORDER BY date DESC').all();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    res.json(db.prepare('SELECT bm.*, u.firstName, u.lastName FROM bonus_malus bm JOIN users u ON u.id = (SELECT userId FROM students WHERE id = bm.studentId) ORDER BY date DESC').all());
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.post('/api/bonus-malus', authenticate, (req, res) => {
@@ -291,29 +245,16 @@ app.post('/api/bonus-malus', authenticate, (req, res) => {
     const db = getDb();
     const { studentId, teacherId, value, reason, date } = req.body;
     const id = require('uuid').v4();
-    db.prepare('INSERT INTO bonus_malus (id, studentId, teacherId, value, reason, date) VALUES (?,?,?,?,?,?)')
-      .run(id, studentId, teacherId, value, reason, date);
+    db.prepare('INSERT INTO bonus_malus (id, studentId, teacherId, value, reason, date) VALUES (?,?,?,?,?,?)').run(id, studentId, teacherId, value, reason, date);
     res.json({ success: true, id });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === ACTIVITIES ===
 app.get('/api/activities', (req, res) => {
   try {
     const db = getDb();
-    const activities = db.prepare(`
-      SELECT a.*, u.firstName as teacherFirstName, u.lastName as teacherLastName,
-        (SELECT COUNT(*) FROM activity_enrollments ae WHERE ae.activityId = a.id) as enrolled
-      FROM activities a
-      LEFT JOIN teachers t ON t.id = a.teacherId
-      LEFT JOIN users u ON u.id = t.userId
-    `).all();
-    res.json(activities);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    res.json(db.prepare(`SELECT a.*, u.firstName as teacherFirstName, u.lastName as teacherLastName, (SELECT COUNT(*) FROM activity_enrollments ae WHERE ae.activityId = a.id) as enrolled FROM activities a LEFT JOIN teachers t ON t.id = a.teacherId LEFT JOIN users u ON u.id = t.userId`).all());
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.post('/api/activities', authenticate, (req, res) => {
@@ -321,12 +262,9 @@ app.post('/api/activities', authenticate, (req, res) => {
     const db = getDb();
     const { name, type, description, schedule, maxStudents, teacherId } = req.body;
     const id = require('uuid').v4();
-    db.prepare('INSERT INTO activities (id, name, type, description, schedule, maxStudents, teacherId) VALUES (?,?,?,?,?,?,?)')
-      .run(id, name, type, description, schedule, maxStudents, teacherId);
+    db.prepare('INSERT INTO activities (id, name, type, description, schedule, maxStudents, teacherId) VALUES (?,?,?,?,?,?,?)').run(id, name, type, description, schedule, maxStudents, teacherId);
     res.json({ success: true, id });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.delete('/api/activities/:id', authenticate, (req, res) => {
@@ -335,31 +273,17 @@ app.delete('/api/activities/:id', authenticate, (req, res) => {
     db.prepare('DELETE FROM activities WHERE id=?').run(req.params.id);
     db.prepare('DELETE FROM activity_enrollments WHERE activityId=?').run(req.params.id);
     res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === SCHOLARSHIPS ===
 app.get('/api/scholarships', (req, res) => {
-  try {
-    const db = getDb();
-    const scholarships = db.prepare('SELECT * FROM scholarships ORDER BY country').all();
-    res.json(scholarships);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  try { const db = getDb(); res.json(db.prepare('SELECT * FROM scholarships ORDER BY country').all()); }
+  catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === CANDIDATES (Inscriptions) ===
 app.get('/api/candidates', authenticate, (req, res) => {
-  try {
-    const db = getDb();
-    const candidates = db.prepare('SELECT * FROM candidates ORDER BY createdAt DESC').all();
-    res.json(candidates);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  try { const db = getDb(); res.json(db.prepare('SELECT * FROM candidates ORDER BY createdAt DESC').all()); }
+  catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.post('/api/candidates', (req, res) => {
@@ -367,26 +291,16 @@ app.post('/api/candidates', (req, res) => {
     const db = getDb();
     const data = req.body;
     const id = require('uuid').v4();
-    db.prepare(`INSERT INTO candidates (id, nom, prenom, age, phone, email, diplome, etablissement, moyenne, filiere, specialite, motivation, rdvDate, rdvTime, notes, status)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'pending')`).run(id, data.nom, data.prenom, data.age, data.phone, data.email, data.diplome, data.etablissement, data.moyenne, data.filiere, data.specialite, data.motivation, data.rdvDate, data.rdvTime, data.notes);
+    db.prepare(`INSERT INTO candidates (id, nom, prenom, age, phone, email, diplome, etablissement, moyenne, filiere, specialite, motivation, rdvDate, rdvTime, notes, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'pending')`).run(id, data.nom, data.prenom, data.age, data.phone, data.email, data.diplome, data.etablissement, data.moyenne, data.filiere, data.specialite, data.motivation, data.rdvDate, data.rdvTime, data.notes);
     res.json({ success: true, id });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.put('/api/candidates/:id', authenticate, (req, res) => {
-  try {
-    const db = getDb();
-    const { status } = req.body;
-    db.prepare('UPDATE candidates SET status=? WHERE id=?').run(status, req.params.id);
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  try { const db = getDb(); db.prepare('UPDATE candidates SET status=? WHERE id=?').run(req.body.status, req.params.id); res.json({ success: true }); }
+  catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === RDV SLOTS ===
 app.get('/api/slots', (req, res) => {
   try {
     const db = getDb();
@@ -398,35 +312,24 @@ app.get('/api/slots', (req, res) => {
       slots = defaults.map(t => ({ time: t }));
     }
     res.json(slots);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.post('/api/slots', authenticate, (req, res) => {
   try {
     const db = getDb();
     const { time } = req.body;
-    const existing = db.prepare('SELECT id FROM rdv_slots WHERE time=?').get(time);
-    if (existing) return res.status(400).json({ error: 'Ce créneau existe déjà' });
+    if (db.prepare('SELECT id FROM rdv_slots WHERE time=?').get(time)) return res.status(400).json({ error: 'Ce créneau existe déjà' });
     db.prepare('INSERT INTO rdv_slots (id, time) VALUES (?,?)').run(require('uuid').v4(), time);
     res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
 app.delete('/api/slots/:time', authenticate, (req, res) => {
-  try {
-    const db = getDb();
-    db.prepare('DELETE FROM rdv_slots WHERE time=?').run(req.params.time);
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  try { const db = getDb(); db.prepare('DELETE FROM rdv_slots WHERE time=?').run(req.params.time); res.json({ success: true }); }
+  catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// === DASHBOARD STATS ===
 app.get('/api/stats', authenticate, (req, res) => {
   try {
     const db = getDb();
@@ -436,25 +339,33 @@ app.get('/api/stats', authenticate, (req, res) => {
     const users = db.prepare('SELECT COUNT(*) as count FROM users').get();
     const pendingCandidates = db.prepare("SELECT COUNT(*) as count FROM candidates WHERE status='pending'").get();
     const events = db.prepare('SELECT COUNT(*) as count FROM calendar_events').get();
-    res.json({
-      students: students.count,
-      teachers: teachers.count,
-      classes: classes.count,
-      users: users.count,
-      pendingCandidates: pendingCandidates.count,
-      events: events.count
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    res.json({ students: students.count, teachers: teachers.count, classes: classes.count, users: users.count, pendingCandidates: pendingCandidates.count, events: events.count });
+  } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// Fallback SPA : servir index.html pour les routes inconnues
+// Routes de login par rôle
+['/admin/login','/enseignant/login','/prof/login','/etudiant/login','/eleve/login','/parent/login'].forEach(route => {
+  app.get(route, (req, res) => res.sendFile(path.join(__dirname, '..', 'public', 'login.html')));
+});
+
+// Fichiers statiques
+app.use(express.static(path.join(__dirname, '..')));
+
+// Fallback SPA
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
+
+/* --- Middleware d'erreur global (doit être APRÈS toutes les routes) --- */
+app.use((err, req, res, next) => {
+  console.error('[ERROR]', err.message);
+  res.status(err.status || 500).json({
+    error: process.env.NODE_ENV === 'production' ? 'Erreur interne du serveur' : err.message
+  });
 });
 
 app.listen(PORT, () => {
   console.log(`✅ Serveur Gestion Scolaire démarré sur http://localhost:${PORT}`);
   console.log(`📦 API disponible sur http://localhost:${PORT}/api`);
+  console.log(`🔀 API v1 (multi-tenant) sur http://localhost:${PORT}/api/v1`);
 });

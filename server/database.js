@@ -1,5 +1,6 @@
 const Database = require('better-sqlite3');
 const path = require('path');
+const fs = require('fs');
 
 const DB_PATH = path.join(__dirname, 'gestion_scolaire.db');
 
@@ -11,17 +12,19 @@ function getDb() {
     db.pragma('journal_mode = WAL');
     db.pragma('foreign_keys = ON');
     initSchema();
+    runMigrations();
   }
   return db;
 }
 
+/* --- Schéma initial (compatible ascendant) --- */
 function initSchema() {
   db.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id TEXT PRIMARY KEY,
       email TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL,
-      role TEXT NOT NULL CHECK(role IN ('admin','teacher','student','parent')),
+      role TEXT NOT NULL CHECK(role IN ('admin','teacher','student','parent','superadmin')),
       firstName TEXT NOT NULL,
       lastName TEXT NOT NULL,
       phone TEXT,
@@ -217,6 +220,56 @@ function initSchema() {
       isActive INTEGER DEFAULT 1
     );
   `);
+}
+
+/* --- Migration runner --- */
+function runMigrations() {
+  // Create tracker table if not exists
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS _migrations (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT UNIQUE NOT NULL,
+      applied_at TEXT DEFAULT (datetime('now'))
+    );
+  `);
+
+  const migrationsDir = path.join(__dirname, '..', 'migrations');
+  if (!fs.existsSync(migrationsDir)) {
+    fs.mkdirSync(migrationsDir, { recursive: true });
+    return;
+  }
+
+  const applied = new Set(
+    db.prepare('SELECT name FROM _migrations').all().map(r => r.name)
+  );
+
+  const files = fs.readdirSync(migrationsDir)
+    .filter(f => f.endsWith('.sql'))
+    .sort();
+
+  for (const file of files) {
+    if (applied.has(file)) continue;
+
+    try {
+      const sql = fs.readFileSync(path.join(migrationsDir, file), 'utf-8');
+      console.log(`  ⚙️ Migration : ${file}`);
+
+      // better-sqlite3 supporte l'exécution de scripts SQL multi-statements
+      try {
+        db.exec(sql);
+      } catch (err) {
+        // Ignorer les erreurs "duplicate column" (déjà migré)
+        if (!err.message.includes('duplicate column') && !err.message.includes('already exists')) {
+          throw err;
+        }
+      }
+
+      db.prepare('INSERT INTO _migrations (name) VALUES (?)').run(file);
+      console.log(`  ✅ Migration appliquée : ${file}`);
+    } catch (err) {
+      console.error(`  ❌ Erreur migration ${file}:`, err.message);
+    }
+  }
 }
 
 module.exports = { getDb };

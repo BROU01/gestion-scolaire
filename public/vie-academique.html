@@ -20,19 +20,19 @@
         <span data-pub="schoolName">Gestion Scolaire</span>
       </a>
       <ul class="pub-nav-links">
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="vie-academique.html" class="active">Vie Académique</a></li>
-        <li><a href="activites.html">Activités</a></li>
-        <li><a href="bourses.html">Bourses</a></li>
+        <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="vie-academique.html" class="active" data-i18n="nav.academic">Vie Académique</a></li>
+        <li><a href="activites.html" data-i18n="nav.activities">Activités</a></li>
+        <li><a href="bourses.html" data-i18n="nav.scholarships">Bourses</a></li>
       </ul>
       <div class="pub-nav-actions">
         <a href="inscription.html" class="pub-btn pub-btn-primary pub-btn-sm">
           <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z"/></svg>
-          S'inscrire
+          <span data-i18n="nav.register">S'inscrire</span>
         </a>
         <a href="login.html" class="pub-btn pub-btn-secondary pub-btn-sm">
           <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg>
-          Espace Privé
+          <span data-i18n="nav.login">Espace Privé</span>
         </a>
       <button class="lang-btn" onclick="switchLang(CURRENT_LANG === 'fr' ? 'en' : 'fr')" aria-label="Switch language">
         <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
@@ -72,60 +72,58 @@
         <div class="pub-info-card">
           <h3>
             <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>
-            Interrogations
+            <span data-i18n="academic.interro">Interrogations</span>
           </h3>
           <ul>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Évaluations courtes (30 min à 1h)
+              <span data-i18n="academic.interro.i1">Évaluations courtes (30 min à 1h)</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Portée sur les chapitres récents
+              <span data-i18n="academic.interro.i2">Portée sur les chapitres récents</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Coefficient 1 — Comptent pour 20% de la moyenne
+              <span data-i18n="academic.interro.i3">Coefficient 1 — Comptent pour 20% de la moyenne</span>
             </li>
           </ul>
         </div>
-        <div class="pub-info-card">
-          <h3>
+        <div class="pub-info-card">            <h3>
             <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
-            Devoirs
+            <span data-i18n="academic.devoir">Devoirs</span>
           </h3>
           <ul>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Évaluations sur une durée plus longue
+              <span data-i18n="academic.devoir.i1">Évaluations sur une durée plus longue</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Travaux à rendre avant la date limite
+              <span data-i18n="academic.devoir.i2">Travaux à rendre avant la date limite</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Coefficient 2 — Comptent pour 30% de la moyenne
+              <span data-i18n="academic.devoir.i3">Coefficient 2 — Comptent pour 30% de la moyenne</span>
             </li>
           </ul>
         </div>
-        <div class="pub-info-card">
-          <h3>
+        <div class="pub-info-card">            <h3>
             <svg class="hi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75"/></svg>
-            Partiels
+            <span data-i18n="academic.partiel">Partiels</span>
           </h3>
           <ul>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Examens de fin de semestre
+              <span data-i18n="academic.partiel.i1">Examens de fin de semestre</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Couverture de tous les chapitres
+              <span data-i18n="academic.partiel.i2">Couverture de tous les chapitres</span>
             </li>
             <li>
               <svg class="hi hi-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.75 6 6 9-13.5"/></svg>
-              Coefficient 3 — Comptent pour 50% de la moyenne
+              <span data-i18n="academic.partiel.i3">Coefficient 3 — Comptent pour 50% de la moyenne</span>
             </li>
           </ul>
         </div>
@@ -262,62 +260,33 @@
         <p>Établissement d'enseignement supérieur dédié à l'excellence académique.</p>
       </div>
       <div>
-        <h4>Navigation</h4>
+        <h4 data-i18n="footer.nav">Navigation</h4>
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="vie-academique.html">Vie Académique</a></li>
-          <li><a href="activites.html">Activités</a></li>
-          <li><a href="bourses.html">Bourses</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+          <li><a href="vie-academique.html" data-i18n="nav.academic">Vie Académique</a></li>
+          <li><a href="activites.html" data-i18n="nav.activities">Activités</a></li>
+          <li><a href="bourses.html" data-i18n="nav.scholarships">Bourses</a></li>
         </ul>
       </div>
       <div>
-        <h4>Espaces</h4>
+        <h4 data-i18n="footer.spaces">Espaces</h4>
         <ul>
-          <li><a href="inscription.html">Inscription</a></li>
-          <li><a href="login.html">Espace Privé</a></li>
-          <li><a href="login.html">Portail Parents</a></li>
+          <li><a href="inscription.html" data-i18n="footer.register">Inscription</a></li>
+          <li><a href="login.html" data-i18n="footer.private">Espace Privé</a></li>
+          <li><a href="login.html" data-i18n="footer.parents">Portail Parents</a></li>
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h4 data-i18n="footer.contact">Contact</h4>
         <ul>
           <li><a href="mailto:contact@ecole.fr">contact@ecole.fr</a></li>
           <li><a href="tel:+33123456789">01 23 45 67 89</a></li>
         </ul>
       </div>
     </div>
-    <div class="pub-footer-bottom">© 2025 Gestion Scolaire. Tous droits réservés.</div>
+    <div class="pub-footer-bottom"><span data-i18n="footer.copyright">© 2025 Gestion Scolaire. Tous droits réservés.</span></div>
   </footer>
 
-  <!-- ====== FLAGS SHOWCASE ====== -->
-  <section class="pub-flags-section">
-    <div class="pub-flags-section-inner">
-      <h3 data-i18n="hero.scholarships.title">Étudiez à l'étranger</h3>
-      <p data-i18n="hero.scholarships.desc">Un portail complet des bourses d'études disponibles dans 28+ pays. Trouvez l'opportunité idéale pour votre avenir.</p>
-      <div class="pub-flags-row">
-        <a href="bourses.html" class="pub-flag-item">🇨🇳<span>Chine</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇯🇵<span>Japon</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇰🇷<span>Corée</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇩🇪<span>Allemagne</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇫🇷<span>France</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇸🇪<span>Suède</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇳🇴<span>Norvège</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇹🇷<span>Turquie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇸🇦<span>Arabie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇧🇷<span>Brésil</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇲🇽<span>Mexique</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇹🇭<span>Thaïlande</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇫🇮<span>Finlande</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇷🇺<span>Russie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇩🇰<span>Danemark</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇹🇼<span>Taïwan</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇺🇾<span>Uruguay</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇪🇪<span>Estonie</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇧🇳<span>Brunei</span></a>
-        <a href="bourses.html" class="pub-flag-item">🇶🇦<span>Qatar</span></a>
-      </div>
-    </div>
-  </section>
 
   <script src="js/i18n.js"></script>
   <script src="js/public.js"></script>

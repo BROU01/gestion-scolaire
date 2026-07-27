@@ -9,7 +9,7 @@ const router = express.Router();
 // POST /api/auth/login
 router.post('/login', (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: 'Email et mot de passe requis' });
     }
@@ -18,6 +18,11 @@ router.post('/login', (req, res) => {
     const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email);
     if (!user) {
       return res.status(401).json({ error: 'Identifiants incorrects' });
+    }
+
+    /* Valider le rôle si fourni (per-role URL) */
+    if (role && user.role !== role) {
+      return res.status(403).json({ error: 'Accès non autorisé pour ce profil.' });
     }
 
     const valid = bcrypt.compareSync(password, user.password);

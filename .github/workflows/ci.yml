@@ -1,0 +1,47 @@
+name: CI — Gestion Scolaire
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: server/package.json
+
+      - name: Install dependencies
+        run: |
+          cd server
+          npm ci
+
+      - name: Run seed
+        run: |
+          cd server
+          node seed.js
+
+      - name: Start server
+        run: |
+          cd server
+          node index.js &
+          sleep 3
+          curl -s http://localhost:3001/api/health
+
+      - name: Run integration tests
+        run: |
+          cd server
+          node --test ../tests/integration.test.js
+
+      - name: Stop server
+        run: |
+          kill $(lsof -t -i:3001) 2>/dev/null || true

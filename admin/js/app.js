@@ -222,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
   APP.role = APP.session.role;
 
   buildSidebar();
+  restoreSidebarState();
   bindEvents();
   navigateTo('dashboard');
 });
@@ -235,6 +236,7 @@ function logout() {
 /* --- Events --- */
 function bindEvents() {
   document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
+  document.getElementById('sidebarToggle').addEventListener('click', toggleDesktopSidebar);
   document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
   document.getElementById('btnLogout').addEventListener('click', logout);
 
@@ -246,14 +248,39 @@ function bindEvents() {
   });
 }
 
-/* --- Sidebar --- */
+/* --- Sidebar Collapsible --- */
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidebarOverlay').classList.toggle('active');
+  var sidebar = document.getElementById('sidebar');
+  /* Mobile: toggle open/close */
+  if (window.innerWidth <= 1024) {
+    sidebar.classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+    return;
+  }
+  /* Desktop: toggle collapsed/expanded */
+  var isCollapsed = sidebar.classList.toggle('collapsed');
+  localStorage.setItem('sidebar_collapsed', isCollapsed ? '1' : '0');
 }
+
 function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebarOverlay').classList.remove('active');
+  var sidebar = document.getElementById('sidebar');
+  if (window.innerWidth <= 1024) {
+    sidebar.classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('active');
+  }
+}
+
+function toggleDesktopSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  var isCollapsed = sidebar.classList.toggle('collapsed');
+  localStorage.setItem('sidebar_collapsed', isCollapsed ? '1' : '0');
+}
+
+function restoreSidebarState() {
+  var sidebar = document.getElementById('sidebar');
+  if (window.innerWidth > 1024 && localStorage.getItem('sidebar_collapsed') === '1') {
+    sidebar.classList.add('collapsed');
+  }
 }
 
 /* ============================================
@@ -263,8 +290,9 @@ function buildSidebar() {
   var nav = document.getElementById('sidebarNav');
   var role = APP.role;
 
-  document.getElementById('userName').textContent = APP.session.name;
-  document.getElementById('userAvatar').textContent = APP.session.name.charAt(0).toUpperCase();
+  var displayName = APP.session.name || (APP.session.firstName + ' ' + APP.session.lastName).trim() || 'Utilisateur';
+  document.getElementById('userName').textContent = displayName;
+  document.getElementById('userAvatar').textContent = (APP.session.name || APP.session.firstName || 'U').charAt(0).toUpperCase();
   var roleLabels = { admin: __t('role.admin','Administrateur'), teacher: __t('role.teacher','Enseignant'), student: __t('role.student','Étudiant'), parent: __t('role.parent','Parent') };
   document.getElementById('userRole').textContent = roleLabels[role] || role;
   document.getElementById('sidebarRoleBadge').textContent = roleLabels[role] || role;
@@ -1861,7 +1889,7 @@ function saveCalendarEvent() {
   var body = JSON.stringify({ title: title, date: date, endDate: endDate, type: type, description: description });
 
   var session = JSON.parse(localStorage.getItem('ecole_session') || '{}');
-  var token = session.token;
+  var token = localStorage.getItem('ecole_token');
 
   /* Si token mocké ou API indisponible, enregistrer localement */
   if (!token || token.indexOf('mock-') === 0) {
@@ -1949,7 +1977,7 @@ function confirmDeleteCalendar(id, title) {
 
 function deleteCalendarEvent(id) {
   var session = JSON.parse(localStorage.getItem('ecole_session') || '{}');
-  var token = session.token;
+  var token = localStorage.getItem('ecole_token');
 
   /* Si token mocké ou API indisponible, supprimer localement */
   if (!token || token.indexOf('mock-') === 0) {

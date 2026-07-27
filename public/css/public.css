@@ -716,6 +716,25 @@ h1,h2,h3,h4,h5,h6 { line-height:1.2; letter-spacing:-0.02em; }
   box-shadow: 3px 3px 0 #000;
 }
 
+/* Images drapeaux via flagcdn */
+.pub-flag-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+
+.pub-flag-chip .pub-flag-img {
+  width: 20px;
+  height: 15px;
+}
+
+.pub-card-icon.pub-flag .pub-flag-img {
+  width: 32px;
+  height: 24px;
+}
+
 /* Bandeau drapeaux en haut du filtre */
 .pub-flags-bar {
   display: flex;
