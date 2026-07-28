@@ -5,7 +5,7 @@
 var API = (function() {
   var BASE = '';
 
-  /* Helper fetch avec gestion d'erreur */
+  /* Helper fetch avec gestion d'erreur et refresh automatique */
   function request(method, path, body) {
     var opts = {
       method: method,
@@ -18,11 +18,8 @@ var API = (function() {
     return fetch(BASE + path, opts)
       .then(function(res) {
         if (res.status === 401) {
-          /* Token expiré ou invalide → rediriger vers login */
-          localStorage.removeItem('ecole_session');
-          localStorage.removeItem('ecole_token');
-          window.location.href = '../public/login.html';
-          return; /* stop ici, pas de throw pour éviter le double catch */
+          /* Token expiré → tenter un refresh silencieux puis réessayer */
+          return tryRefreshAndRetry(method, path, body);
         }
         if (!res.ok) {
           return res.json().then(function(err) {
@@ -34,6 +31,56 @@ var API = (function() {
         }
         return res.json();
       });
+  }
+
+  /* Tentative de refresh token silencieux, puis redirection si échec */
+  function tryRefreshAndRetry(method, path, body) {
+    var refreshToken = localStorage.getItem('ecole_refresh_token');
+    if (!refreshToken) {
+      forceLogout();
+      return;
+    }
+
+    return fetch(BASE + '/api/auth/refresh', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + refreshToken
+      }
+    })
+    .then(function(r) {
+      if (!r.ok) { forceLogout(); throw new Error('Refresh échoué'); }
+      return r.json();
+    })
+    .then(function(data) {
+      if (!data || !data.token) { forceLogout(); return; }
+      localStorage.setItem('ecole_token', data.token);
+      /* Réessayer la requête originale avec le nouveau token */
+      opts.headers['Authorization'] = 'Bearer ' + data.token;
+      return fetch(BASE + path, opts).then(function(res) {
+        if (res.status === 401) { forceLogout(); return; }
+        if (!res.ok) {
+          return res.json().then(function(err) {
+            throw new Error(err.error || 'Erreur serveur (' + res.status + ')');
+          }).catch(function(e) {
+            if (e instanceof SyntaxError) throw new Error('Erreur serveur (' + res.status + ')');
+            throw e;
+          });
+        }
+        return res.json();
+      });
+    })
+    .catch(function(e) {
+      /* Erreur réseau ou autre → on relance l'erreur sans déconnecter */
+      throw e;
+    });
+  }
+
+  function forceLogout() {
+    localStorage.removeItem('ecole_session');
+    localStorage.removeItem('ecole_token');
+    localStorage.removeItem('ecole_refresh_token');
+    window.location.href = '../public/login.html';
   }
 
   /* --- Santé --- */

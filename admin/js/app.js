@@ -230,56 +230,123 @@ var APP = {
 };
 
 /* ============================================
-   INIT
+   INIT — Vérification asynchrone avec refresh automatique
    ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
-  var raw = localStorage.getItem('ecole_session');
-  var token = localStorage.getItem('ecole_token');
+  var raw, session, token;
+
+  try {
+    raw = localStorage.getItem('ecole_session');
+    token = localStorage.getItem('ecole_token');
+  } catch(e) { /* localStorage inaccessible */ }
+
   if (!raw) { window.location.href = '../public/login.html'; return; }
-  APP.session = JSON.parse(raw);
+
+  try {
+    APP.session = JSON.parse(raw);
+  } catch(e) {
+    localStorage.removeItem('ecole_session');
+    localStorage.removeItem('ecole_token');
+    window.location.href = '../public/login.html';
+    return;
+  }
   APP.role = APP.session.role;
 
-  /* Vérifier que le token est toujours valide (non expiré) */
-  if (token && token.indexOf('mock-') !== 0) {
-    /* 1. Vérification rapide côté client : décoder le JWT et vérifier l'expiration */
-    try {
-      var payload = JSON.parse(atob(token.split('.')[1]));
-      if (payload.exp && Date.now() >= payload.exp * 1000) {
-        /* Token expiré → redirect immédiat sans appel serveur */
-        localStorage.removeItem('ecole_session');
-        localStorage.removeItem('ecole_token');
-        window.location.href = '../public/login.html';
-        return;
-      }
-    } catch(e) { /* payload invalide, on continue vers la vérif serveur */ }
-
-    /* 2. Vérification serveur (token révoqué, utilisateur supprimé, etc.) */
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/api/auth/me', false);
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    try {
-      xhr.send();
-      if (xhr.status === 401) {
-        localStorage.removeItem('ecole_session');
-        localStorage.removeItem('ecole_token');
-        window.location.href = '../public/login.html';
-        return;
-      }
-    } catch(e) {
-      /* Serveur down → mode dégradé avec données mockées */
-    }
+  function bootstrap() {
+    buildSidebar();
+    restoreSidebarState();
+    bindEvents();
+    navigateTo('dashboard');
   }
 
-  buildSidebar();
-  restoreSidebarState();
-  bindEvents();
-  navigateTo('dashboard');
+  /* Si pas de token ou token mocké → on charge directement */
+  if (!token || token.indexOf('mock-') === 0) {
+    bootstrap();
+    return;
+  }
+
+  /* 1. Vérification rapide côté client : décoder le JWT et vérifier l'expiration */
+  try {
+    var payload = JSON.parse(atob(token.split('.')[1]));
+    if (payload.exp && Date.now() >= payload.exp * 1000) {
+      /* Token expiré → tenter un refresh avant de rediriger */
+      tryRefreshToken(function(refreshed) {
+        if (refreshed) {
+          bootstrap();
+        } else {
+          localStorage.removeItem('ecole_session');
+          localStorage.removeItem('ecole_token');
+          window.location.href = '../public/login.html';
+        }
+      });
+      return;
+    }
+  } catch(e) { /* payload invalide, on continue */ }
+
+  /* 2. Vérification serveur asynchrone (token révoqué, utilisateur supprimé, etc.) */
+  fetch('/api/auth/me', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  })
+  .then(function(res) {
+    if (res.status === 401) {
+      /* Token révoqué → tenter un refresh */
+      tryRefreshToken(function(refreshed) {
+        if (!refreshed) {
+          localStorage.removeItem('ecole_session');
+          localStorage.removeItem('ecole_token');
+          window.location.href = '../public/login.html';
+          return;
+        }
+        bootstrap();
+      });
+      return;
+    }
+    bootstrap();
+  })
+  .catch(function() {
+    /* Serveur down → mode dégradé avec données mockées */
+    bootstrap();
+  });
 });
+
+/* --- Tentative de rafraîchissement silencieux du token --- */
+function tryRefreshToken(callback) {
+  var refreshToken = localStorage.getItem('ecole_refresh_token');
+  if (!refreshToken) {
+    /* Pas de refresh token → on ne peut pas rafraîchir */
+    callback(false);
+    return;
+  }
+
+  fetch('/api/auth/refresh', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + refreshToken
+    }
+  })
+  .then(function(res) {
+    if (!res.ok) { callback(false); return; }
+    return res.json();
+  })
+  .then(function(data) {
+    if (data && data.token) {
+      localStorage.setItem('ecole_token', data.token);
+      callback(true);
+    } else {
+      callback(false);
+    }
+  })
+  .catch(function() {
+    callback(false);
+  });
+}
 
 /* --- Logout --- */
 function logout() {
   localStorage.removeItem('ecole_session');
   localStorage.removeItem('ecole_token');
+  localStorage.removeItem('ecole_refresh_token');
   window.location.href = '../public/login.html';
 }
 

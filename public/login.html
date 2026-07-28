@@ -434,23 +434,32 @@
         loginBtn.disabled = true;
         loginBtn.innerHTML = '<svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Connexion...';
 
-        /* Appel API */
+        /* Appel API — avec gestion robuste des erreurs HTTP */
         fetch(API_BASE + '/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email, password: password, role: role })
         })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          if (data.error) {
-            showToast(data.error, 'error');
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = '<svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg> Se connecter';
-            return;
+        .then(function(res) {
+          if (!res.ok) {
+            /* Gérer les erreurs HTTP (rate limit, 500, etc.) */
+            return res.json().then(function(err) {
+              throw new Error(err.error || 'Erreur serveur (' + res.status + ')');
+            }).catch(function(e) {
+              if (e instanceof SyntaxError) throw new Error('Erreur serveur (' + res.status + '). Veuillez réessayer.');
+              throw e;
+            });
           }
-
+          return res.json();
+        })
+        .then(function(data) {
           localStorage.setItem('ecole_session', JSON.stringify(data.user));
           localStorage.setItem('ecole_token', data.token);
+
+          /* Stocker aussi le refresh token si présent */
+          if (data.refreshToken) {
+            localStorage.setItem('ecole_refresh_token', data.refreshToken);
+          }
 
           var redir = {
             admin: '../admin/index.html',
@@ -465,7 +474,7 @@
           }, 600);
         })
         .catch(function(err) {
-          showToast('Erreur de connexion au serveur.', 'error');
+          showToast(err.message || 'Erreur de connexion au serveur.', 'error');
           loginBtn.disabled = false;
           loginBtn.innerHTML = '<svg class="heroicon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"/></svg> Se connecter';
         });

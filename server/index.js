@@ -37,7 +37,8 @@ const apiLimiter = rateLimit({
 app.use('/api', apiLimiter);
 
 /* Rate limiting strict pour login */
-const AUTH_RATE_LIMIT = process.env.NODE_ENV === 'test' ? 100 : (parseInt(process.env.RATE_LIMIT_AUTH_MAX) || 5);
+/* Augmenté à 20 tentatives pour éviter les blocages intempestifs en milieu scolaire */
+const AUTH_RATE_LIMIT = process.env.NODE_ENV === 'test' ? 100 : (parseInt(process.env.RATE_LIMIT_AUTH_MAX) || 20);
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: AUTH_RATE_LIMIT,
@@ -58,6 +59,10 @@ app.get('/api/health', (req, res) => {
 app.use('/api/v1', v1Router);
 
 /* --- API v0 (compatibilité existante, pas de tenant) --- */
+/* Route de rafraîchissement de token (pas de rate limit strict) */
+const { refreshAuth } = require('./middleware/auth');
+app.post('/api/auth/refresh', refreshAuth);
+
 app.use('/api/auth', authRoutes);
 app.use('/api/calendar', calendarRoutes);
 

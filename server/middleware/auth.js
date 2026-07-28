@@ -20,6 +20,43 @@ function generateToken(user) {
   );
 }
 
+function generateRefreshToken(user) {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      type: 'refresh'
+    },
+    JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+}
+
+function refreshAuth(req, res) {
+  const header = req.headers.authorization;
+  if (!header || !header.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Token manquant' });
+  }
+  try {
+    const token = header.split(' ')[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    if (decoded.type !== 'refresh') {
+      return res.status(401).json({ error: 'Token de rafraîchissement invalide' });
+    }
+
+    const db = require('../database').getDb();
+    const user = db.prepare('SELECT * FROM users WHERE id = ?').get(decoded.id);
+    if (!user || !user.isActive) {
+      return res.status(401).json({ error: 'Utilisateur introuvable ou désactivé' });
+    }
+
+    const newToken = generateToken(user);
+    res.json({ token: newToken });
+  } catch (err) {
+    return res.status(401).json({ error: 'Token de rafraîchissement invalide ou expiré' });
+  }
+}
+
 function authenticate(req, res, next) {
   const header = req.headers.authorization;
   if (!header || !header.startsWith('Bearer ')) {
@@ -44,4 +81,4 @@ function authorize(...roles) {
   };
 }
 
-module.exports = { generateToken, authenticate, authorize, JWT_SECRET };
+module.exports = { generateToken, generateRefreshToken, refreshAuth, authenticate, authorize, JWT_SECRET };

@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const { getDb } = require('../database');
-const { generateToken, authenticate } = require('../middleware/auth');
+const { generateToken, generateRefreshToken, authenticate } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -35,8 +35,10 @@ router.post('/login', (req, res) => {
     }
 
     const token = generateToken(user);
+    const refreshToken = generateRefreshToken(user);
     res.json({
       token,
+      refreshToken,
       user: {
         id: user.id,
         email: user.email,
@@ -86,8 +88,10 @@ router.post('/register', authenticate, (req, res) => {
     }
 
     const token = generateToken({ id, email, role });
+    const refreshToken = generateRefreshToken({ id, email, role });
     res.status(201).json({
       token,
+      refreshToken,
       user: { id, email, role, firstName, lastName, phone, profileUrl }
     });
   } catch (err) {
